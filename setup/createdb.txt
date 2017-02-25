@@ -1,0 +1,72 @@
+USE dbsys
+
+/*
+Wherever something is a CHAR(1), that means I don't know what I want
+to use as its datatype.
+This assumes each University has its own RSO and Events tables.
+*/
+
+
+CREATE TABLE University (
+unid INTEGER, 
+uname CHAR(100), 
+city CHAR(100), 
+address CHAR(100), 
+studentCount INTEGER, 
+coordinates ARRAY, 
+upicture CHAR(1), 
+description CHAR(1) 
+PRIMARY KEY (unid) );
+
+--skeleton
+CREATE TABLE E_User(
+usrid INTEGER,
+email CHAR(100),
+PRIMARY KEY (usrid) );
+
+CREATE TABLE RSO (
+rid INTEGER, 
+rname CHAR(100), 
+approved BOOLEAN, 
+rpicture CHAR(1), 
+description char(1), 
+usrid INTEGER NOT NULL, 
+PRIMARY KEY (rid),
+FOREIGN KEY (usrid) REFERENCES E_User );
+--Needs trigger/constraint for amount of members.
+
+CREATE TABLE Membership (
+rid INTEGER,
+usrid INTEGER,
+PRIMARY KEY (rid, usrid), 
+FOREIGN KEY (rid) REFERENCES RSO,
+FOREIGN KEY (usrid) REFERENCES E_User );
+
+CREATE TABLE Events (
+eid INTEGER,
+etime TIMESTAMP,
+description CHAR(1),
+approved BOOLEAN,
+etype CHAR(100),
+visibility CHAR(100),
+city CHAR(100), 
+coordinates ARRAY.
+rid INTEGER,
+PRIMARY KEY (eid),
+FOREIGN KEY (rid) REFERENCES RSO );
+
+CREATE TABLE Ratings (
+rateid INTEGER,
+rid INTEGER,
+val INTEGER,
+PRIMARY KEY (rateid);
+FOREIGN KEY (rid) REFERENCES RSO );
+
+CREATE TABLE Comments (
+cid INTEGER,
+usrid INTEGER,
+rid INTEGER,
+txt CHAR(1),
+PRIMARY KEY (cid, usrid, rid),
+FOREIGN KEY (usrid) REFERENCES E_User,
+FOREIGN KEY (rid) REFERENCES RSO );
