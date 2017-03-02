@@ -31,6 +31,7 @@ approved BOOLEAN,
 rpicture CHAR(1), 
 description char(1), 
 usrid INTEGER NOT NULL, 
+unid INTEGER NOT NULL,
 PRIMARY KEY (rid),
 FOREIGN KEY (usrid) REFERENCES E_User );
 --Needs trigger/constraint for amount of members.
@@ -44,16 +45,48 @@ FOREIGN KEY (usrid) REFERENCES E_User );
 
 CREATE TABLE Events (
 eid INTEGER,
-etime TIMESTAMP,
+estart TIMESTAMP,
+eend TIMESTAMP,
 description CHAR(1),
 approved BOOLEAN,
+ecat CHAR(100),
 etype CHAR(100),
 visibility CHAR(100),
 city CHAR(100), 
-coordinates ARRAY.
+coordinates ARRAY,
+campus CHAR(100),
+building CHAR(100),
+room_no CHAR(100),
 rid INTEGER,
+unid INTEGER NOT NULL,
 PRIMARY KEY (eid),
 FOREIGN KEY (rid) REFERENCES RSO );
+
+CREATE ASSERTION eventcollision
+CHECK ( 0 = SELECT COUNT(e.eid)
+FROM Events e
+WHERE ( EXISTS 
+	SELECT e2.eid
+	FROM Events e2
+	WHERE e.campus = e2.campus
+	AND e.building = e2.building
+	AND e.room_no = e2.room_no
+	AND (
+	(e2.estart <= e.estart AND e.estart < e2.eend)
+	OR (e2.estart <= e.eend AND e.eend < e2.eend)
+	)
+	)
+)
+/*
+--Needs Testing
+CREATE TRIGGER Event_Insert
+BEFORE INSERT ON Events
+  REFERENCING NEW ROW AS New, OLD ROW AS O FOR EACH ROW
+WHEN ( NOT ( ( (Old.estart <= New.estart) AND (New.estart <= Old.eend) ) AND ( (Old.estart <= New.eend) AND (New.eend <= Old.eend) ) ) )
+  INSERT INTO Events
+	N;
+*/
+
 
 CREATE TABLE Ratings (
 rateid INTEGER,
@@ -63,10 +96,10 @@ PRIMARY KEY (rateid);
 FOREIGN KEY (rid) REFERENCES RSO );
 
 CREATE TABLE Comments (
-cid INTEGER,
+ctime TIMESTAMP,
 usrid INTEGER,
-rid INTEGER,
+eid INTEGER,
 txt CHAR(1),
-PRIMARY KEY (cid, usrid, rid),
-FOREIGN KEY (usrid) REFERENCES E_User,
-FOREIGN KEY (rid) REFERENCES RSO );
+PRIMARY KEY (ctime, usrid, eid),
+FOREIGN KEY (usrid) REFERENCES E_User
+FOREIGN KEY (eid) REFERENCES Events);
