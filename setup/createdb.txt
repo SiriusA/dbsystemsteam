@@ -18,7 +18,8 @@ upicture CHAR(1),
 description CHAR(1) 
 PRIMARY KEY (unid) );
 
---skeleton
+/*skeleton
+*/
 CREATE TABLE E_User(
 usrid INTEGER,
 email CHAR(100),
@@ -33,15 +34,16 @@ description char(1),
 usrid INTEGER NOT NULL, 
 unid INTEGER NOT NULL,
 PRIMARY KEY (rid),
-FOREIGN KEY (usrid) REFERENCES E_User );
---Needs trigger/constraint for amount of members.
+FOREIGN KEY (usrid) REFERENCES E_User(usrid) );
+/*Needs trigger/constraint for amount of members.
+*/
 
 CREATE TABLE Membership (
 rid INTEGER,
 usrid INTEGER,
 PRIMARY KEY (rid, usrid), 
-FOREIGN KEY (rid) REFERENCES RSO,
-FOREIGN KEY (usrid) REFERENCES E_User );
+FOREIGN KEY (rid) REFERENCES RSO(rid),
+FOREIGN KEY (usrid) REFERENCES E_User(usrid) );
 
 CREATE TABLE Events (
 eid INTEGER,
@@ -60,7 +62,7 @@ room_no CHAR(100),
 rid INTEGER,
 unid INTEGER NOT NULL,
 PRIMARY KEY (eid),
-FOREIGN KEY (rid) REFERENCES RSO );
+FOREIGN KEY (rid) REFERENCES RSO(rid) );
 
 CREATE ASSERTION eventcollision
 CHECK ( 0 = SELECT COUNT(e.eid)
@@ -76,7 +78,7 @@ WHERE ( EXISTS
 	OR (e2.estart <= e.eend AND e.eend < e2.eend)
 	)
 	)
-)
+);
 /*
 --Needs Testing
 CREATE TRIGGER Event_Insert
@@ -92,8 +94,8 @@ CREATE TABLE Ratings (
 rateid INTEGER,
 rid INTEGER,
 val INTEGER,
-PRIMARY KEY (rateid);
-FOREIGN KEY (rid) REFERENCES RSO );
+PRIMARY KEY (rateid),
+FOREIGN KEY (rid) REFERENCES RSO(rid) );
 
 CREATE TABLE Comments (
 ctime TIMESTAMP,
@@ -101,5 +103,5 @@ usrid INTEGER,
 eid INTEGER,
 txt CHAR(1),
 PRIMARY KEY (ctime, usrid, eid),
-FOREIGN KEY (usrid) REFERENCES E_User
-FOREIGN KEY (eid) REFERENCES Events);
+FOREIGN KEY (usrid) REFERENCES E_User(usrid),
+FOREIGN KEY (eid) REFERENCES Events(eid));
