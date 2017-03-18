@@ -19,29 +19,26 @@ echo("connection successful");
 
 <?php
 echo("testing insert");
-$timetable_collision = "SELECT e.eid
-FROM Event_temp e
+$timetable_collision = "SELECT e.lid
+FROM Events_temp e
 WHERE ( EXISTS (
-	SELECT e2.eid
-	FROM Events e2
-	WHERE e.eid <> e2.eid
-    AND e.campus = e2.campus
-	AND e.building = e2.building
-	AND e.room_no = e2.room_no
-	AND (
-	(e2.estart <= e.estart AND e.estart < e2.eend)
-	OR (e2.estart <= e.eend AND e.eend < e2.eend)
-	OR (e.estart <= e2.estart AND e2.estart < e.eend)
-	OR (e.estart <= e2.eend AND e2.eend < e.eend)
+	SELECT e2.lid
+	FROM Events_Hosted_Located e2
+	WHERE e.lid = e2.lid
+    AND (
+	(e2.start_time <= e.start_time AND e.start_time < e2.end_time)
+	OR (e2.start_time <= e.end_time AND e.end_time < e2.end_time)
+	OR (e.start_time <= e2.start_time AND e2.start_time < e.end_time)
+	OR (e.start_time <= e2.end_time AND e2.end_time < e.end_time)
 	)
 	)
 );";
-$insert_temp = "INSERT INTO Event_Temp(eid, estart, eend, campus, building, room_no, unid)
-VALUES (2, '2017-03-02 12:10:00', '2017-03-02 12:40:00', 'a', 'aa', '202a', 1);";
-$delete_temp = "DELETE FROM Event_Temp;";
-$insert_actual = "INSERT INTO Events(eid, estart, eend, campus, building, room_no, unid)
-VALUES (2, '2017-03-02 12:10:00', '2017-03-02 12:40:00', 'a', 'aa', '202a', 1);";
-$conn->query("USE dbsys;");
+$insert_temp = "INSERT INTO Events_Temp(start_time, end_time, rid, lid, description, approved, type, visibility, ename, phone, email)
+VALUES ('2017-03-02 12:10:00', '2017-03-02 12:40:00', 1, 1, 3, 1, 1, 1, 'cirno', '999-999-9999', 'the_strongest@gensokyo.gov');";
+$delete_temp = "DELETE FROM Events_Temp;";
+$insert_actual = "INSERT INTO Events_Hosted_Located(start_time, end_time, rid, lid, description, approved, type, visibility, ename, phone, email)
+VALUES ('2017-03-02 12:10:00', '2017-03-02 12:50:00', 1, 1, 3, 1, 1, 1, 'cirno', '999-999-9999', 'the_strongest@gensokyo.gov');";
+$conn->query("USE event;");
 $conn->query($delete_temp);
 if($conn->query($insert_temp)=== TRUE) {
 	echo "new record created <br>";
@@ -51,12 +48,15 @@ if($conn->query($insert_temp)=== TRUE) {
 $result = $conn->query($timetable_collision);
 echo("<br> ye <br>");
 if($result->num_rows == 0) {
-	$result = $conn->query($insert_actual);
-	echo("insert successful");
+	if($conn->query($insert_actual)=== TRUE) {
+		echo "new record created <br>";
+		echo("insert successful");
+	} else {
+		echo "Error: " . $insert_actual . "<br>" . $conn->error;
+	}	
 } else {
-	echo "Collsion Detected";
+	echo "Collision Detected";
 }
-
 $conn->query($delete_temp);
 
 ?>
