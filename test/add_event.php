@@ -54,10 +54,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		)
 	);";
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
-	$insert_data_str = "VALUES (" . $starttime . ", " . $endtime . ", 1, 1, 1, 1, 1, " . $eventname . ", " . $phone . ", " . $email . ", " . "1" . ");";
+	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', 1, 1, 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . "1" . "');";
 	echo $insert_data_str;
 	$insert_temp = "INSERT INTO Events_Temp(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description)
 	VALUES ('2017-03-02 12:10:00', '2017-03-02 12:40:00', 1, 1, 1, 1, 1, 'cirno', '999-999-9999', 'the_strongest@gensokyo.gov', '3');";
+	echo $insert_temp;
 	$delete_temp = "DELETE FROM Events_Temp;";
 	$insert_actual = "INSERT INTO Events_Hosted_Located(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description)
 	VALUES ('2017-03-02 12:10:00', '2017-03-02 12:50:00', 1, 1, 1, 1, 1, 'cirno', '999-999-9999', 'the_strongest@gensokyo.gov', '3');";
