@@ -13,8 +13,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 //connects to database
 include "connection.php";
 
-$email = $_GET["email"];
-$password = $_GET["password"];
+$email = $_POST["email"];
+$password = $_POST["password"];
 
 //select U.sid from user U where email = "$email" AND password='$pass'
 $result = db_query("SELECT U.sid FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
@@ -23,8 +23,10 @@ if($result == false){
 }
 else{
 
-    if(!($row = mysqli_fetch_row($result)))
+    if(!($row = mysqli_fetch_row($result))){
         echo "no user found or incorrect credentials";
+       header('Location: index.php?error=1');
+    }
 
     //save sid in session and variable
     $sid = $row[0];

@@ -17,7 +17,7 @@
 
 <body>
 
-<form action="login_action.php">
+<form action="login_action.php" method="post">
     <div class="imgcontainer">
 <!--        <img src="img_avatar2.png" alt="Avatar" class="avatar">-->
     </div>
@@ -41,3 +41,10 @@
 
 </body>
 </html>
+
+<?php
+
+    //check if there was an error with the last login
+    if(isset($_GET["error"]) && $_GET["error"] == "1"){
+        echo "<script>alert('Error message: Credentials are incorrect');</script>";
+    }
