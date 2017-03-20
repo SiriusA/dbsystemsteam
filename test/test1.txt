@@ -1,0 +1,26 @@
+INSERT INTO Events(eid, estart, eend, campus, building, room_no, unid)
+VALUES (1, '2017-03-02 12:00:00', '2017-03-02 12:30:00', 'a', 'aa', '202a', 1);
+INSERT INTO Events(eid, estart, eend, campus, building, room_no, unid)
+VALUES (2, '2017-03-02 12:10:00', '2017-03-02 12:40:00', 'a', 'aa', '202a', 1);
+INSERT INTO Events(eid, estart, eend, campus, building, room_no, unid)
+VALUES (3, '2017-03-02 11:00:00', '2017-03-02 12:20:00', 'a', 'aa', '202a', 1);
+INSERT INTO Events(eid, estart, eend, campus, building, room_no, unid)
+VALUES (4, '2017-03-02 11:10:00', '2017-03-02 12:10:00', 'a', 'aa', '202a', 1);
+
+SELECT e.eid
+FROM Events e
+WHERE ( EXISTS (
+	SELECT e2.eid
+	FROM Events e2
+	WHERE e.eid <> e2.eid
+    AND e.campus = e2.campus
+	AND e.building = e2.building
+	AND e.room_no = e2.room_no
+	AND (
+	(e2.estart <= e.estart AND e.estart < e2.eend)
+	OR (e2.estart <= e.eend AND e.eend < e2.eend)
+	OR (e.estart <= e2.estart AND e2.estart < e.eend)
+	OR (e.estart <= e2.eend AND e2.eend < e.eend)
+	)
+	)
+);

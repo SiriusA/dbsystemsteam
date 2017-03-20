@@ -13,9 +13,9 @@ uname CHAR(100),
 city CHAR(100), 
 address CHAR(100), 
 studentCount INTEGER, 
-coordinates ARRAY, 
+coordinates CHAR(1), 
 upicture CHAR(1), 
-description CHAR(1) 
+description CHAR(1), 
 PRIMARY KEY (unid) );
 
 /*skeleton
@@ -55,7 +55,7 @@ ecat CHAR(100),
 etype CHAR(100),
 visibility CHAR(100),
 city CHAR(100), 
-coordinates ARRAY,
+coordinates CHAR(1),
 campus CHAR(100),
 building CHAR(100),
 room_no CHAR(100),
@@ -64,6 +64,8 @@ unid INTEGER NOT NULL,
 PRIMARY KEY (eid),
 FOREIGN KEY (rid) REFERENCES RSO(rid) );
 
+
+/*
 CREATE ASSERTION eventcollision
 CHECK ( 0 = SELECT COUNT(e.eid)
 FROM Events e
@@ -79,15 +81,79 @@ WHERE ( EXISTS
 	)
 	)
 );
-/*
---Needs Testing
+*/
+
+DROP TRIGGER IF EXISTS `event_insert`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` TRIGGER `event_insert` BEFORE INSERT ON `events` FOR EACH ROW BEGIN
+	IF (
+	EXISTS (
+		SELECT e.eid
+		FROM Events e
+		WHERE New.eid <> e.eid
+		AND New.campus = e.campus
+		AND New.building = e.building
+		AND New.room_no = e.room_no
+		AND (
+		(e.estart <= New.estart AND New.estart < e.eend)
+		OR (e.estart <= New.eend AND New.eend < e.eend)
+		)
+		)
+	) THEN
+    	SIGNAL SQLSTATE '01000';
+		UPDATE event_count SET event_count.eventcount = event_count.eventcount+1;
+    END IF;
+END; //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Event_Insert
+BEFORE INSERT ON Events
+FOR EACH ROW
+BEGIN
+	IF (
+	EXISTS (
+		SELECT e.eid
+		FROM Events e
+		WHERE New.eid <> e.eid
+		AND New.campus = e.campus
+		AND New.building = e.building
+		AND New.room_no = e.room_no
+		AND (
+		(e.estart <= New.estart AND New.estart < e.eend)
+		OR (e.estart <= New.eend AND New.eend < e.eend)
+		)
+		)
+	) THEN
+		SIGNAL SQLSTATE '01000';
+    END IF;
+END; //
+DELIMITER ;
+
+/*Needs Testing*/
+DELIMITER //
+CREATE TRIGGER Event_Insert
+BEFORE INSERT ON Events
+FOR EACH ROW
+BEGIN
+	IF ( ( (Old.estart <= New.estart) AND (New.estart <= Old.eend) ) AND ( (Old.estart <= New.eend) AND (New.eend <= Old.eend) ) ) THEN
+		SIGNAL 01000
+    ELSE
+    	
+    END IF
+END
+
+DELIMITER ;
+	
+UPDATE event_count SET event_count.eventcount = event_count.eventcount+1
+	
 CREATE TRIGGER Event_Insert
 BEFORE INSERT ON Events
   REFERENCING NEW ROW AS New, OLD ROW AS O FOR EACH ROW
 WHEN ( NOT ( ( (Old.estart <= New.estart) AND (New.estart <= Old.eend) ) AND ( (Old.estart <= New.eend) AND (New.eend <= Old.eend) ) ) )
   INSERT INTO Events
 	N;
-*/
+
 
 
 CREATE TABLE Ratings (
