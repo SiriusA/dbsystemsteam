@@ -1,0 +1,173 @@
+USE dbsys
+
+/*
+Wherever something is a CHAR(1), that means I don't know what I want
+to use as its datatype.
+This assumes each University has its own RSO and Events tables.
+*/
+
+
+CREATE TABLE University (
+unid INTEGER, 
+uname CHAR(100), 
+city CHAR(100), 
+address CHAR(100), 
+studentCount INTEGER, 
+coordinates CHAR(1), 
+upicture CHAR(1), 
+description CHAR(1), 
+PRIMARY KEY (unid) );
+
+/*skeleton
+*/
+CREATE TABLE E_User(
+usrid INTEGER,
+email CHAR(100),
+PRIMARY KEY (usrid) );
+
+CREATE TABLE RSO (
+rid INTEGER, 
+rname CHAR(100), 
+approved BOOLEAN, 
+rpicture CHAR(1), 
+description char(1), 
+usrid INTEGER NOT NULL, 
+unid INTEGER NOT NULL,
+PRIMARY KEY (rid),
+FOREIGN KEY (usrid) REFERENCES E_User(usrid) );
+/*Needs trigger/constraint for amount of members.
+*/
+
+CREATE TABLE Membership (
+rid INTEGER,
+usrid INTEGER,
+PRIMARY KEY (rid, usrid), 
+FOREIGN KEY (rid) REFERENCES RSO(rid),
+FOREIGN KEY (usrid) REFERENCES E_User(usrid) );
+
+CREATE TABLE Events (
+eid INTEGER,
+estart TIMESTAMP,
+eend TIMESTAMP,
+description CHAR(1),
+approved BOOLEAN,
+ecat CHAR(100),
+etype CHAR(100),
+visibility CHAR(100),
+city CHAR(100), 
+coordinates CHAR(1),
+campus CHAR(100),
+building CHAR(100),
+room_no CHAR(100),
+rid INTEGER,
+unid INTEGER NOT NULL,
+PRIMARY KEY (eid),
+FOREIGN KEY (rid) REFERENCES RSO(rid) );
+
+
+/*
+CREATE ASSERTION eventcollision
+CHECK ( 0 = SELECT COUNT(e.eid)
+FROM Events e
+WHERE ( EXISTS 
+	SELECT e2.eid
+	FROM Events e2
+	WHERE e.campus = e2.campus
+	AND e.building = e2.building
+	AND e.room_no = e2.room_no
+	AND (
+	(e2.estart <= e.estart AND e.estart < e2.eend)
+	OR (e2.estart <= e.eend AND e.eend < e2.eend)
+	)
+	)
+);
+*/
+
+DROP TRIGGER IF EXISTS `event_insert`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` TRIGGER `event_insert` BEFORE INSERT ON `events` FOR EACH ROW BEGIN
+	IF (
+	EXISTS (
+		SELECT e.eid
+		FROM Events e
+		WHERE New.eid <> e.eid
+		AND New.campus = e.campus
+		AND New.building = e.building
+		AND New.room_no = e.room_no
+		AND (
+		(e.estart <= New.estart AND New.estart < e.eend)
+		OR (e.estart <= New.eend AND New.eend < e.eend)
+		)
+		)
+	) THEN
+    	SIGNAL SQLSTATE '01000';
+		UPDATE event_count SET event_count.eventcount = event_count.eventcount+1;
+    END IF;
+END; //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Event_Insert
+BEFORE INSERT ON Events
+FOR EACH ROW
+BEGIN
+	IF (
+	EXISTS (
+		SELECT e.eid
+		FROM Events e
+		WHERE New.eid <> e.eid
+		AND New.campus = e.campus
+		AND New.building = e.building
+		AND New.room_no = e.room_no
+		AND (
+		(e.estart <= New.estart AND New.estart < e.eend)
+		OR (e.estart <= New.eend AND New.eend < e.eend)
+		)
+		)
+	) THEN
+		SIGNAL SQLSTATE '01000';
+    END IF;
+END; //
+DELIMITER ;
+
+/*Needs Testing*/
+DELIMITER //
+CREATE TRIGGER Event_Insert
+BEFORE INSERT ON Events
+FOR EACH ROW
+BEGIN
+	IF ( ( (Old.estart <= New.estart) AND (New.estart <= Old.eend) ) AND ( (Old.estart <= New.eend) AND (New.eend <= Old.eend) ) ) THEN
+		SIGNAL 01000
+    ELSE
+    	
+    END IF
+END
+
+DELIMITER ;
+	
+UPDATE event_count SET event_count.eventcount = event_count.eventcount+1
+	
+CREATE TRIGGER Event_Insert
+BEFORE INSERT ON Events
+  REFERENCING NEW ROW AS New, OLD ROW AS O FOR EACH ROW
+WHEN ( NOT ( ( (Old.estart <= New.estart) AND (New.estart <= Old.eend) ) AND ( (Old.estart <= New.eend) AND (New.eend <= Old.eend) ) ) )
+  INSERT INTO Events
+	N;
+
+
+
+CREATE TABLE Ratings (
+rateid INTEGER,
+rid INTEGER,
+val INTEGER,
+PRIMARY KEY (rateid),
+FOREIGN KEY (rid) REFERENCES RSO(rid) );
+
+CREATE TABLE Comments (
+ctime TIMESTAMP,
+usrid INTEGER,
+eid INTEGER,
+txt CHAR(1),
+PRIMARY KEY (ctime, usrid, eid),
+FOREIGN KEY (usrid) REFERENCES E_User(usrid),
+FOREIGN KEY (eid) REFERENCES Events(eid));
