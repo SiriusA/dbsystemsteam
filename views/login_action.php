@@ -36,6 +36,7 @@ else{
 
     if(isSuperAdmin($sid)){
         echo "User is SuperAdmin";
+        header('Location: create_university.php');
     }
     else if(isAdmin($sid)){
         echo "User is Admin";
