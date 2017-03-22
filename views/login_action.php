@@ -36,12 +36,15 @@ else{
 
     if(isSuperAdmin($sid)){
         echo "User is SuperAdmin";
+        $_SESSION["usertype"] = 1;
         header('Location: create_university.php');
     }
     else if(isAdmin($sid)){
+        $_SESSION["usertype"] = 2;
         echo "User is Admin";
     }
     else{
+        $_SESSION["usertype"] = 3;
         echo "User is Student only";
     }
 

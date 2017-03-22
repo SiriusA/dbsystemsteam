@@ -18,18 +18,6 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <style>
-
-/*        all child of div.col-sm-3 called button*/
-        div.col-sm-3 button {
-            margin-left: 20px;
-            margin-bottom: 10px;
-        }
-
-        .container-fluid {
-            margin: 20px;
-        }
-    </style>
 </head>
 
 <body>

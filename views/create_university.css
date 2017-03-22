@@ -1,0 +1,10 @@
+
+    /*        all child of div.col-sm-3 called button*/
+div.col-sm-3 button {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.container-fluid {
+    margin: 20px;
+}
