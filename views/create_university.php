@@ -65,11 +65,11 @@
 <!--                3/3 column-->
     <!--            Map here-->
                 <div class="col-sm-6" style="background-color:beige;">
-                    <button type="button" class="btn btn-primary">Map</button> <br>
+                    <div id="googleMap" style="width:100%;height:400px;"></div>
                 </div>
             </div>
 
-<!--            2/2 row-->
+            <!--            2/2 row-->
 <!--            Submit form button-->
             <div class="row" style="background-color: #00fa00">
                 <div class="col-sm-12">
@@ -80,4 +80,37 @@
         </form>
 
     </div>
+
+    <script>
+
+
+        var map;
+
+        function myMap() {
+
+            var haightAshbury = {lat: 37.769, lng: -122.446};
+
+            var mapProp= {
+                center:new google.maps.LatLng(37.769,-122.446),
+                zoom:5,
+            };
+            map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+//            map.addListener('click', function(event) {
+//                placeMarker(event.latLng);
+//            });
+
+            placeMarker(haightAshbury);
+        }
+
+        function placeMarker(location) {
+
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                draggable:true
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCttR_s1Fawjgb7lQGP9Yk8T4VAU6vsAbQ&callback=myMap"></script>
+
 </body>
