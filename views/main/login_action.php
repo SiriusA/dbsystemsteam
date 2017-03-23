@@ -11,7 +11,7 @@ error_reporting(E_ALL ^ E_NOTICE);
  */
 
 //connects to database
-include "/main/connection.php";
+include "connection.php";
 
 $email = $_POST["email"];
 $password = $_POST["password"];
