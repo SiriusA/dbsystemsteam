@@ -46,6 +46,7 @@ else{
     else{
         $_SESSION["usertype"] = 3;
         echo "User is Student only";
+        header('Location: /university_description');
     }
 
     //    while ($row = $result->fetch_object()){
