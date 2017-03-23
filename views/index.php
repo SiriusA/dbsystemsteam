@@ -3,7 +3,7 @@
 <head>
 	<title>Login</title>
 
-    <link rel="stylesheet" href="/main/index.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
 
 <body>
 
-<form action="/main/login_action.php" method="post">
+<form action="/db/login_action.php" method="post">
     <div class="imgcontainer">
 <!--        <img src="img_avatar2.png" alt="Avatar" class="avatar">-->
     </div>

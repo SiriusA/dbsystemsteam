@@ -7,7 +7,7 @@
 <head>
     <title>Create University</title>
 
-    <link rel="stylesheet" href="/main/create_university.css">
+    <link rel="stylesheet" href="/stylesheets/create_university.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
     <div class="container-fluid">
         <h2>Create University</h2>
 
-        <form action="/main/post_university.php" method="post">
+        <form action="/create_university/post_university.php" method="post">
 
             <!--        1/2 row-->
             <div class="row">

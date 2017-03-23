@@ -25,7 +25,7 @@ else{
 
     if(!($row = mysqli_fetch_row($result))){
         echo "no user found or incorrect credentials";
-       header('Location: /main/index.php?error=1');
+       header('Location: /index.php?error=1');
     }
 
     //save sid in session and variable
@@ -37,7 +37,7 @@ else{
     if(isSuperAdmin($sid)){
         echo "User is SuperAdmin";
         $_SESSION["usertype"] = 1;
-        header('Location: /main/create_university.php');
+        header('Location: /create_university');
     }
     else if(isAdmin($sid)){
         $_SESSION["usertype"] = 2;
