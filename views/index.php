@@ -3,7 +3,7 @@
 <head>
 	<title>Login</title>
 
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,11 +13,14 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<link href="/images/favicon.png" rel="icon" type="image/png" />
+
 </head>
 
 <body>
 
-<form action="login_action.php" method="post">
+<form action="/db/login_action.php" method="post">
     <div class="imgcontainer">
 <!--        <img src="img_avatar2.png" alt="Avatar" class="avatar">-->
     </div>
