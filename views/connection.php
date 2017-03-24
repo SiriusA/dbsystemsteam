@@ -8,7 +8,7 @@
 
 function db_connect(){
 
-//    static $connection;
+    static $connection;
 
     if(!isset($connection)){
 

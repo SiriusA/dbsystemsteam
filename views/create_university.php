@@ -31,7 +31,7 @@
 
                 <!--                    1/3 column-->
                 <!--            place buttons here-->
-                <div class="col-sm-3" style="background-color:lavender;">
+                <div class="col-sm-4" style="background-color:lavender;">
 
 <!--                Form to post University Credentials-->
                     <div class="form-group">
@@ -54,17 +54,22 @@
                         <input type="text" name="studentCount" class="form-control" id="cnt">
                     </div>
 
+<!--                    hidden input for latitude-->
+<!--                    javarscript will set input after Marker is dragged-->
+                    <input id="lat" type="hidden" name="lat" value="123">
+                    <input id="lng" type="hidden" name="lng" value="123">
+
                 </div>
 
 <!--                2/3 column-->
                 <!--            location button-->
-                <div class="col-sm-3" style="background-color:lavenderblush;">
-                    <button type="button" class="btn btn-primary">Set Location</button> <br>
-                </div>
+<!--                <div class="col-sm-3" style="background-color:lavenderblush;">-->
+<!--                    <button type="button" class="btn btn-primary">Set Location</button> <br>-->
+<!--                </div>-->
 
 <!--                3/3 column-->
     <!--            Map here-->
-                <div class="col-sm-6" style="background-color:beige;">
+                <div class="col-sm-7" style="background-color:beige;">
                     <div id="googleMap" style="width:100%;height:400px;"></div>
                 </div>
             </div>
@@ -72,7 +77,7 @@
             <!--            2/2 row-->
 <!--            Submit form button-->
             <div class="row" style="background-color: #00fa00">
-                <div class="col-sm-12">
+                <div class="col-sm-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
@@ -83,9 +88,8 @@
 
     <script>
 
-
         var map;
-
+        var marker;
         function myMap() {
 
             var haightAshbury = {lat: 37.769, lng: -122.446};
@@ -95,16 +99,22 @@
                 zoom:5,
             };
             map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-//            map.addListener('click', function(event) {
-//                placeMarker(event.latLng);
-//            });
-
             placeMarker(haightAshbury);
+
+            //get marker position after dragging
+            marker.addListener('dragend', function(event) {
+                var latlng = marker.getPosition();
+                console.log("latlng: " + latlng);
+                console.log("lat(): " + latlng.lat() + ", lng(): " + latlng.lng());
+                document.getElementById("lat").value = latlng.lat();
+                document.getElementById("lng").value = latlng.lng();
+            });
+
         }
 
         function placeMarker(location) {
 
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 position: location,
                 map: map,
                 draggable:true
@@ -114,3 +124,15 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCttR_s1Fawjgb7lQGP9Yk8T4VAU6vsAbQ&callback=myMap"></script>
 
 </body>
+<?php
+
+//check if there was an error with the last login
+if(isset($_GET["error"]) && $_GET["error"] == "1"){
+    echo "<script>alert('Error message: Input is missing');</script>";
+}
+else if(isset($_GET["insert_error"]) && $_GET["insert_error"] == "1"){
+    echo "<script>alert('Error message: Insertion did not complete');</script>";
+}
+else if(isset($_GET["success"]) && $_GET["success"] == "1"){
+    echo "<script>alert('Success message: Insertion complete');</script>";
+}

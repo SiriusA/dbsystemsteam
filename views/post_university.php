@@ -6,9 +6,64 @@
  * Time: 11:41 AM
  */
 
-if(isset($_POST["university"]) && isset($_POST["description"]) && isset($_POST["picture"]) && isset($_POST["studentCount"])){
-    echo $_POST["university"];
-    echo $_POST["description"];
-    echo $_POST["picture"];
-    echo $_POST["studentCount"];
+session_start();
+include "connection.php";
+
+if(empty($_POST["university"]) || empty($_POST["description"]) || empty($_POST["picture"]) || empty($_POST["studentCount"]) || empty($_POST["lat"]) || empty($_POST["lng"])){
+    echo "Something is not set";
+    header('Location: create_university.php?error=1');
+}
+
+$sid = $_SESSION["sid"];
+$description = $_POST["description"];
+$uname = $_POST["university"];
+$studentCount = $_POST["studentCount"];
+
+$picture = $_POST["picture"];
+$lat = $_POST["lat"];
+$lng = $_POST["lng"];
+
+$universityid;
+
+//insert university credentials
+insertUniversity($sid, $description, $uname, $studentCount, $picture);
+
+//insert university location
+insertLocation($universityid, $uname, $lat, $lng);
+
+header('Location: create_university.php?success=1');
+
+
+function insertUniversity($sid, $description, $uname, $studentCount, $picture){
+
+    $result = db_query("INSERT INTO university_created (uid, sid, description, uname,studentcount, upicture)
+                        VALUES (NULL, '$sid', '$description', '$uname', '$studentCount', '$picture')");
+    if($result == false){
+        echo "Insertion went wrong";
+        header('Location: create_university.php?insert_error=1');
+
+    }
+    else{
+        echo "insertion went through";
+
+        //im only calling because i need the connection for mysqli insert id
+        //db is already connected
+        $connection = db_connect();
+        $GLOBALS["universityid"] = mysqli_insert_id($connection);
+    }
+
+}
+
+//get uid from previous query maybe
+function insertLocation($uid, $lname, $lat, $lng){
+    $result = db_query("INSERT INTO location (lid, uid, lname, longitude,latitude)
+                        VALUES (NULL, '$uid', '$lname', '$lng', '$lat')");
+    if($result == false){
+        echo "Insertion went wrong";
+        header('Location: create_university.php?insert_error=1');
+    }
+    else{
+        echo "insertion went through";
+    }
+
 }
