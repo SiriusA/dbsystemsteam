@@ -7,11 +7,11 @@
  */
 
 session_start();
-include "connection.php";
+include "../db/connection.php";
 
 if(empty($_POST["university"]) || empty($_POST["description"]) || empty($_POST["picture"]) || empty($_POST["studentCount"]) || empty($_POST["lat"]) || empty($_POST["lng"])){
     echo "Something is not set";
-    header('Location: create_university.php?error=1');
+    header('Location: index.php?error=1');
 }
 
 $sid = $_SESSION["sid"];
@@ -31,7 +31,7 @@ insertUniversity($sid, $description, $uname, $studentCount, $picture);
 //insert university location
 insertLocation($universityid, $uname, $lat, $lng);
 
-header('Location: create_university.php?success=1');
+header('Location: index.php?success=1');
 
 
 function insertUniversity($sid, $description, $uname, $studentCount, $picture){
@@ -60,7 +60,7 @@ function insertLocation($uid, $lname, $lat, $lng){
                         VALUES (NULL, '$uid', '$lname', '$lng', '$lat')");
     if($result == false){
         echo "Insertion went wrong";
-        header('Location: create_university.php?insert_error=1');
+        header('Location: index.php?insert_error=1');
     }
     else{
         echo "insertion went through";
