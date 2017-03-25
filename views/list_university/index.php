@@ -51,7 +51,11 @@ $uCredentials = getUniversities();
 
     <div class="container-fluid">
         <?php
-
+        if(empty($_GET["page"]))
+            $page = 0;
+        else{
+            $page = $_GET["page"];
+        }
         echo '<ul class="list-group">';
         for($i = 0; $i < sizeof($uCredentials); $i++){
             echo     '<a href="#" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
@@ -59,6 +63,22 @@ $uCredentials = getUniversities();
         echo '</ul>';
 
         ?>
+
+        <div class="row">
+
+<!--            <div class="col-sm-4" style="background-color:lavender;">-->
+            <div class="col-sm-3"about="">
+
+            </div>
+
+            <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li>Page</li>
+                <li><a href="#">Next</a></li>
+            </ul>
+
+        </div>
+
 
     </div>
 </body>
