@@ -25,8 +25,6 @@ function db_connect(){
         return mysqli_connect_error();
     }
 
-    echo "Connected successfully";
-    echo "<br>";
     return $connection;
 
 }
