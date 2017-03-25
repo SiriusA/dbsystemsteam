@@ -1,3 +1,5 @@
+<!-- Kyle Picinich -->
+
 <?php
 $servername = "localhost";
 $username = "root";
@@ -12,12 +14,60 @@ if($conn->connect_error) {
 echo("connection successful");
 ?>
 
+<?php
+$rso_ids;
+$uni_id;
+
+session_start();
+$_SESSION["sid"] = 2;
+$_SESSION["usertype"] = 3;
+
+if(!empty($_SESSION["sid"]))
+{
+	$conn->query("USE event;");
+	$rso_query = "SELECT r.rid, r.rname
+	FROM rso_owned r
+	WHERE r.sid = " . $_SESSION["sid"] . ";";
+	
+	$result = $conn->query($rso_query);
+	if($result->num_rows != 0){
+		$rso_ids = $result->fetch_all();
+	}
+	
+	if($_SESSION["usertype"] = 3){
+	//hardcode, fix later
+		$uni_id = 0;
+	}
+	
+	echo $rso_ids[0][0];
+}
+
+session_unset(); 
+
+// destroy the session 
+session_destroy(); 
+?>
+
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
 
 <h1>Add Event</h1>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+<form class="form-vertical" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+	
+	
+	<?php
+	
+	echo '<div class = "form-group">
+		<label for="rso">RSO:</label>
+		<select class="form-control" id="rso" name="rso">
+			<option>' . $rso_ids[0][1] . '</option>
+		</select>
+	</div>';
+	?>
 	Event Name: <input type="text" name="eventname"><br>
 	Format:YYYY-MM-DD HH:MM:SS<br>
 	Start Time: <input type="datetime-local" name="starttime"> End Time: <input type="datetime-local" name="endtime"><br>
@@ -33,10 +83,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$eventname = test_input($_POST["eventname"]);
 	$starttime = test_input($_POST["starttime"]);
 	$endtime = test_input($_POST["endtime"]);
+	$rso = test_input($_POST["rso"]);
 	$location = "1";
 	$desc = test_input($_POST["description"]);
 	$phone = test_input($_POST["phone"]);
 	$email = test_input($_POST["email"]);
+	
 	
 	echo("testing insert");
 
@@ -51,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	);";
 	echo($timetable_collision);
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
-	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', 1, 1, 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . "1" . "');";
+	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', 1, 1, 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
 	echo $insert_data_str;
 	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	$conn->query("USE event;");
