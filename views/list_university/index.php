@@ -51,33 +51,58 @@ $uCredentials = getUniversities();
 
     <div class="container-fluid">
         <?php
-        if(empty($_GET["page"]))
+
+        if(empty($_GET["page"])){
             $page = 0;
+            $remaining = sizeof($uCredentials);
+        }
         else{
             $page = $_GET["page"];
+            $remaining = $_GET["remaining"];
         }
+
+        $nextPage = -1;
+//        only display 10
         echo '<ul class="list-group">';
-        for($i = 0; $i < sizeof($uCredentials); $i++){
-            echo     '<a href="#" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
+        if($remaining > 10){
+            $index = sizeof($uCredentials) - $remaining;
+            for($i = 0; $i < 10; $i++){
+                echo     '<a href="#" class="list-group-item">'.$uCredentials[$i + $index]["uname"].' - '.$uCredentials[$i + $index]["description"].'</a>';
+            }
+            $nextPage = $page + 1;
+        }
+//        display what is left
+        else{
+            $index = sizeof($uCredentials) - $remaining;
+            for($i = $index; $i < sizeof($uCredentials); $i++){
+                echo     '<a href="#" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
+            }
         }
         echo '</ul>';
 
+        echo '<div class="row">';
+        echo    '<ul class="pager">';
+
+//        display previous button?
+        if($page != 0){
+            $prevPage = $page - 1;
+            $prevRemaining = $remaining + 10;
+//            DISPLAY PREV BUTTON
+        echo    '<li><a href="index.php?page='.$prevPage.'&remaining='.$prevRemaining.'">Previous</a></li>';
+
+        }
+        echo    '<li>Page '.$page.'</li>';
+
+//        display next button?
+        if($nextPage != -1){
+            $nextRemaining = $remaining - 10;
+//            display next button here
+            echo '<li><a href="index.php?page='.$nextPage.'&remaining='.$nextRemaining.'">Next</a></li>';
+
+        }
+        echo    '</ul>';
+        echo '</div>';
         ?>
-
-        <div class="row">
-
-<!--            <div class="col-sm-4" style="background-color:lavender;">-->
-            <div class="col-sm-3"about="">
-
-            </div>
-
-            <ul class="pager">
-                <li><a href="#">Previous</a></li>
-                <li>Page</li>
-                <li><a href="#">Next</a></li>
-            </ul>
-
-        </div>
 
 
     </div>
