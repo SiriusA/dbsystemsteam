@@ -64,7 +64,7 @@ session_destroy();
 	echo '<div class = "form-group">
 		<label for="rso">RSO:</label>
 		<select class="form-control" id="rso" name="rso">
-			<option>' . $rso_ids[0][1] . '</option>
+			<option value = ' . $rso_ids[0][0] . '>' . $rso_ids[0][1] . '</option>
 		</select>
 	</div>';
 	?>
@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	);";
 	echo($timetable_collision);
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
-	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', 1, 1, 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
+	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", 1, 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
 	echo $insert_data_str;
 	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	$conn->query("USE event;");
