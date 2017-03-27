@@ -41,7 +41,7 @@ else{
     }
     else if(isAdmin($sid)){
         $_SESSION["usertype"] = 2;
-        echo "User is Admin";
+        header('Location: /create_rso');
     }
     else{
         $_SESSION["usertype"] = 3;
