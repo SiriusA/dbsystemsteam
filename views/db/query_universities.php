@@ -14,7 +14,9 @@ function getUniversities(){
     $sid = $_SESSION["sid"];
 
 //query all universites created by me
-    $result = db_query("SELECT U.uid, U.uname, U.description FROM university_created U WHERE U.sid = '$sid' ");
+    $result = db_query("SELECT U.uid, U.uname, U.description, U.studentcount, U.upicture 
+                        FROM university_created U 
+                        WHERE U.sid = '$sid' ");
     if($result == false){
         echo "something went wrong";
     }
@@ -27,4 +29,20 @@ function getUniversities(){
     }
 
     return $uNames;
+}
+
+function getUniversityLocation($uid){
+    $result = db_query("SELECT L.longitude, L.latitude
+                        FROM location L
+                        WHERE L.uid='.$uid.'");
+    if($result == false){
+        echo "could not query university location";
+    }
+
+    if($row = mysqli_fetch_array($result)){
+        echo "success";
+        return $row;
+    }
+    echo "fail";
+    return ;
 }

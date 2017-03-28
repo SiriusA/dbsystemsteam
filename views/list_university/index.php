@@ -5,11 +5,7 @@
  * Date: 3/25/2017
  * Time: 8:15 AM
  */
-session_start();
-include ("../db/query_universities.php");
 
-//$uCredentials["uid"] $uCredentials["uname"] $uCredentials["description"]
-$uCredentials = getUniversities();
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +48,12 @@ $uCredentials = getUniversities();
     <div class="container-fluid">
         <?php
 
+        session_start();
+        include ("../db/query_universities.php");
+
+        //$uCredentials["uid"] $uCredentials["uname"] $uCredentials["description"]
+        $uCredentials = getUniversities();
+
         if(empty($_GET["page"])){
             $page = 0;
             $remaining = sizeof($uCredentials);
@@ -67,7 +69,7 @@ $uCredentials = getUniversities();
         if($remaining > 10){
             $index = sizeof($uCredentials) - $remaining;
             for($i = 0; $i < 10; $i++){
-                echo     '<a href="#" class="list-group-item">'.$uCredentials[$i + $index]["uname"].' - '.$uCredentials[$i + $index]["description"].'</a>';
+                echo     '<a href="../university_profile/index.php?index='.($i + $index).'" class="list-group-item">'.$uCredentials[$i + $index]["uname"].' - '.$uCredentials[$i + $index]["description"].'</a>';
             }
             $nextPage = $page + 1;
         }
@@ -75,7 +77,7 @@ $uCredentials = getUniversities();
         else{
             $index = sizeof($uCredentials) - $remaining;
             for($i = $index; $i < sizeof($uCredentials); $i++){
-                echo     '<a href="#" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
+                echo     '<a href="../university_profile/index.php?index='.$i.'" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
             }
         }
         echo '</ul>';

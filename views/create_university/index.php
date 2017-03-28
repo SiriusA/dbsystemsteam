@@ -44,9 +44,9 @@
             <!--        1/2 row-->
             <div class="row">
 
-                <!--                    1/3 column-->
+                <!--                    1/2 column-->
                 <!--            place buttons here-->
-                <div class="col-sm-4" style="background-color:lavender;">
+                <div class="col-sm-4">
 
 <!--                Form to post University Credentials-->
                     <div class="form-group">
@@ -76,22 +76,17 @@
 
                 </div>
 
-<!--                2/3 column-->
-                <!--            location button-->
-<!--                <div class="col-sm-3" style="background-color:lavenderblush;">-->
-<!--                    <button type="button" class="btn btn-primary">Set Location</button> <br>-->
-<!--                </div>-->
 
-<!--                3/3 column-->
+<!--                2/2 column-->
     <!--            Map here-->
-                <div class="col-sm-7" style="background-color:beige;">
+                <div class="col-sm-7">
                     <div id="googleMap" style="width:100%;height:400px;"></div>
                 </div>
             </div>
 
             <!--            2/2 row-->
 <!--            Submit form button-->
-            <div class="row" style="background-color: #00fa00">
+            <div id="submitdiv">
                 <div class="col-sm-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
