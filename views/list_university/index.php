@@ -43,7 +43,7 @@ $uCredentials = getUniversities();
                 <li><a href="#">Home</a></li>
                 <li><a href="../create_university">Create University</a></li>
                 <li class="active"><a href="#">List University</a></li>
-                <li><a href="#">List RSO</a></li>
+                <li><a href="../list_rso_superadmin">List RSO</a></li>
                 <li><a href="#">List Events</a></li>
             </ul>
         </div>
