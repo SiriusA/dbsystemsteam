@@ -17,7 +17,7 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 //select U.sid from user U where email = "$email" AND password='$pass'
-$result = db_query("SELECT U.sid FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
+$result = db_query("SELECT U.sid, U.email FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
 if($result == false){
     echo "somethings wrong";
 }
@@ -31,6 +31,7 @@ else{
     //save sid in session and variable
     $sid = $row[0];
     $_SESSION["sid"] = $row[0];
+    $_SESSION["email"] = $row[1];
 
     $result->close();
 

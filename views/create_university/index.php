@@ -39,7 +39,7 @@
     <div id="content" class="container-fluid">
         <h2>Create University</h2>
 
-        <form action="/create_university/post_university.php" method="post">
+        <form action="/create_university/post_university.php" method="post" enctype="multipart/form-data">
 
             <!--        1/2 row-->
             <div class="row">
@@ -88,7 +88,7 @@
 <!--            Submit form button-->
             <div id="submitdiv">
                 <div class="col-sm-12 text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
 
