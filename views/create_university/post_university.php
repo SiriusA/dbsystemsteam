@@ -76,7 +76,6 @@ function insertFile(){
 
 function insertUniversity($sid, $description, $uname, $studentCount, $picture){
 
-    $picture =
     $result = db_query("INSERT INTO university_created (uid, sid, description, uname,studentcount, upicture)
                         VALUES (NULL, '$sid', '$description', '$uname', '$studentCount', '$picture')");
     if($result == false){

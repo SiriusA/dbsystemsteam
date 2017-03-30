@@ -1,16 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 3/27/2017
- * Time: 7:19 PM
- */
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create University</title>
+    <title>List RSO</title>
 
     <link rel="stylesheet" href="/stylesheets/create_university.css">
 
@@ -26,6 +17,8 @@
 </head>
 
 <body>
+
+<!--    navbar start-->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -40,6 +33,20 @@
             </ul>
         </div>
     </nav>
+<!--    navbar end-->
 
+    <?php
+
+    include "../db/query_rso.php";
+    $rsoAndUniverstiyInfo = getRSOsFromManagedUniversities();
+
+echo '<div id="content" class="container-fluid">
+        <h2>Create University</h2>
+        '.$rsoAndUniverstiyInfo[0]["rname"].'<br>
+        '.$rsoAndUniverstiyInfo[0]["uname"].'<br>
+        '.$rsoAndUniverstiyInfo[0]["approved"].'<br>
+      </div>';
+
+    ?>
 </body>
 </html>
