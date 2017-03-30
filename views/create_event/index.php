@@ -10,6 +10,42 @@
 
 <!-- Kyle Picinich -->
 
+<?php
+//debug
+session_start();
+$_SESSION["sid"] = 2;
+$_SESSION["usertype"] = 3;
+?>
+
+<?php
+$rso_ids;
+
+
+include ("../db/connection.php");
+
+
+if(!empty($_SESSION["sid"]))
+{
+	//db_query("USE event;");
+	$rso_query = "SELECT r.rid, r.rname
+	FROM rso_owned r
+	WHERE r.sid = " . $_SESSION["sid"] . ";";
+	
+	$rso_ids_result = db_query($rso_query);
+//	if($result->num_rows != 0){
+//		$rso_ids = $result->fetch_all();
+//	}
+	
+	
+	
+}
+
+session_unset(); 
+
+// destroy the session 
+session_destroy(); 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,22 +76,39 @@
             <ul class="nav navbar-nav">
                 <li><a href="#">Home</a></li>
                 <li><a href="../create_university">Create University</a></li>
-                <li class="active"><a href="#">List University</a></li>
+                <li><a href="../list_university">List University</a></li>
                 <li><a href="../list_rso_superadmin">List RSO</a></li>
+				<li><a href="../create_rso">Create RSO</a></li>
+				<li class="active"><a href="../create_event">Create Event</a></li>
                 <li><a href="#">List Events</a></li>
             </ul>
         </div>
     </nav>
 
-    <form class="form-vertical" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form class="form-vertical" role="form" action="add_event.php" method="post">
 	
 	
 		<?php
-		
+			//retrieve rsos
+			$rso_id = $rso_ids_result->fetch_row();
+			$rso_olist = "";
+			while($rso_id !== NULL)
+			{
+				$rso_olist = $rso_olist . "<option value = " . $rso_id[0] . ">" . $rso_id[1] . "</option>";
+				$rso_id = $rso_ids_result->fetch_row();
+			}
+			if($_SESSION["usertype"] = 3){
+				//hardcode, fix later
+				$uni_id = 0;
+				//make negative to differentiate from rso ids
+				$uni_id = 0 - $uni_id - 1;
+				$rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . "ucf" . "</option>";
+			}
+			
 			echo '<div class = "form-group">
 				<label for="rso">RSO:</label>
 				<select class="form-control" id="rso" name="rso">
-					<option value = ' . $rso_ids[0][0] . '>' . $rso_ids[0][1] . '</option>
+					' . $rso_olist . '
 				</select>
 			</div>';
 		?>
