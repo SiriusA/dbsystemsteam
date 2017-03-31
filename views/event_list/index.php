@@ -9,7 +9,7 @@
 
     <!-- Use title if it's in the page YAML frontmatter -->
 
-    <title>RSOs - Eventi</title>
+    <title>Events - Eventi</title>
 
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 
@@ -33,6 +33,14 @@
 
         <section class="top-bar-section">
           <ul class="right">
+            <?php
+              session_start();
+              if($_SESSION["usertype"]== 2)
+              {
+                echo '<li class=""><a href="/create_event/">Create Event</a></li>';
+              }
+            ?>
+            <li class=""><a href="/create_rso/">Create RSO</a></li>
             <li class=""><a href="/rso">RSOs</a></li>
             <li class=""><a href="/university_description">Universities</a></li>
             <li class=""><a href="/event_list">Events</a></li>
@@ -47,7 +55,7 @@
         <div class="hero">
           <div class="row">
             <div class="large-12 columns">
-              <h1>RSO Name</h1>
+              <h1>Event Name</h1>
                 <!--
                 <h1><img src="/images/xampp-logo.svg" />University Name <span>Apache + MariaDB + PHP + Perl</span></h1>
                 -->

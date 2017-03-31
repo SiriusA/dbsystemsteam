@@ -17,7 +17,7 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 //select U.sid from user U where email = "$email" AND password='$pass'
-$result = db_query("SELECT U.sid, U.email FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
+$result = db_query("SELECT U.sid FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
 if($result == false){
     echo "somethings wrong";
 }
@@ -31,7 +31,6 @@ else{
     //save sid in session and variable
     $sid = $row[0];
     $_SESSION["sid"] = $row[0];
-    $_SESSION["email"] = $row[1];
 
     $result->close();
 
@@ -42,7 +41,7 @@ else{
     }
     else if(isAdmin($sid)){
         $_SESSION["usertype"] = 2;
-        header('Location: /create_rso');
+        header('Location: /university_description');
     }
     else{
         $_SESSION["usertype"] = 3;
