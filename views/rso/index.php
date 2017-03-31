@@ -19,6 +19,7 @@
     <script src="/javascripts/modernizr.js" type="text/javascript"></script>
 
     <link href="/images/favicon.png" rel="icon" type="image/png" />
+    <a href = "/db/logout.php" class = "topcorner">Log Out</a>
 
   </head>
 
@@ -35,6 +36,10 @@
           <ul class="right">
             <?php
               session_start();
+              if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
+              {
+               header("location: ../");
+              }
               if($_SESSION["usertype"]== 2)
               {
                 echo '<li class=""><a href="/create_event/">Create Event</a></li>';
