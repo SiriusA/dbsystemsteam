@@ -12,10 +12,17 @@ function db_connect(){
 
     if(!isset($connection)){
 
+        //temp local line
         $config = parse_ini_file("../config.ini");
 
+        //keep line
+        //$config = parse_ini_file("../../config.ini");
+
+        //temp line
+        $connection = mysqli_connect("localhost", "root", "", "event");
+
         // Create connection
-        $connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
+        //$connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
 
     }
 
