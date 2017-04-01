@@ -1,6 +1,3 @@
-<?php  
-  session_start();
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +29,28 @@
             				<h1><a href="/home">Home</a></h1>
           				</li>
         			</ul>
-					<section class="top-bar-section">
-          				<ul class="right">
-            				<li class=""><a href="/list_rso">List RSOs</a></li>
-          				</ul>
-        			</section>
-      			</nav>
+              <section class="top-bar-section">
+                <ul class="right">
+                  <?php
+                    session_start();
+                    if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
+                    {
+                     header("location: ../");
+                    } 
+                    if($_SESSION["usertype"]== 2)
+                    {
+                      echo '<li class=""><a href="/create_event/">Create Event</a></li>';
+                    }
+                  ?>
+                   <li class=""><a href="/create_rso/">Create RSO</a></li>
+                   <li class=""><a href="/rso">RSOs</a></li>
+                   <li class=""><a href="/university_description">Universities</a></li>
+                   <li class=""><a href="/event_list">Events</a></li>
+                   <li class=""><a target="_blank" href="/phpinfo.php">My Account</a></li>
+                  <li class=""><a href="/phpmyadmin/">Search</a></li>
+                </ul>
+              </section>
+            </nav>
    		 	</div>
    			<div id="wrapper">
         		<div class="hero">
@@ -50,13 +63,19 @@
     		</div>
     		
         <p>University Name:
+        </p>
     		<input type= "text" name="university_name" size "30" maxlength = "45" value = ""/>
-    		</p>
+    		
 
     		<p>RSO Name:
+        </p>
     		<input type= "text" name="rso_name" size "30" maxlength = "45" value = ""/>
-    		</p>
+    		
 
+        <p>RSO Picture:
+        </p>
+        <input type= "file" name="rso_picture" value = ""/>
+        
         <p>RSO Description:
         </p>
         <p>                
@@ -79,20 +98,21 @@
         </div>
 
         <p>Member 1 Email:
-        <input type= "text" name="rso_member_email_1" size "30" maxlength = "40" value = ""/>
         </p>
+        <input type= "text" name="rso_member_email_1" size "30" maxlength = "40" value = ""/>
+        
 
         <p>Member 2 Email:
-        <input type= "text" name="rso_member_email_2" size "30" maxlength = "40" value = ""/>
         </p>
+        <input type= "text" name="rso_member_email_2" size "30" maxlength = "40" value = ""/>
 
         <p>Member 3 Email:
-        <input type= "text" name="rso_member_email_3" size "30" maxlength = "40" value = ""/>
         </p>
+        <input type= "text" name="rso_member_email_3" size "30" maxlength = "40" value = ""/>
 
         <p>Member 4 Email:
-        <input type= "text" name="rso_member_email_4" size "30" maxlength = "40" value = ""/>
         </p>
+        <input type= "text" name="rso_member_email_4" size "30" maxlength = "40" value = ""/>
 
     		<p>
     		<input type = "submit" name ="submit1" value="Send" />
