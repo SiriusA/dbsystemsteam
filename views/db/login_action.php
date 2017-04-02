@@ -18,7 +18,7 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 //select U.sid from user U where email = "$email" AND password='$pass'
-$result = db_query("SELECT U.sid FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
+$result = db_query("SELECT U.sid, U.utype FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
 if($result == false){
     echo "somethings wrong";
 }
@@ -28,25 +28,25 @@ else{
         echo "no user found or incorrect credentials";
        header('Location: /index.php?error=1');
     }
-
-    //save sid in session and variable
+  
     $sid = $row[0];
     $_SESSION["sid"] = $row[0];
+    $utype = $row[1];
+    $_SESSION["utype"] = $row[1];
 
     $result->close();
 
-    if(isSuperAdmin($sid)){
+    if(isSuperAdmin($utype)){
         echo "User is SuperAdmin";
         $_SESSION["usertype"] = 1;
         header('Location: /create_university');
     }
-    else if(isAdmin($sid)){
+    else if(isAdmin($utype)){
         $_SESSION["usertype"] = 2;
         header('Location: /university_description');
     }
-    else{
+    else if(isStudent($utype)){
         $_SESSION["usertype"] = 3;
-        echo "User is Student only";
         header('Location: /university_description');
     }
 
@@ -59,8 +59,8 @@ else{
 
 }
 
-function isSuperAdmin($sid){
-    $result = db_query("SELECT S.sid FROM superadmin S WHERE S.sid = '$sid' ");
+function isSuperAdmin($utype){
+    $result = db_query("SELECT S.utype FROM superadmin S WHERE S.utype = '$utype' ");
     if($result == false){
         echo "Error w/ query";
     }
@@ -72,8 +72,22 @@ function isSuperAdmin($sid){
     $result ->close();
 }
 
-function isAdmin($sid){
-    $result = db_query("SELECT A.sid FROM admin A WHERE A.sid = '$sid' ");
+function isAdmin($utype){
+    $result = db_query("SELECT A.utype FROM admin A WHERE A.utype = '$utype' ");
+    if($result == false){
+        echo "Error w/ query";
+    }
+    //check if there is a row
+    else if ($row = mysqli_fetch_row($result)){
+        return true;
+    }
+
+    $result->close();
+}
+
+
+function isStudent($utype){
+    $result = db_query("SELECT S.utype FROM student S WHERE S.utype = '$utype' ");
     if($result == false){
         echo "Error w/ query";
     }
