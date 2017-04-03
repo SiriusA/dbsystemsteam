@@ -11,7 +11,7 @@ session_start();
 
 function getRSOsFromManagedUniversities(){
     $sid = $_SESSION["sid"];
-    $result = db_query("SELECT R.rname, U.uname, R.approved
+    $result = db_query("SELECT R.rname, U.uname, R.approved, R.description
                         FROM rso_owned R, university_created U, student_affiliated S 
                         WHERE U.sid = '$sid' AND U.uid=S.uid AND S.sid=R.sid");
     if($result == false){

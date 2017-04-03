@@ -46,6 +46,7 @@
     </nav>
 
     <div class="container-fluid">
+        <h2>List University</h2>
         <?php
 
         session_start();
