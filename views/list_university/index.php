@@ -37,7 +37,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="../create_university">Create University</a></li>
                 <li class="active"><a href="#">List University</a></li>
-                <li><a href="../list_rso_superadmin">List RSO</a></li>
+                <li><a href="../list_rso">List RSO</a></li>
                 <li><a href="#">List Events</a></li>
             </ul>
         </div>
@@ -72,7 +72,8 @@
             }
             $nextPage = $page + 1;
         }
-//        display what is left
+        //display what is left
+        //this is either the first or last page
         else{
             $index = sizeof($uCredentials) - $remaining;
             for($i = $index; $i < sizeof($uCredentials); $i++){

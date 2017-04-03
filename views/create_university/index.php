@@ -30,7 +30,7 @@
                 <li><a href="#">Home</a></li>
                 <li class="active"><a href="#">Create University</a></li>
                 <li><a href="../list_university">List University</a></li>
-                <li><a href="../list_rso_superadmin">List RSO</a></li>
+                <li><a href="../list_rso">List RSO</a></li>
                 <li><a href="#">List Events</a></li>
             </ul>
         </div>

@@ -18,7 +18,8 @@
 
 <body>
 
-<!--    navbar start-->
+<!--    TODO place correct navbar depending on user-->
+<!--    navbar SuperAdmin start-->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -36,11 +37,12 @@
 <!--    navbar end-->
 
     <div class="container-fluid">
-        <h2>List University</h2>
-        <div
+        <h2>List RSO</h2>
     <?php
 
     include "../db/query_rso.php";
+    //TODO query correct RSO to display for each user (Super, Admin, Student)
+    //query RSO from Universities that ae managed by SuperAdmin
     $rsoAndUniverstiyInfo = getRSOsFromManagedUniversities();
 
     //if page is not set, then default to page 0

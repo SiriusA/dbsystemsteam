@@ -77,7 +77,7 @@ session_destroy();
                 <li><a href="#">Home</a></li>
                 <li><a href="../create_university">Create University</a></li>
                 <li><a href="../list_university">List University</a></li>
-                <li><a href="../list_rso_superadmin">List RSO</a></li>
+                <li><a href="../list_rso">List RSO</a></li>
 				<li><a href="../create_rso">Create RSO</a></li>
 				<li class="active"><a href="../create_event">Create Event</a></li>
                 <li><a href="#">List Events</a></li>
