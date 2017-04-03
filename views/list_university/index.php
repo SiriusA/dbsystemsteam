@@ -26,8 +26,6 @@
 
 </head>
 
-
-
 <body>
 
     <nav class="navbar navbar-default">
@@ -66,11 +64,11 @@
 
         $nextPage = -1;
 //        only display 10
-        echo '<ul class="list-group">';
+      //  echo '<ul class="list-group">';
         if($remaining > 10){
             $index = sizeof($uCredentials) - $remaining;
             for($i = 0; $i < 10; $i++){
-                echo     '<a href="../university_profile/index.php?index='.($i + $index).'" class="list-group-item">'.$uCredentials[$i + $index]["uname"].' - '.$uCredentials[$i + $index]["description"].'</a>';
+                echo     '<a href="../university_description/index.php?index='.($i + $index).'" class="list-group-item">'.$uCredentials[$i + $index]["uname"].' - '.$uCredentials[$i + $index]["description"].'</a>';
             }
             $nextPage = $page + 1;
         }
@@ -78,7 +76,7 @@
         else{
             $index = sizeof($uCredentials) - $remaining;
             for($i = $index; $i < sizeof($uCredentials); $i++){
-                echo     '<a href="../university_profile/index.php?index='.$i.'" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
+                echo     '<a href="../university_description/index.php?index='.$i.'" class="list-group-item">'.$uCredentials[$i]["uname"].' - '.$uCredentials[$i]["description"].'</a>';
             }
         }
         echo '</ul>';

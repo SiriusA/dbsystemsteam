@@ -7,7 +7,9 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>University - Eventi</title>
+    <!-- Use title if it's in the page YAML frontmatter -->
+
+    <title>Events - Eventi</title>
 
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 
@@ -17,6 +19,7 @@
     <script src="/javascripts/modernizr.js" type="text/javascript"></script>
 
     <link href="/images/favicon.png" rel="icon" type="image/png" />
+    <a href = "/db/logout.php" class = "topcorner">Log Out</a>
 
   </head>
 
@@ -31,6 +34,18 @@
 
         <section class="top-bar-section">
           <ul class="right">
+            <?php
+              session_start();
+              if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
+              {
+               header("location: ../");
+              }
+              if($_SESSION["usertype"]== 2)
+              {
+                echo '<li class=""><a href="/create_event/">Create Event</a></li>';
+              }
+            ?>
+            <li class=""><a href="/create_rso/">Create RSO</a></li>
             <li class=""><a href="/rso">RSOs</a></li>
             <li class=""><a href="/university_description">Universities</a></li>
             <li class=""><a href="/event_list">Events</a></li>
@@ -45,7 +60,7 @@
         <div class="hero">
           <div class="row">
             <div class="large-12 columns">
-              <h1>University Name</h1>
+              <h1>Event Name</h1>
                 <!--
                 <h1><img src="/images/xampp-logo.svg" />University Name <span>Apache + MariaDB + PHP + Perl</span></h1>
                 -->
