@@ -59,7 +59,17 @@
     if($remaining > 10){
         $index = sizeof($rsoAndUniverstiyInfo) - $remaining;
         for($i = 0; $i < 10; $i++){
-            echo     '<a href="../university_profile/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i + $index]["uname"].'</a>';
+            echo     '<div class="row">
+                        <div class="col-sm-8">
+                            <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["uname"].'</a>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
+                        </div>
+                      </div>';
         }
         $nextPage = $page + 1;
     }
@@ -69,7 +79,7 @@
         for($i = $index; $i < sizeof($rsoAndUniverstiyInfo); $i++){
             echo     '<div class="row">
                         <div class="col-sm-8">
-                            <a href="../university_profile/index.php?index='.$i.'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.$i.'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
                         </div>
                         <div class="col-sm-1">
                             <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["uname"].'</a>

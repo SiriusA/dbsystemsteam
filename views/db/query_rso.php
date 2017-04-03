@@ -9,6 +9,7 @@
 include "connection.php";
 session_start();
 
+//returns all RSO that are part of a University that SuperAdmin manages
 function getRSOsFromManagedUniversities(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT R.rname, U.uname, R.approved, R.description
