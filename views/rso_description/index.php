@@ -3,7 +3,7 @@
 <head>
     <title>List RSO</title>
 
-    <link rel="stylesheet" href="/stylesheets/list_rso.css">
+    <link rel="stylesheet" href="/stylesheets/rso_description.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,8 +37,7 @@
     <!--    navbar end-->
 
     <!--    Content Start-->
-    <div class="container-fluid">
-        <h2>RSO Description</h2>
+    <div id="content" class="container-fluid">
 
         <?php
             include "../db/query_rso.php";
@@ -53,15 +52,38 @@
             }
 
             $rsoDescription = getRSOsFromManagedUniversities();
-            //TODO display RSO received from list_rso
-            echo ''.$rsoDescription[$index]["rname"].' <br>';
-            echo ''.$rsoDescription[$index]["description"].' <br>';
-            echo ''.$rsoDescription[$index]["uname"].' <br>';
-            echo ''.$rsoDescription[$index]["approved"].' <br>';
-            echo ''.$rsoDescription[$index]["rpicture"].' <br>';
-            echo ''.$rsoDescription[$index]["email"].' <br>';
 
             //TODO create view
+        echo '<!--        1/2 row-->
+                <div class="row">
+        
+                    <!--                    1/1 column-->
+                    <!--            place buttons here-->
+                    <div class="col-sm-12">
+                        <h2>'.$rsoDescription[$index]["rname"].'</h2>
+                    </div>
+                </div>
+        
+                <!--        2/2 row-->
+                <div class="row">
+        
+                    <div class="col-sm-6">
+                        <h3>Description</h3>
+                            '.$rsoDescription[$index]["description"].'
+                        <h3>University</h3>
+                            '.$rsoDescription[$index]["uname"].'
+                        <h3>Approved</h3>
+                            '.$rsoDescription[$index]["approved"].'
+        
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <h3>Picture</h3>
+                              <img src="../images/'.$rsoDescription[$index]["rpicture"].'" class="img-rounded" width="304" height="236"> 
+                        <h3>Admin Contact</h3>
+                            '.$rsoDescription[$index]["email"].'
+                    </div>
+                </div>';
         ?>
 
     </div>
