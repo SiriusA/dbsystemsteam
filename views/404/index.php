@@ -1,3 +1,10 @@
+<?php
+  session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+    header('Location: /');
+ ?>
+ 
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,8 +17,8 @@
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>404 Not Found</title>
 
-    
-    
+
+
 
     <link href="/dashboard/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
