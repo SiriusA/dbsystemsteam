@@ -52,7 +52,7 @@
 
     <div class="row">
       <div class="column_left">
-        <h2>University Description</h2>
+        <h3>University Description</h3>
         <p>
           <?= $universityDetails[$index]["description"]; ?>
         </p>
