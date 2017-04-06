@@ -1,3 +1,11 @@
+<!-- Prevent user from skipping login page -->
+<?php
+  session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+    header('Location: /');
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,14 +16,12 @@
 
     <link rel="stylesheet" href="../stylesheets/university_description.css">
 
-  <!--  <script src="/javascripts/modernizr.js" type="text/javascript"></script> -->
+    <!-- <script src="/javascripts/modernizr.js" type="text/javascript"></script> -->
 
     <link href="/images/favicon.png" rel="icon" type="image/png" />
 
     <?php
       include ("../db/query_universities.php");
-
-      session_start();
 
       if(!empty($_GET["index"])){
           $index = $_GET["index"];

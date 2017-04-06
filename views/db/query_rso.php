@@ -7,8 +7,6 @@
  */
 
 include "connection.php";
-session_start();
-
 //returns all RSO that are part of a University that SuperAdmin manages
 //used in list_rso and rso_description
 function getRSOsFromManagedUniversities(){
@@ -16,7 +14,7 @@ function getRSOsFromManagedUniversities(){
 
     //use quotes on user because it is a reverved word
     $result = db_query("SELECT R.rname, R.approved, R.description, R.rpicture, U.uname, Us.email
-                        FROM rso_owned R, university_created U, student_affiliated S, `user` Us 
+                        FROM rso_owned R, university_created U, student_affiliated S, `user` Us
                         WHERE U.sid = '$sid' AND U.uid=S.uid AND S.sid=R.sid AND R.sid=Us.sid");
     if($result == false){
         echo "something went wrong";

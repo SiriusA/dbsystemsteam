@@ -1,3 +1,11 @@
+<!-- Prevent user from skipping login page -->
+<?php
+  session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+		 header('Location: /');
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -35,7 +43,6 @@
         <section class="top-bar-section">
           <ul class="right">
             <?php
-              session_start();
               if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
               {
                header("location: ../");

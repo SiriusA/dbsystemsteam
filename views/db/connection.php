@@ -12,13 +12,10 @@ function db_connect(){
 
     if(!isset($connection)){
 
-        //temp local line
-        //$config = parse_ini_file("../config.ini");
-
-        //keep line
+        //Comment out when developing offline
         $config = parse_ini_file("../../config.ini");
 
-        //temp line
+        //devloping offline
         //$connection = mysqli_connect("localhost", "root", "", "event");
 
         // Create connection

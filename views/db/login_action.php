@@ -14,6 +14,9 @@ error_reporting(E_ALL ^ E_NOTICE);
 //connects to database
 include "connection.php";
 
+//storing info on user authenticity
+$_SESSION["userLoggedIn"] = false;
+
 $email = $_POST["email"];
 $password = $_POST["password"];
 
@@ -25,13 +28,14 @@ if($result == false){
 else{
 
     if(!($row = mysqli_fetch_row($result))){
-        echo "no user found or incorrect credentials";
-       header('Location: /index.php?error=1');
+      echo "no user found or incorrect credentials";
+      header('Location: /index.php?error=1');
     }
 
     //save sid in session and variable
     $sid = $row[0];
     $_SESSION["sid"] = $row[0];
+    $_SESSION["userLoggedIn"] = true;
 
     $result->close();
 

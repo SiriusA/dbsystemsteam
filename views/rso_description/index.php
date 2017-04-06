@@ -1,3 +1,11 @@
+<!-- Prevent user from skipping login page -->
+<?php
+  session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+    header('Location: /');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,17 +64,17 @@
             //TODO create view
         echo '<!--        1/2 row-->
                 <div class="row">
-        
+
                     <!--                    1/1 column-->
                     <!--            place buttons here-->
                     <div class="col-sm-12">
                         <h2>'.$rsoDescription[$index]["rname"].'</h2>
                     </div>
                 </div>
-        
+
                 <!--        2/2 row-->
                 <div class="row">
-        
+
                     <div class="col-sm-6">
                         <h3>Description</h3>
                             '.$rsoDescription[$index]["description"].'
@@ -74,12 +82,12 @@
                             '.$rsoDescription[$index]["uname"].'
                         <h3>Approved</h3>
                             '.$rsoDescription[$index]["approved"].'
-        
+
                     </div>
-        
+
                     <div class="col-sm-6">
                         <h3>Picture</h3>
-                              <img src="../images/'.$rsoDescription[$index]["rpicture"].'" class="img-rounded" width="304" height="236"> 
+                              <img src="../images/'.$rsoDescription[$index]["rpicture"].'" class="img-rounded" width="304" height="236">
                         <h3>Admin Contact</h3>
                             '.$rsoDescription[$index]["email"].'
                     </div>

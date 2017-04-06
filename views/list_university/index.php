@@ -1,16 +1,22 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 3/25/2017
- * Time: 8:15 AM
- */
+<!--
+ Created by PhpStorm.
+ User: alex
+ Date: 3/25/2017
+ Time: 8:15 AM
+-->
 
+ <!-- Prevent user from skipping login page -->
+ <?php
+   session_start();
+
+   if($_SESSION["userLoggedIn"] == false)
+      header('Location: /');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Create University</title>
 
 <!--    <link rel="stylesheet" href="/stylesheets/list_university.css">-->
@@ -47,7 +53,6 @@
         <h2>List University</h2>
         <?php
 
-        session_start();
         include ("../db/query_universities.php");
 
         //$uCredentials["uid"] $uCredentials["uname"] $uCredentials["description"]
