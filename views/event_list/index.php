@@ -37,8 +37,9 @@
     <?php require_once "../db/events_feed.php"; ?>
 
     <?php
-      getFeed("http://events.ucf.edu/feed.rss"); ?>
-      
+      fillEventTable("http://events.ucf.edu/feed.rss");
+      ?>
+
     <div class="contain-to-grid">
       <nav class="top-bar" data-topbar>
         <ul class="title-area">
