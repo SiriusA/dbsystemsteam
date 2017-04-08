@@ -86,5 +86,5 @@ function isAdmin($sid){
         return true;
     }
 
-    $result->close();
+    //$result->close();
 }
