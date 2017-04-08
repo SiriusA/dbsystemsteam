@@ -1,49 +1,48 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 3/25/2017
- * Time: 8:15 AM
- */
+<!--
+  Created by PhpStorm.
+  User: alex
+  Date: 3/25/2017
+  Time: 8:15 AM
+ -->
 
-?>
+ <!-- Prevent user from skipping login page -->
+ <?php
+	 session_start();
+
+	 if($_SESSION["userLoggedIn"] == false)
+		 header('Location: /');
+	?>
 
 <!-- Kyle Picinich -->
 
 <?php
-//debug
-session_start();
-$_SESSION["sid"] = 2;
-$_SESSION["usertype"] = 3;
+  //debug
+  $_SESSION["sid"] = 2;
+  $_SESSION["usertype"] = 3;
 ?>
 
 <?php
-$rso_ids;
+  $rso_ids;
 
+  include ("../db/connection.php");
 
-include ("../db/connection.php");
+  if(!empty($_SESSION["sid"]))
+  {
+  	//db_query("USE event;");
+  	$rso_query = "SELECT r.rid, r.rname
+  	FROM rso_owned r
+  	WHERE r.sid = " . $_SESSION["sid"] . ";";
 
+  	$rso_ids_result = db_query($rso_query);
+  //	if($result->num_rows != 0){
+  //		$rso_ids = $result->fetch_all();
+  //	}
+  }
 
-if(!empty($_SESSION["sid"]))
-{
-	//db_query("USE event;");
-	$rso_query = "SELECT r.rid, r.rname
-	FROM rso_owned r
-	WHERE r.sid = " . $_SESSION["sid"] . ";";
-	
-	$rso_ids_result = db_query($rso_query);
-//	if($result->num_rows != 0){
-//		$rso_ids = $result->fetch_all();
-//	}
-	
-	
-	
-}
+  session_unset();
 
-session_unset(); 
-
-// destroy the session 
-session_destroy(); 
+  // destroy the session
+  session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -64,10 +63,7 @@ session_destroy();
 
 </head>
 
-
-
 <body>
-
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -77,7 +73,7 @@ session_destroy();
                 <li><a href="#">Home</a></li>
                 <li><a href="../create_university">Create University</a></li>
                 <li><a href="../list_university">List University</a></li>
-                <li><a href="../list_rso_superadmin">List RSO</a></li>
+                <li><a href="../list_rso">List RSO</a></li>
 				<li><a href="../create_rso">Create RSO</a></li>
 				<li class="active"><a href="../create_event">Create Event</a></li>
                 <li><a href="#">List Events</a></li>
@@ -86,8 +82,7 @@ session_destroy();
     </nav>
 
     <form class="form-vertical" role="form" action="add_event.php" method="post">
-	
-	
+
 		<?php
 			//retrieve rsos
 			$rso_id = $rso_ids_result->fetch_row();
@@ -104,7 +99,7 @@ session_destroy();
 				$uni_id = 0 - $uni_id - 1;
 				$rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . "ucf" . "</option>";
 			}
-			
+
 			echo '<div class = "form-group">
 				<label for="rso">RSO:</label>
 				<select class="form-control" id="rso" name="rso">
@@ -112,6 +107,7 @@ session_destroy();
 				</select>
 			</div>';
 		?>
+
 		Event Name: <input type="text" name="eventname"><br>
 		Format:YYYY-MM-DD HH:MM:SS<br>
 		Start Time: <input type="datetime-local" name="starttime"> End Time: <input type="datetime-local" name="endtime"><br>

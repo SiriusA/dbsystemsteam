@@ -14,6 +14,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 //connects to database
 include "connection.php";
 
+$_SESSION["userLoggedIn"] = false;
+
 $email = $_POST["email"];
 $password = $_POST["password"];
 
@@ -33,6 +35,7 @@ else{
     $_SESSION["sid"] = $row[0];
     $utype = $row[1];
     $_SESSION["utype"] = $row[1];
+    $_SESSION["userLoggedIn"] = true;
 
     $result->close();
 
@@ -87,7 +90,7 @@ function isAdmin($utype){
 
 
 function isStudent($utype){
-    $result = db_query("SELECT S.utype FROM student S WHERE S.utype = '$utype' ");
+    $result = db_query("SELECT U.utype FROM User U WHERE U.utype = '$utype' ");
     if($result == false){
         echo "Error w/ query";
     }

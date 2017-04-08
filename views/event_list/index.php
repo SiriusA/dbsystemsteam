@@ -1,3 +1,11 @@
+<!-- Prevent user from skipping login page -->
+<?php
+  session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+		 header('Location: /');
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,6 +32,13 @@
   </head>
 
   <body class="index">
+
+
+    <?php require_once "../db/events_feed.php";
+    
+      fillEventTable("http://events.ucf.edu/feed.rss");
+      ?>
+
     <div class="contain-to-grid">
       <nav class="top-bar" data-topbar>
         <ul class="title-area">
@@ -35,7 +50,6 @@
         <section class="top-bar-section">
           <ul class="right">
             <?php
-              session_start();
               if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
               {
                header("location: ../");
@@ -67,7 +81,6 @@
             </div>
           </div>
         </div>
-
       <div class="row">
         <div class="large-12 columns">
           <h2>University Description</h2>

@@ -1,3 +1,10 @@
+<!-- Prevent user from skipping login page -->
+<?php
+	session_start();
+
+	if($_SESSION["userLoggedIn"] == false)
+		header('Location: /');
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +39,10 @@
               <section class="top-bar-section">
                 <ul class="right">
                   <?php
-                    session_start();
                     if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
                     {
                      header("location: ../");
-                    } 
+                    }
                     if($_SESSION["usertype"]== 2)
                     {
                       echo '<li class=""><a href="/create_event/">Create Event</a></li>';
@@ -61,24 +67,24 @@
         			</div>
     			</div>
     		</div>
-    		
+
         <p>University Name:
         </p>
     		<input type= "text" name="university_name" size "30" maxlength = "45" value = ""/>
-    		
+
 
     		<p>RSO Name:
         </p>
     		<input type= "text" name="rso_name" size "30" maxlength = "45" value = ""/>
-    		
+
 
         <p>RSO Picture:
         </p>
         <input type= "file" name="rso_picture" value = ""/>
-        
+
         <p>RSO Description:
         </p>
-        <p>                
+        <p>
         <textarea name="rso_description" cols="40" rows="5"></textarea>
         </p>
         <div id="wrapper">
@@ -100,7 +106,7 @@
         <p>Member 1 Email:
         </p>
         <input type= "text" name="rso_member_email_1" size "30" maxlength = "40" value = ""/>
-        
+
 
         <p>Member 2 Email:
         </p>
@@ -120,5 +126,3 @@
    		</form>
    	</body>
 </html>
-
-
