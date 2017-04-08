@@ -99,5 +99,5 @@ function isStudent($utype){
         return true;
     }
 
-    $result->close();
+ $result->close();
 }
