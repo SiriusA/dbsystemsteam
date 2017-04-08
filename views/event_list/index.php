@@ -34,9 +34,8 @@
   <body class="index">
 
 
-    <?php require_once "../db/events_feed.php"; ?>
-
-    <?php
+    <?php require_once "../db/events_feed.php";
+    
       fillEventTable("http://events.ucf.edu/feed.rss");
       ?>
 
