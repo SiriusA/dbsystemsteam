@@ -14,10 +14,11 @@ function db_connect(){
 
       //  $config = parse_ini_file("../config.ini");
 
-      $connection = mysqli_connect("localhost", "root", "", "event");
+      //local development
+      //$connection = mysqli_connect("localhost", "root", "", "event");
 
-        // Create connection
-      //  $connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
+      // Create connection
+      $connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
 
     }
 
