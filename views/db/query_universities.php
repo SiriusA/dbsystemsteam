@@ -11,13 +11,10 @@ include "connection.php";
 //will return an array of names
 
 function getUniversities(){
-    //disabled for now as university list should be seen by anyone
-    //$sid = $_SESSION["sid"];
 
 //query all universites created by me
     $result = db_query("SELECT U.uid, U.uname, U.description, U.studentcount, U.upicture
                         FROM university_created U");
-
     if($result == false){
         echo "something went wrong";
     }

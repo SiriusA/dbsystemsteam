@@ -1,11 +1,9 @@
+<!-- Prevent user from skipping login page -->
 <?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 3/25/2017
- * Time: 8:15 AM
- */
+  session_start();
 
+  if($_SESSION["userLoggedIn"] == false)
+    header('Location: /');
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +44,6 @@
     <div class="container-fluid">
         <?php
 
-        session_start();
         include ("../db/query_universities.php");
 
         //$uCredentials["uid"] $uCredentials["uname"] $uCredentials["description"]

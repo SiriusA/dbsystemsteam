@@ -1,3 +1,11 @@
+<!-- Prevent user from skipping login page -->
+<?php
+  session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+    header('Location: /');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,5 +1,9 @@
+<!-- Prevent user from skipping login page -->
 <?php
   session_start();
+
+  if($_SESSION["userLoggedIn"] == false)
+    header('Location: /');
 ?>
 
 <!DOCTYPE html>
@@ -54,11 +58,11 @@
         			</div>
     			</div>
     		</div>
-    		
+
         <p>First Name:
         </p>
     		<input type= "text" name="first_name" size "30" maxlength = "45" value = ""/>
-    		
+
 
     		<p>Last Name:
         </p>
@@ -67,26 +71,24 @@
         <p>Password:
         </p>
         <input type= "text" name="pwd" size "30" maxlength = "45" value = ""/>
-    		
-        <p>University: 
-        </p>             
+
+        <p>University:
+        </p>
         <select name="university_id">
         <option value="">Select...</option>
         <option value="2" >Florida State University</option>
         <option value="3">University of Central Florida</option>
         <option value="4">University of Florida</option>
         </select>
-        
+
 
         <p>Email Address:
         </p>
         <input type= "text" name="email_address" size "30" maxlength = "45" value = ""/>
-        
+
         <p>
     		<input type = "submit" name ="submit1" value="Sign Up" />
    			</p>
    		</form>
    	</body>
 </html>
-
-
