@@ -36,6 +36,13 @@
                 <li><a href="../list_university">List University</a></li>
                 <li><a href="../list_rso">List RSO</a></li>
                 <li><a href="#">List Events</a></li>
+                <li><a href = "/db/logout.php">Log Out</a></li>
+                <?php
+                    if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
+                    {
+                        header("location: ../");
+                    }
+                ?>
             </ul>
         </div>
     </nav>
