@@ -57,7 +57,7 @@ function fillEventTable($feed_url) {
         // Feed each event into the database event table
 
         db_query("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
-                  VALUES ('0', '$decription', '$contact_email', '$ename', '$end_time', '$i', '$contact_phone', '1', '$start_time')");
+                  VALUES ('0', '$description', '$contact_email', '$ename', '$end_time', '$i', '$contact_phone', '1', '$start_time')");
        $i++;
     }
 
