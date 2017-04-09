@@ -36,7 +36,8 @@
                 <li><a href="../create_university">Create University</a></li>
                 <li class="active"><a href="#">List University</a></li>
                 <li><a href="../list_rso_superadmin">List RSO</a></li>
-                <li><a href="#">List Events</a></li>
+                <li><a href="../list_events">List Events</a></li>
+                <li><a href = "/db/logout.php">Log Out</a></li>
             </ul>
         </div>
     </nav>

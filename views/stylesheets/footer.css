@@ -1,0 +1,38 @@
+ul.footer{
+  list-style: none;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #334139;
+}
+
+ul.footer li {
+  float: right;
+  padding: 4px 16px;
+}
+
+ul.footer li a{
+  text-decoration: none;
+  padding: 0px 0px;
+}
+
+ul.footer li a img{
+  vertical-align: middle;
+  padding: 0px 12px;
+}
+
+ul.footer li a:link{
+
+  color: #FFFFFF;
+}
+
+ul.footer li a:visited{
+  color: #FFFFFF;
+}
+
+ul.footer li a:hover{
+  color: #9aecbd;
+}

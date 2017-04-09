@@ -43,10 +43,6 @@
         <ul class="menu_bar">
           <li><a href = "/db/logout.php">Log Out</a></li>
           <?php
-              if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
-              {
-                header("location: ../");
-              }
               if($_SESSION["usertype"]== 2)
               {
                 echo '<li class=""><a href="/create_event/">Create Event</a></li>';
@@ -55,7 +51,7 @@
           <li class="left"><a href="/">Home</a></li>
           <li><a href="">Search</a></li>
           <li><a href="">My Account</a></li>
-          <li><a href="/event_list">Events</a></li>
+          <li><a href="/list_events">Events</a></li>
           <li><a href="/university_description">Universities</a></li>
           <li><a href="/rso">RSOs</a></li>
         </ul>

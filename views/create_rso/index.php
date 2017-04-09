@@ -22,6 +22,10 @@
     	<link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" />
     	<link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
 
+
+	    <link href="/stylesheets/nav_bar.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
+	    <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
+
     	<script src="/javascripts/modernizr.js" type="text/javascript"></script>
 
     	<link href="/images/favicon.png" rel="icon" type="image/png" />
@@ -29,44 +33,29 @@
 	</head>
 	<body class="index">
 		<form action = "http://localhost/create_rso/rso_added.php" method= "post">
-    		<div class="contain-to-grid">
-      			<nav class="top-bar" data-topbar>
-        			<ul class="title-area">
-          				<li class="name">
-            				<h1><a href="/home">Home</a></h1>
-          				</li>
-        			</ul>
-              <section class="top-bar-section">
-                <ul class="right">
-                  <?php
-                    if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
-                    {
-                     header("location: ../");
-                    }
-                    if($_SESSION["usertype"]== 2)
-                    {
-                      echo '<li class=""><a href="/create_event/">Create Event</a></li>';
-                    }
-                  ?>
-                   <li class=""><a href="/create_rso/">Create RSO</a></li>
-                   <li class=""><a href="/rso">RSOs</a></li>
-                   <li class=""><a href="/university_description">Universities</a></li>
-                   <li class=""><a href="/event_list">Events</a></li>
-                   <li class=""><a target="_blank" href="/phpinfo.php">My Account</a></li>
-                  <li class=""><a href="/phpmyadmin/">Search</a></li>
-                </ul>
-              </section>
-            </nav>
-   		 	</div>
-   			<div id="wrapper">
-        		<div class="hero">
-          			<div class="row">
-            			<div class="large-12 columns">
-              				<h1>Create RSO</h1>
-  						</div>
-        			</div>
-    			</div>
-    		</div>
+
+			<!-- NAVIGATION BAR -->
+	    <div>
+	      <nav>
+	        <ul class="menu_bar">
+	          <li><a href = "/db/logout.php">Log Out</a></li>
+	          <?php
+	              if($_SESSION["usertype"]== 2)
+	              {
+	                echo '<li class=""><a href="/create_event/">Create Event</a></li>';
+	              }
+	          ?>
+	          <li class="left"><a href="/">Home</a></li>
+	          <li><a href="">Search</a></li>
+	          <li><a href="">My Account</a></li>
+	          <li><a href="/list_events">Events</a></li>
+	          <li><a href="/university_description">Universities</a></li>
+	          <li><a href="/rso">RSOs</a></li>
+	        </ul>
+	      </nav>
+	    </div>
+
+        <h1 class="title_bar">Create RSO</h1>
 
         <p>University Name:
         </p>
@@ -124,5 +113,17 @@
     		<input type = "submit" name ="submit1" value="Send" />
    			</p>
    		</form>
+
+
+	    <!-- FOOTER OF PAGE -->
+	    <footer>
+	      <div>
+	        <ul class="footer">
+	          <li><a href="https://twitter.com">Twitter<img src="/images/social_twitter.png" /></a></li>
+	          <li><a href="https://www.facebook.com">Facebook<img src="/images/social_fb.png" /></a></li>
+	        </ul>
+	      </div>
+	    </footer>
+
    	</body>
 </html>

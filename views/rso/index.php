@@ -21,8 +21,8 @@
 
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 
-    <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/nav_bar.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
 
     <script src="/javascripts/modernizr.js" type="text/javascript"></script>
 
@@ -31,35 +31,27 @@
 
   </head>
 
-  <body class="index">
-    <div class="contain-to-grid">
-      <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-          <li class="name">
-            <h1><a href="/home">Home</a></h1>
-          </li>
-        </ul>
+        <div>
+          <nav>
+            <ul class="menu_bar">
+              <li><a href = "/db/logout.php">Log Out</a></li>
+              <?php
+                  if($_SESSION["usertype"]== 2)
+                  {
+                    echo '<li class=""><a href="/create_event/">Create Event</a></li>';
+                  }
+              ?>
+              <li class="left"><a href="/">Home</a></li>
+              <li><a href="">Search</a></li>
+              <li><a href="">My Account</a></li>
+              <li><a href="/list_events">Events</a></li>
+              <li><a href="/university_description">Universities</a></li>
+              <li><a href="/rso">RSOs</a></li>
+            </ul>
+          </nav>
+        </div>
 
-        <section class="top-bar-section">
-          <ul class="right">
-            <?php
-              if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
-              {
-               header("location: ../");
-              }
-              if($_SESSION["usertype"]== 2)
-              {
-                echo '<li class=""><a href="/create_event/">Create Event</a></li>';
-              }
-            ?>
-            <li class=""><a href="/create_rso/">Create RSO</a></li>
-            <li class=""><a href="/rso">RSOs</a></li>
-            <li class=""><a href="/university_description">Universities</a></li>
-            <li class=""><a href="/event_list">Events</a></li>
-            <li class=""><a target="_blank" href="/phpinfo.php">My Account</a></li>
-            <li class=""><a href="/phpmyadmin/">Search</a></li>
-          </ul>
-        </section>
+
       </nav>
     </div>
 
@@ -67,7 +59,7 @@
         <div class="hero">
           <div class="row">
             <div class="large-12 columns">
-              <h1>RSO Name</h1>
+              <h1 class="title_bar">RSO Name</h1>
                 <!--
                 <h1><img src="/images/xampp-logo.svg" />University Name <span>Apache + MariaDB + PHP + Perl</span></h1>
                 -->
@@ -75,80 +67,15 @@
           </div>
         </div>
 
-      <div class="row">
-        <div class="large-12 columns">
-          <h2>University Description</h2>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="large-12 columns">
-          <p>
-            Detail description of the university here!
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-          <h3>Student Count</h3>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-          <p>
-          # of Students
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-          <h3>University Picture</h3>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-          <p>
-            Picture here.
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-          <h3>University Location</h3>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-          <p>
-          Location here via google maps.
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="large-12 columns">
-        </div>
-      </div>
-    </div>
-
+    <!-- FOOTER OF PAGE -->
     <footer>
-          <div class="row">
-            <div class="large-12 columns">
-              <ul class="inline-list">
-                <li class=""><a href="https://twitter.com"><img src="/images/social_twitter.png" /></a></li>
-                <li class =""><a href="https://twitter.com">Twitter</a></li>
-                <li class=""><a href="https://www.facebook.com"><img src="/images/social_fb.png" /></a></li>
-                <li class=""><a href="https://www.facebook.com">Facebook</a></li>
-                <li class="">Privacy Policy</li>
-              </ul>
-            </div>
-          </div>
+      <div>
+        <ul class="footer">
+          <li><a href="https://twitter.com">Twitter<img src="/images/social_twitter.png" /></a></li>
+          <li><a href="https://www.facebook.com">Facebook<img src="/images/social_fb.png" /></a></li>
+        </ul>
+      </div>
     </footer>
 
     <!-- JS Libraries -->
