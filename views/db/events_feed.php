@@ -2,7 +2,6 @@
 
 // Bring database connection into file
 include "../db/connection.php";
-$connection = mysqli_connect("localhost", "root", "", "event");
 
 function fillEventTable($feed_url) {
 
