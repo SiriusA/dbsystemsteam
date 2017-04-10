@@ -13,7 +13,7 @@ include "connection.php";
 function getRSOsFromManagedUniversities(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, U.uname, Us.email
-                        FROM rso_owned R, university_created U, student_affiliated S, `user` Us 
+                        FROM rso_owned R, university_created U, `user` Us 
                         WHERE U.sid = '$sid' AND U.uid=Us.uid AND Us.sid=R.sid");
     if($result == false){
         echo "something went wrong";
