@@ -80,7 +80,7 @@ function insertUniversity($sid, $description, $uname, $studentCount, $picture){
                         VALUES (NULL, '$sid', '$description', '$uname', '$studentCount', '$picture')");
     if($result == false){
         echo "Insertion went wrong";
-        header('Location: create_university.php?insert_error=1');
+        header('Location: index.php?insert_error=1');
         exit();
     }
     else{

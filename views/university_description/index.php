@@ -91,7 +91,7 @@
       <div class="column_right">
         <h3>University Picture</h3>
         <p><?= $universityDetails[$index]["upicture"]; ?></p>
-        <img src="http://rs203.pbsrc.com/albums/aa72/monicalovesyoualotchris/29384439_2463ec3024_m.jpg~c200"/>
+        <img src="../images/<?= $universityDetails[$index]["upicture"]; ?>"/>
       </div>
     </div>
 
