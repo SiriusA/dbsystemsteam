@@ -25,27 +25,14 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Events</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li class="active"><a href="#">Create University</a></li>
-                <li><a href="../list_university">List University</a></li>
-                <li><a href="../list_rso">List RSO</a></li>
-                <li><a href="../list_events">List Events</a></li>
-                <li><a href = "/db/logout.php">Log Out</a></li>
-                <?php
-                    if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
-                    {
-                        header("location: ../");
-                    }
-                ?>
-            </ul>
-        </div>
-    </nav>
+
+    <!--Display correct navbar-->
+    <?php
+
+        if($_SESSION["usertype"] == 1)
+            include "../nav_bar/super_admin_navbar.php";
+        else
+    ?>
 
     <div id="content" class="container-fluid">
         <h2>Create University</h2>
@@ -147,6 +134,10 @@
 </body>
 <?php
 
+if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
+{
+    header("location: ../");
+}
 //check if there was an error with the last login
 if(isset($_GET["error"]) && $_GET["error"] == "1"){
     echo "<script>alert('Error message: Input is missing');</script>";
