@@ -1,7 +1,7 @@
 <?php
 
 // Bring database connection into file
-include once "../db/connection.php";
+include_once "../db/connection.php";
 
 function fillEventTable($feed_url) {
 
@@ -42,14 +42,14 @@ function fillEventTable($feed_url) {
 
 		echo "<li>" . $event->children('http://events.ucf.edu')->location->children('http://events.ucf.edu')->name . "</li>";
 		$location_name = $event->children('http://events.ucf.edu')->location->children('http://events.ucf.edu')->name;
-		
+
 		echo "<li>" . $event->children('http://events.ucf.edu')->location->children('http://events.ucf.edu')->mapurl . "</li>";
 		$location_url = $event->children('http://events.ucf.edu')->location->children('http://events.ucf.edu')->mapurl;
-		
+
 		//fill location table
 		db_query("INSERT INTO location (uid, lname, url)
 				  VALUES ('1', '$location_name', '$location_url')");
-		
+
         /*
             events table holds
               start_time  datetime
@@ -68,8 +68,8 @@ function fillEventTable($feed_url) {
 
         db_query("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
                   VALUES ('0', '$description', '$contact_email', '$ename', '$end_time', '$i', '$contact_phone', '1', '$start_time')");
-				  
-		
+
+
        $i++;
     }
 

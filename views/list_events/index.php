@@ -67,21 +67,21 @@
               </div>';
       				$event_entry = $event_result->fetch_row();
       			}
-            echo $event_list;  
+            echo $event_list;
           ?>
+          <!-->
           <div class="row">
             <div class="large-12 columns">
               <h1 class="title_bar">Event Name</h1>
-                <!--
-                <h1><img src="/images/xampp-logo.svg" />University Name <span>Apache + MariaDB + PHP + Perl</span></h1>
-                -->
+                
             </div>
           </div>
         </div>
+        -->
 
 <!---------------------------------------->
         <?php require_once "../db/events_feed.php";
-          fillEventTable("http://events.ucf.edu/feed.rss");
+          //fillEventTable("http://events.ucf.edu/feed.rss");
         ?>
 <!---------------------------------------->
 
