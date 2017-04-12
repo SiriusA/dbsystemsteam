@@ -26,6 +26,17 @@
     else if ($_SESSION["usertype"] == 3){
         include "../nav_bar/student_navbar.php";
     }
+
+    include "../db/query_events.php";
+
+    //get list of events that this student is going to attend
+    $eventAttendingList = getEventsAttending();
+
+    echo $eventAttendingList[0]["ename"] . "<br>";
+    echo $eventAttendingList[0]["description"] . "<br>";
+    echo $eventAttendingList[0]["start_time"] . "<br>";
+    echo $eventAttendingList[0]["end_time"] . "<br>";
+    echo $eventAttendingList[0]["approved"] . "<br>";
 ?>
 
 </body>

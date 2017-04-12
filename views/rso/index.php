@@ -34,7 +34,7 @@
 <!--    <a href = "/db/logout.php" class = "topcorner">Log Out</a-->
 
   </head>
-
+<body
   <?php
 
   if($_SESSION["usertype"] == 2)
