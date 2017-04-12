@@ -65,7 +65,7 @@
     if($_SESSION["usertype"] == 2){
         include "../nav_bar/admin_navbar.php";
     }
-	if($_SESSION["usertype"] == 3){
+	if($_SESSION["usertype"] == 1){
 		include "../nav_bar/super_admin_navbar.php";
 	}
 ?>
