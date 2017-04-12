@@ -48,11 +48,11 @@ else{
     }
     else if($utype == 2){
         $_SESSION["usertype"] = 2;
-        header('Location: /university_description');
+        header('Location: /events_attending');
     }
     else if($utype == 3){
         $_SESSION["usertype"] = 3;
-        header('Location: /university_description');
+        header('Location: /events_attending');
     }
 
     //    while ($row = $result->fetch_object()){

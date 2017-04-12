@@ -25,36 +25,24 @@
     <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
 
     <script src="/javascripts/modernizr.js" type="text/javascript"></script>
+      <!-- 3 links needed for bootstrap-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link href="/images/favicon.png" rel="icon" type="image/png" />
-    <a href = "/db/logout.php" class = "topcorner">Log Out</a>
+      <link href="/images/favicon.png" rel="icon" type="image/png" />
+<!--    <a href = "/db/logout.php" class = "topcorner">Log Out</a-->
 
   </head>
 
-        <div>
-          <nav>
-            <ul class="menu_bar">
-              <li><a href = "/db/logout.php">Log Out</a></li>
-              <?php
-                  if($_SESSION["usertype"]== 2)
-                  {
-                    echo '<li class=""><a href="/create_event/">Create Event</a></li>';
-                  }
-              ?>
-              <li class="left"><a href="/">Home</a></li>
-              <li><a href="">Search</a></li>
-              <li><a href="">My Account</a></li>
-              <li><a href="/list_events">Events</a></li>
-              <li><a href="/university_description">Universities</a></li>
-              <li><a href="/rso">RSOs</a></li>
-            </ul>
-          </nav>
-        </div>
+  <?php
 
-
-      </nav>
-    </div>
-
+  if($_SESSION["usertype"] == 2)
+      include "../nav_bar/admin_navbar.php";
+  else if ($_SESSION["usertype"] == 3){
+      include "../nav_bar/student_navbar.php";
+  }
+  ?>
     <div id="wrapper">
         <div class="hero">
           <div class="row">
