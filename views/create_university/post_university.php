@@ -7,7 +7,7 @@
  */
 
 session_start();
-include "../db/connection.php";
+include once "../db/connection.php";
 
 if(empty($_POST["university"]) || empty($_POST["description"]) || empty($_FILES["picture"]["name"]) || empty($_POST["studentCount"]) || empty($_POST["lat"]) || empty($_POST["lng"])){
     echo "Something is not set";

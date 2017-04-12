@@ -65,9 +65,9 @@
     if($_SESSION["usertype"] == 2){
         include "../nav_bar/admin_navbar.php";
     }
-	if($_SESSION["usertype"] == 1){
-		include "../nav_bar/super_admin_navbar.php";
-	}
+    if($_SESSION["usertype"] == 1){
+		    include "../nav_bar/super_admin_navbar.php";
+	  }
 ?>
 
 
@@ -107,7 +107,7 @@
 		Description: <textarea name="description" rows="10" cols="40"></textarea><br>
 		Phone: <input type="text" name="phone"> Email: <input type="text" name="email"><br>
 		<input type="submit" name="Submit"><br>
-		
+
 		<div class="col-sm-7">
             <div id="googleMap" style="width:100%;height:400px;"></div>
         </div>

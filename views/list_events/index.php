@@ -48,8 +48,27 @@
         include "../nav_bar/student_navbar.php";
     }
   ?>
+
+
     <div id="wrapper">
         <div class="hero">
+          <?php
+            include_once "../db/query_events.php";
+            $event_result = getEventsList();
+            $event_entry = $event_result->fetch_row();
+      			$event_list = "";
+      			while($event_entry !== NULL)
+      			{
+      				$event_list = $event_list .
+              '<div class="row">
+                <div class="large-12 columns">
+                  <h1 class="title_bar">' . $event_entry[0] . '</h1>
+                </div>
+              </div>';
+      				$event_entry = $event_result->fetch_row();
+      			}
+            echo $event_list;  
+          ?>
           <div class="row">
             <div class="large-12 columns">
               <h1 class="title_bar">Event Name</h1>

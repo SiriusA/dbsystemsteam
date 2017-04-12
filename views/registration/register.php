@@ -2,7 +2,7 @@
 
 
 session_start();
-include "../db/connection.php";
+include once "../db/connection.php";
 
 if(empty($_POST["first_name"]) || empty($_POST["last_name"]) || empty($_POST["pwd"]) || empty($_POST["email_address"]) || empty($_POST["university_id"])){
     echo "Something is not set";

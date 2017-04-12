@@ -1,7 +1,7 @@
 <?php
 
 // Bring database connection into file
-include "../db/connection.php";
+include once "../db/connection.php";
 
 function fillEventTable($feed_url) {
 

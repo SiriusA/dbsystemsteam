@@ -4,7 +4,7 @@
 
 session_start();
 
-include "../db/connection.php";
+include once "../db/connection.php";
 $rname = trim($_POST['rso_name']);
 $description = trim($_POST['rso_description']);
 if(isset($_POST['submit']))

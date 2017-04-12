@@ -7,13 +7,13 @@
  */
 
 
-include "connection.php";
+include_once "connection.php";
 
 
 function getEventsAttending(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT E.ename, E.description, E.start_time, E.end_time, E.approved
-                        FROM events_hosted_located E, attends A 
+                        FROM events_hosted_located E, attends A
                         WHERE A.sid='.$sid.' AND A.start_time=E.start_time AND A.lid=E.lid");
     if($result == false){
         echo "something went wrong";
@@ -26,4 +26,17 @@ function getEventsAttending(){
     }
 
     return $eventsAttending;
+}
+
+function getEventsList(){
+    $sid = $_SESSION["sid"];
+    $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end, E.e_approved, L.url, L.longitude, L.latitude
+                        FROM events E, location L, joins J
+                        WHERE '.$sid.' = J.sid
+                        AND J.rid = E.rid
+                        AND E.lid = L.lid");
+    if($result === false){
+        echo "something went wrong";
+    }
+    return $result;
 }
