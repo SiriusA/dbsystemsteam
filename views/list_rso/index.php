@@ -28,14 +28,17 @@
 
 <!--    TODO place correct navbar depending on user-->
 <!--    navbar start-->
-    <?php
-
-        if($_SESSION["usertype"] == 1)
-            include "../nav_bar/super_admin_navbar.php";
-        else{
-
+      <?php
+        if($_SESSION["usertype"] == 1){
+            include_once "../nav_bar/super_admin_navbar.php";
         }
-    ?>
+        if($_SESSION["usertype"] == 2){
+            include_once "../nav_bar/admin_navbar.php";
+        }
+        else if ($_SESSION["usertype"] == 3){
+            include_once "../nav_bar/student_navbar.php";
+        }
+      ?>
 <!--navbar end-->
 
     <div class="container-fluid">

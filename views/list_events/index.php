@@ -40,12 +40,14 @@
 
 
   <?php
-
+    if($_SESSION["usertype"] == 1){
+        include_once "../nav_bar/super_admin_navbar.php";
+    }
     if($_SESSION["usertype"] == 2){
-        include "../nav_bar/admin_navbar.php";
+        include_once "../nav_bar/admin_navbar.php";
     }
     else if ($_SESSION["usertype"] == 3){
-        include "../nav_bar/student_navbar.php";
+        include_once "../nav_bar/student_navbar.php";
     }
   ?>
 
@@ -73,7 +75,7 @@
           <div class="row">
             <div class="large-12 columns">
               <h1 class="title_bar">Event Name</h1>
-                
+
             </div>
           </div>
         </div>

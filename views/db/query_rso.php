@@ -6,14 +6,14 @@
  * Time: 3:49 PM
  */
 
-include "connection.php";
+include_once "connection.php";
 
 //used in list_rso and rso description
 //Queries all RSO that Superadmin may manage
 function getRSOsFromManagedUniversities(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, U.uname, Us.email
-                        FROM rso_owned R, university_created U, `user` Us 
+                        FROM rso_owned R, university_created U, `user` Us
                         WHERE U.sid = '$sid' AND U.uid=Us.uid AND Us.sid=R.sid");
     if($result == false){
         echo "something went wrong";
@@ -29,3 +29,16 @@ function getRSOsFromManagedUniversities(){
 }
 
 //Function to query RSO student or admin may view
+function getRSOsForStudent()
+{
+    $sid = $_SESSION["sid"];
+    $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, U.uname, Us.email
+                        FROM rso_owned R, university_created U, `user` Us
+                        WHERE Us.sid = '$sid' AND R.uid=Us.uid");
+
+    if($result === false){
+        echo "something went wrong";
+    }
+
+    return $result;
+}

@@ -31,9 +31,11 @@ function getEventsAttending(){
 function getEventsList(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end, E.e_approved, L.url, L.longitude, L.latitude
-                        FROM events E, location L, joins J
-                        WHERE '.$sid.' = J.sid
-                        AND J.rid = E.rid
+                        FROM events E, location L, joins J, user U
+                        WHERE ('.$sid.' = J.sid
+                        AND J.rid = E.rid)
+                        OR ('.$sid.' = U.sid
+                        AND U.uid = L.uid)
                         AND E.lid = L.lid");
     if($result === false){
         echo "something went wrong";
