@@ -69,6 +69,7 @@
 ?>
 
 
+
 <form class="form-vertical" role="form" action="add_event.php" method="post">
 
 <?php
