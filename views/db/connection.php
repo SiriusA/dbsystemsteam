@@ -12,10 +12,11 @@ function db_connect(){
 
     if(!isset($connection)){
 
-      $config = parse_ini_file("../../config.ini");
+        $config = parse_ini_file("../config.ini");
 
-      // Create connection
-      $connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
+        // Create connection
+        $connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
+
     }
 
     // Check connection
@@ -35,10 +36,8 @@ function db_query($query) {
     // Query the database
     $result = mysqli_query($connection,$query);
 
-    if($result == false){
+    if($result == false)
         echo mysqli_error($connection);
-        echo $query;
-    }
     return $result;
 }
 
