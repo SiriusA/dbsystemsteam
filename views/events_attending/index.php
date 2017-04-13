@@ -107,16 +107,16 @@
                         for($i = $index; $i < sizeof($eventAttendingList); $i++){
                             echo '<div class="row">
                                     <div class="col-sm-5">
-                                        <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$eventAttendingList[$i + $index]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
+                                        <a href="../rso_description/index.php?index='.($i).'" class="list-group-item">'.$eventAttendingList[$i]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="#" class="list-group-item">'.$eventAttendingList[$i + $index]["start_time"].'</a>
+                                        <a href="#" class="list-group-item">'.$eventAttendingList[$i]["start_time"].'</a>
                                     </div>
                                     <div class="col-sm-2">
                                         <a href="#" class="list-group-item">University</a>
                                     </div>
                                     <div class="col-sm-1">
-                                        <a href="#" class="list-group-item">'.$eventAttendingList[$i + $index]["approved"].'</a>
+                                        <a href="#" class="list-group-item">'.$eventAttendingList[$i]["approved"].'</a>
                                     </div>
                                   </div>';
                         }
