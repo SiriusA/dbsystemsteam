@@ -71,7 +71,7 @@
       			}
             echo $event_list;
           ?>
-          <!-->
+          <!--
           <div class="row">
             <div class="large-12 columns">
               <h1 class="title_bar">Event Name</h1>
