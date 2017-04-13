@@ -5,6 +5,9 @@
 
 
 <?php
+include_once "../db/connection.php";
+$conn = getConnObj();
+
 $eventname = $starttime = $endtime = $desc = $phone = $email = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,8 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$desc = test_input($_POST["description"]);
 	$phone = test_input($_POST["phone"]);
 	$email = test_input($_POST["email"]);
-	
-	
+
+
 	echo("testing insert");
 
 	$timetable_collision = "SELECT e2.lid, e2.start_time
@@ -35,8 +38,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo $insert_data_str;
 	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	db_query("USE event;");
-	
-	$result = db_query($timetable_collision);
+
+	$result = $conn->query($timetable_collision);
 	echo("<br> ye <br>");
 	if($result->num_rows == 0) {
 		if($conn->query($insert_actual)=== TRUE) {
@@ -44,10 +47,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			echo("insert successful");
 		} else {
 			echo "Error: " . $insert_actual . "<br>" . $conn->error;
-		}	
+		}
 	} else {
 		echo "Collision Detected";
 	}
+
+	$conn->close();
 }
 
 function test_input($data) {
