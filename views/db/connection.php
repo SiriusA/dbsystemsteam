@@ -45,3 +45,8 @@ function db_error(){
     $connection = db_connect();
     return mysqli_error($connection);
 }
+
+function getConnObj(){
+    $conn = new mysqli("localhost", $config["username"], $config["password"], $config["dbname"]);
+    return $conn;
+}
