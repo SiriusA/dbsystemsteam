@@ -13,8 +13,10 @@ function fillEventTable($feed_url) {
     $conn = getConnObj();
     $conn2 = getConnObj();
     $conn3 = getConnObj();
-    $eventIns = $conn->prepare("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
-              VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?)");
+//    $eventIns = $conn->prepare("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
+//              VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?)");
+    $eventIns = $conn->prepare("INSERT INTO events_hosted_located (approved, description, email, ename, end_time, lid, phone, rid, start_time, type, visibility)
+                                VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?, 0, 1)");
     $eventIns->bind_param("ssssisis", $description, $contact_email, $name, $end_time, $locationid, $contact_phone, $rid, $start_time);
     $locIns = $conn2->prepare("INSERT INTO location (uid, lname, url)
               VALUES ('1', ?, ?)");
@@ -67,7 +69,7 @@ function fillEventTable($feed_url) {
 
 
 
-        $locationid = -1;
+        $locationid = 0;
 
         if($locQuery->execute() == FALSE){
 //          echo "something failed<br>";
@@ -85,7 +87,10 @@ function fillEventTable($feed_url) {
         //db_query("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
         //            VALUES ('0', '$description', '$contact_email', '$ename', '$end_time', '$locationid', '$contact_phone', '1', '$start_time')");
 
-        $eventIns->execute();
+        if($eventIns->execute() == FALSE)
+        {
+          echo $eventIns->error . "<br>";
+        }
 
         $i++;
       }
