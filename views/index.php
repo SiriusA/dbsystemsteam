@@ -21,10 +21,9 @@
 <body>
 
 <form action="/db/login_action.php" method="post">
-    <div class="imgcontainer">
-<!--        <img src="img_avatar2.png" alt="Avatar" class="avatar">-->
-    </div>
 
+ 		<img src="/images/wb1.png">
+		
     <div class="container">
         <label><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="email" required>
