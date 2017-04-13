@@ -66,18 +66,19 @@
 
             if(sizeof($event_result) <= 0){
               echo '<div class="list-group-item">';
-              echo '<h3> Looks like your university is lacking events! </h3>';
+              echo '<h3> Looks like you\'re university is lacking events! </h3>';
               echo '</div>';
             }
 
             else
               while($i < 20 && $i < sizeof($event_result)){
                 echo '<div class="list-group-item">';
-                echo '<h3>' .$event_result[$i++]["e_name"]. '</h3>';
-                echo '<p>' .$event_result[$i++]["e_description"]. '</p>';
-                echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i++]["e_start"]. '</font></strong></p>';
-                echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i++]["e_end"]. '</font></strong></p>';
+                echo '<h3>' .$event_result[$i]["e_name"]. '</h3>';
+                echo '<p>' .$event_result[$i]["e_description"]. '</p>';
+                echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i]["e_start"]. '</font></strong></p>';
+                echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["e_end"]. '</font></strong></p>';
                 echo '</div>';
+                $i++;
               }
           ?>
 

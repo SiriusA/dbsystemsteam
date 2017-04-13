@@ -32,13 +32,20 @@ function getRSOsFromManagedUniversities(){
 function getRSOsForStudent()
 {
     $sid = $_SESSION["sid"];
+
     $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, U.uname, Us.email
                         FROM rso_owned R, university_created U, `user` Us
-                        WHERE Us.sid = '$sid' AND R.uid=Us.uid");
+                        WHERE Us.sid = '$sid' AND R.sid = Us.sid AND U.uid = Us.uid");
 
-    if($result === false){
+    if($result == false){
         echo "something went wrong";
     }
 
-    return $result;
+    //save each row in array
+    $myRso = array();
+    while($row = mysqli_fetch_array($result)){
+        $myRso[] = $row;
+    }
+
+    return $myRso;
 }
