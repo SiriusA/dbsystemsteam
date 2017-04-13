@@ -47,6 +47,7 @@ function db_error(){
 }
 
 function getConnObj(){
+    $config = parse_ini_file("../../config.ini");
     $conn = new mysqli("localhost", $config["username"], $config["password"], $config["dbname"]);
     return $conn;
 }
