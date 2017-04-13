@@ -78,8 +78,9 @@
 
             </div>
           </div>
-        </div>
         -->
+        </div>
+
 
 <!---------------------------------------->
         <?php require_once "../db/events_feed.php";
