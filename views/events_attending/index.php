@@ -94,7 +94,7 @@
                                     <div class="col-sm-2">
                                         <a href="#" class="list-group-item">University</a>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-1">
                                         <a href="#" class="list-group-item">'.$eventAttendingList[$i + $index]["approved"].'</a>
                                     </div>
                                   </div>';
