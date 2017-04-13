@@ -21,6 +21,8 @@
 <body>
 
 <form action="/db/login_action.php" method="post">
+
+ 		<img src="/images/wb1.png">
 		
     <div class="container">
         <label><b>Username</b></label>
