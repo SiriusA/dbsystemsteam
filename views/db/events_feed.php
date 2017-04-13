@@ -10,6 +10,20 @@ function fillEventTable($feed_url) {
     $element = new SimpleXmlElement($rss_feed);
 
     $i = 0;
+    $conn = getConnObj();
+    $conn2 = getConnObj();
+    $conn3 = getConnObj();
+    $eventIns = $conn->prepare("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
+              VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?)");
+    $eventIns->bind_param("ssssisis", $description, $contact_email, $name, $end_time, $locationid, $contact_phone, $rid, $start_time);
+    $locIns = $conn2->prepare("INSERT INTO location (uid, lname, url)
+              VALUES ('1', ?, ?)");
+    $locIns->bind_param("ss", $location_name, $location_url);
+    $locQuery = $conn3->prepare("SELECT L.lid
+                               FROM location L
+                               WHERE L.lname = ?");
+    $locQuery->bind_param("s", $location_name);
+    $locQuery->bind_result($locationidres);
 
     // Go through each event in the RSS and pull the data
     foreach($element->channel->item as $event) {
@@ -25,6 +39,7 @@ function fillEventTable($feed_url) {
     		$location_name = $event->children('http://events.ucf.edu')->location->children('http://events.ucf.edu')->name;
 		    $location_url = $event->children('http://events.ucf.edu')->location->children('http://events.ucf.edu')->mapurl;
 
+        /*
         $ename = test_input($ename);
         $description = test_input($description);
         $start_time = test_input($start_time);
@@ -35,30 +50,54 @@ function fillEventTable($feed_url) {
         $contact_email = test_input($contact_email);
         $location_name = test_input($location_name);
         $location_url = test_input($location_url);
-
+        */
 
       	//fill location table
-      	db_query("INSERT INTO location (uid, lname, url)
-      			      VALUES ('1', '$location_name', '$location_url')");
+      	//db_query("INSERT INTO location (uid, lname, url)
+      	//	      VALUES ('1', '$location_name', '$location_url')");
 
-        $locationidres = db_query('SELECT L.lid
-                                   FROM location L
-                                   WHERE L.lname = "' . $location_name . '"');
+        if(!$locIns->execute())
+        {
+//          echo "insert location failed<br>" . $locIns->error . "<br>";
+        }
+
+//      $locationidres = db_query('SELECT L.lid
+//                                   FROM location L
+//                                   WHERE L.lname = "' . $location_name . '"');
+
+
 
         $locationid = -1;
 
-        if($locationidres === FALSE){
-          echo "something failed";
+        if($locQuery->execute() == FALSE){
+//          echo "something failed<br>";
+        }
+        else if($locQuery->fetch() != NULL){
+          $locationid = $locationidres[0];
+        }
+        else {
+//          echo "no data:" . $location_name . "<br>";
         }
 
-        else {
-          $locationid = $locationidres->fetch_row()[0];
-        }
-            // Feed each event into the database event table
-            db_query("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
-                      VALUES ('0', '$description', '$contact_email', '$ename', '$end_time', '$locationid', '$contact_phone', '1', '$start_time')");
-           $i++;
+        $rid = 1;
+
+        // Feed each event into the database event table
+        //db_query("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
+        //            VALUES ('0', '$description', '$contact_email', '$ename', '$end_time', '$locationid', '$contact_phone', '1', '$start_time')");
+
+        $eventIns->execute();
+
+        $i++;
       }
+
+      $eventIns->close();
+      $locIns->close();
+      $locQuery->close();
+
+      $conn->close();
+      $conn2->close();
+      $conn3->close();
+
 }
 
 function test_input($data) {
