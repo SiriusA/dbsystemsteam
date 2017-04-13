@@ -79,11 +79,11 @@
     //                echo $eventAttendingList[0]["approved"] . "<br>";
 
                     $nextPage = -1;
-                    //        only display 10
+                    //        only display 7
                     echo '<ul class="list-group">';
-                    if($remaining > 10){
+                    if($remaining > 7){
                         $index = sizeof($eventAttendingList) - $remaining;
-                        for($i = 0; $i < 10; $i++){
+                        for($i = 0; $i < 7; $i++){
                             echo '<div class="row">
                                     <div class="col-sm-5">
                                         <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$eventAttendingList[$i + $index]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
