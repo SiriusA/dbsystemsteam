@@ -23,6 +23,7 @@
 
 	</head>
 	 <body>
+    <form action = "http://localhost/registration/register.php" method= "post">
     <!-- NAVIGATION BAR -->
     <div>
       <nav>
@@ -52,9 +53,9 @@
   </p>             
   <select name="university_id">
   <option value="">Select...</option>
-  <option value="2" >Florida State University</option>
-  <option value="3">University of Central Florida</option>
-  <option value="4">University of Florida</option>
+  <option value="124" >Florida State University</option>
+  <option value="1">University of Central Florida</option>
+  <option value="125">University of Florida</option>
   </select>
   
 
@@ -64,7 +65,7 @@
   
   <p>
 	<input type = "submit" name ="submit1" value="Sign Up" />
-		</p>
+	</p>
 	</form>
 </body>
 </html>

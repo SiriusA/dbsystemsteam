@@ -51,42 +51,39 @@
     }
   ?>
 
-
     <div id="wrapper">
         <div class="hero">
           <?php
+
+            require_once "../db/events_feed.php";
             include_once "../db/query_events.php";
+
+      //      fillEventTable("http://events.ucf.edu/feed.rss");
+
             $event_result = getEventsList();
-            $event_entry = $event_result->fetch_row();
-      			$event_list = "";
-      			while($event_entry !== NULL)
-      			{
-      				$event_list = $event_list .
-              '<div class="row">
-                <div class="large-12 columns">
-                  <h1 class="title_bar">' . $event_entry[0] . '</h1>
-                </div>
-              </div>';
-      				$event_entry = $event_result->fetch_row();
-      			}
-            echo $event_list;
+
+            $i = 0;
+
+            if(sizeof($event_result) <= 0){
+              echo '<div class="list-group-item">';
+              echo '<h3> Looks like your university is lacking events! </h3>';
+              echo '</div>';
+            }
+
+            else
+              while($i < 20 && $i < sizeof($event_result)){
+                echo '<div class="list-group-item">';
+                echo '<h3>' .$event_result[$i++]["e_name"]. '</h3>';
+                echo '<p>' .$event_result[$i++]["e_description"]. '</p>';
+                echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i++]["e_start"]. '</font></strong></p>';
+                echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i++]["e_end"]. '</font></strong></p>';
+                echo '</div>';
+              }
           ?>
-          <!--
-          <div class="row">
-            <div class="large-12 columns">
-              <h1 class="title_bar">Event Name</h1>
 
-            </div>
-          </div>
-        -->
+
         </div>
-
-
-<!---------------------------------------->
-        <?php require_once "../db/events_feed.php";
-          //fillEventTable("http://events.ucf.edu/feed.rss");
-        ?>
-<!---------------------------------------->
+      </div>
 
     <!-- FOOTER OF PAGE -->
     <footer>

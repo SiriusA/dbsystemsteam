@@ -17,7 +17,6 @@
 </head>
 <body>
 
-
 <?php
 
     session_start();
@@ -31,6 +30,7 @@
 
     //get list of events that this student is going to attend
     $eventAttendingList = getEventsAttending();
+
 
 ?>
 
@@ -164,3 +164,21 @@
 
 
 </body>
+<!--    $i = 0;-->
+<!---->
+<!--    if(sizeof($eventAttendingList) <= 0){-->
+<!--      echo '<div class="list-group-item">';-->
+<!--      echo '<h3> Looks like your not going anywhere! </h3>';-->
+<!--      echo '</div>';-->
+<!--    }-->
+<!--    else-->
+<!--      while($i < 20 && $i < sizeof($event_result)){-->
+<!--        echo $eventAttendingList[$i++]["ename"] . "<br>";-->
+<!--        echo $eventAttendingList[$i++]["description"] . "<br>";-->
+<!--        echo $eventAttendingList[$i++]["start_time"] . "<br>";-->
+<!--        echo $eventAttendingList[$i++]["end_time"] . "<br>";-->
+<!--        echo $eventAttendingList[$i++]["approved"] . "<br>";-->
+<!--      }-->
+<!--?>-->
+<!---->
+<!--</body>-->

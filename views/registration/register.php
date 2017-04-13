@@ -26,8 +26,8 @@ $sid;
 
 
 
-    $result = db_query("INSERT INTO user(sid, utype, email, password, first_name, last_name)
-                        VALUES (NULL, DEFAULT, '$email', '$password', '$first_name', '$last_name')");
+    $result = db_query("INSERT INTO user(sid, uid, utype, email, password, first_name, last_name)
+                        VALUES (NULL, '$uid', DEFAULT, '$email', '$password', '$first_name', '$last_name')");
     if($result == false){
         echo "Insertion went wrong";
         exit();
