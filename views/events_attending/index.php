@@ -130,7 +130,7 @@
                             //display previous button?
                             if($page != 0){
                             $prevPage = $page - 1;
-                            $prevRemaining = $remaining + 10;
+                            $prevRemaining = $remaining + 7;
                             //DISPLAY PREV BUTTON
                             echo    '<li><a href="index.php?page='.$prevPage.'&remaining='.$prevRemaining.'">Previous</a></li>';
 
@@ -139,7 +139,7 @@
 
                             //display next button?
                             if($nextPage != -1){
-                            $nextRemaining = $remaining - 10;
+                            $nextRemaining = $remaining - 7;
                             //display next button here
                             echo '<li><a href="index.php?page='.$nextPage.'&remaining='.$nextRemaining.'">Next</a></li>';
 
