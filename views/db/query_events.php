@@ -30,6 +30,7 @@ function getEventsAttending(){
 
 function getEventsList(){
     $sid = $_SESSION["sid"];
+    /*
     $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end, E.e_approved, L.url, L.longitude, L.latitude
                         FROM events E, location L, joins J, user U
                         WHERE ('.$sid.' = J.sid
@@ -38,6 +39,7 @@ function getEventsList(){
                         AND U.uid = L.uid
                         AND E.rid = NULL)
                         AND E.lid = L.lid");
+                        */
 
     $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end
                         FROM events E");
