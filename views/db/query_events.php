@@ -35,7 +35,8 @@ function getEventsList(){
                         WHERE ('.$sid.' = J.sid
                         AND J.rid = E.rid)
                         OR ('.$sid.' = U.sid
-                        AND U.uid = L.uid)
+                        AND U.uid = L.uid
+                        AND E.rid = NULL)
                         AND E.lid = L.lid");
     if($result === false){
         echo "something went wrong";

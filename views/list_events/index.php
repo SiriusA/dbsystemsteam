@@ -84,7 +84,7 @@
 
 <!---------------------------------------->
         <?php require_once "../db/events_feed.php";
-          //fillEventTable("http://events.ucf.edu/feed.rss");
+          fillEventTable("http://events.ucf.edu/feed.rss");
         ?>
 <!---------------------------------------->
 
