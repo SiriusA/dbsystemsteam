@@ -54,6 +54,15 @@ function fillEventTable($feed_url) {
         $location_url = test_input($location_url);
         */
 
+        //`Sat, 15 Apr 2017 08:00:00 -0400`
+        //Fix dates
+        $start_time = date_create_from_format( "D, d M Y H:i:s O", $start_time);
+        $end_time = date_create_from_format( "D, d M Y H:i:s O", $end_time);
+
+        $start_time = $start_time->format("Y-m-d H:i:s");
+        $end_time = $end_time->format("Y-m-d H:i:s");
+
+
       	//fill location table
       	//db_query("INSERT INTO location (uid, lname, url)
       	//	      VALUES ('1', '$location_name', '$location_url')");
@@ -75,7 +84,7 @@ function fillEventTable($feed_url) {
 //          echo "something failed<br>";
         }
         else if($locQuery->fetch() != NULL){
-          $locationid = $locationidres[0];
+          $locationid = $locationidres;
         }
         else {
 //          echo "no data:" . $location_name . "<br>";
