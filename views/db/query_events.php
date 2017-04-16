@@ -14,7 +14,7 @@ function getEventsAttending(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT E.ename, E.description, E.start_time, E.end_time, E.approved
                         FROM events_hosted_located E, attends A
-                        WHERE A.sid='.$sid.' AND A.start_time=E.start_time AND A.lid=E.lid");
+                        WHERE A.sid=" . $sid . " AND A.start_time=E.start_time AND A.lid=E.lid");
     if($result == false){
         echo "something went wrong";
     }
