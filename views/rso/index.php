@@ -42,7 +42,7 @@
   else if ($_SESSION["usertype"] == 3){
       include "../nav_bar/student_navbar.php";
   }
-        
+
 
           include_once "../db/query_rso.php";
 
@@ -52,7 +52,7 @@
 
           if(sizeof($my_rso) <= 0){
             echo '<div class="list-group-item">';
-            echo '<h3> Looks like you\'re university is lacking events! </h3>';
+            echo '<h3> Looks like you\'re university is lacking rsos! </h3>';
             echo '</div>';
           }
 
