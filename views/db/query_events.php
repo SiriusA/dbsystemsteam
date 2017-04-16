@@ -56,3 +56,23 @@ function getEventsList(){
 
     return $eNames;
 }
+
+function getRSOeventLoc($rid)
+{
+  $result = db_query("SELECT *
+                      FROM events_hosted_located E
+                      INNER JOIN location ON E.lid = location.lid
+                      WHERE E.rid = " . $rid . "");
+
+  if($result === false)
+  {
+    echo "something went wrong";
+  }
+
+  $eNames = array();
+  while($row = mysqli_fetch_array($result)){
+      $eNames[] = $row;
+  }
+
+  return $eNames;
+}

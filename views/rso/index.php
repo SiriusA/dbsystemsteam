@@ -59,7 +59,7 @@
           else
             while($i < 20 && $i < sizeof($my_rso)){
               echo '<div class="list-group-item">';
-              echo '<h1 class="title_bar">' .$my_rso[$i]["rname"]. '</h3>';
+              echo '<h1 class="title_bar"><a href = "../page_rso?' . $my_rso[$i]["rid"] . '">' .$my_rso[$i]["rname"]. '</a></h3>';
               echo '<p>' .$my_rso[$i]["description"]. '</p>';
               echo '</div>';
               $i++;

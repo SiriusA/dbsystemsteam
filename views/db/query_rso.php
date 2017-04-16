@@ -33,7 +33,7 @@ function getRSOsForStudent()
 {
     $sid = $_SESSION["sid"];
 
-    $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, U.uname, Us.email
+    $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, R.rid, U.uname, Us.email
                         FROM rso_owned R, university_created U, `user` Us
                         WHERE Us.sid = '$sid' AND R.sid = Us.sid AND U.uid = Us.uid");
 
@@ -48,4 +48,18 @@ function getRSOsForStudent()
     }
 
     return $myRso;
+}
+
+function getRSObyID($rid)
+{
+  $result = db_query("SELECT DISTINCT *
+                      FROM rso_owned R
+                      WHERE R.rid = " . $rid . "");
+
+  if($result === FALSE)
+  {
+    echo "something went wrong";
+  }
+
+  return $result->fetch_array();
 }
