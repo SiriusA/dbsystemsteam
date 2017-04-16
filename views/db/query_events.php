@@ -31,18 +31,19 @@ function getEventsAttending(){
 function getEventsList(){
     $sid = $_SESSION["sid"];
 
-    $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end, E.e_approved, location.url, location.longitude, location.latitude
-                        FROM events E
+
+    $result = db_query("SELECT E.ename, E.description, E.start_time, E.end_time, E.approved, location.url, location.longitude, location.latitude
+                        FROM events_hosted_located E
                         INNER JOIN location ON E.lid = location.lid
                         INNER JOIN joins ON joins.rid = E.rid
                         INNER JOIN user ON location.uid = user.uid
-                        WHERE 2 = joins.sid
-                     	  OR (2 = user.sid AND E.rid = NULL)");
+                        WHERE " . $sid . " = user.sid
+                     	  OR ( " . $sid . " = user.sid AND E.rid = NULL)");
 
 
 
-    $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end
-                        FROM events E");
+//    $result = db_query("SELECT E.e_name, E.e_description, E.e_start, E.e_end
+//                        FROM events E");
 
     if($result === false){
         echo "something went wrong";

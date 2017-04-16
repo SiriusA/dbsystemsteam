@@ -13,8 +13,6 @@ function fillEventTable($feed_url) {
     $conn = getConnObj();
     $conn2 = getConnObj();
     $conn3 = getConnObj();
-//    $eventIns = $conn->prepare("INSERT INTO events (e_approved, e_description, e_email, e_name, e_end, lid, e_phone, rid, e_start)
-//              VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?)");
     $eventIns = $conn->prepare("INSERT INTO events_hosted_located (approved, description, email, ename, end_time, lid, phone, rid, start_time, type, visibility)
                                 VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?, 0, 1)");
     $eventIns->bind_param("ssssisis", $description, $contact_email, $name, $end_time, $locationid, $contact_phone, $rid, $start_time);
@@ -98,7 +96,7 @@ function fillEventTable($feed_url) {
 
         if($eventIns->execute() == FALSE)
         {
-          echo $eventIns->error . "<br>";
+//          echo $eventIns->error . "<br>";
         }
 
         $i++;
