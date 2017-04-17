@@ -29,15 +29,7 @@
 <!--    TODO place correct navbar depending on user-->
 <!--    navbar start-->
 <?php
-  if($_SESSION["usertype"] == 1){
-      include_once "../nav_bar/nav_bar_super.php";
-  }
-  if($_SESSION["usertype"] == 2){
-      include_once "../nav_bar/nav_bar_admin.php";
-  }
-  else if ($_SESSION["usertype"] == 3){
-      include_once "../nav_bar/nav_bar_student.php";
-  }
+  include_once "../nav_bar/only_nav_bar.php";
 ?>
 <!--navbar end-->
 

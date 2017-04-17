@@ -40,15 +40,7 @@
 
 
   <?php
-    if($_SESSION["usertype"] == 1){
-        include_once "../nav_bar/super_admin_navbar.php";
-    }
-    if($_SESSION["usertype"] == 2){
-        include_once "../nav_bar/admin_navbar.php";
-    }
-    else if ($_SESSION["usertype"] == 3){
-        include_once "../nav_bar/student_navbar.php";
-    }
+    include_once "../nav_bar/only_nav_bar.php";
   ?>
 
   <?php function test_input($data) {
