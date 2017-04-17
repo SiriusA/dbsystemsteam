@@ -59,11 +59,20 @@
   } ?>
 
   <?php
-    include_once "../db/query_rso.php";
     include_once "../db/query_events.php";
 
-    //clean please
-    $rsodata = getRSObyID(test_input($_SERVER['QUERY_STRING']));
+
+    //set index if not set
+    if(!empty($_GET["time"]) && !empty($_GET["place"])){
+      $time = test_input($_GET["time"]);
+      $place = test_input($_GET["place"]);
+    }
+    else{
+      $time = 0;
+      $place = 0;
+    }
+
+    $eventData = getEventbyTimePlace($time, $place);
 
   ?>
 
@@ -72,57 +81,31 @@
           <div class="row">
             <div class="col-md-12">
               <?php
-                echo '<h3 class="title_bar">' . $rsodata["rname"] . "</h3>";
+                echo '<h3 class="title_bar">' . $eventData["ename"] . "</h3>";
               ?>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <h3>imasine</h3>
+              <h3>This is where an image would go, if you had one.</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <?php
+              echo '<h1 class="title_bar"><font size = "4%"' . $eventData["start_time"] . "</font></h1>";
+              ?>
+            </div>
+            <div class="col-md-6">
+              <?php
+              echo '<h1 class="title_bar"><font size = "4%"' . $eventData["end_time"] . "</font></h1>";
+              ?>
             </div>
           </div>
           <div class="col-md-12">
             <?php
-              echo '<h1 class="title_bar"><font size = "5%">' . $rsodata["description"] . "</font></h1>";
+              echo '<h1 class="title_bar"><font size = "5%">' . $eventData["description"] . "</font></h1>";
             ?>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <h1><center>Events</center></h1>
-            </div>
-            <div class="col-md-4">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <div class="well">
-                <?php
-                $event_result = getRSOeventLoc($rsodata["rid"]);
-
-                $i = 0;
-
-                if(sizeof($event_result) <= 0){
-                  echo '<div class="list-group-item">';
-                  echo '<h3> Looks like your RSO is lacking events! </h3>';
-                  echo '</div>';
-                }
-
-                else
-                  while($i < 20 && $i < sizeof($event_result)){
-                    echo '<div class="list-group-item">';
-                    echo '<h1>' .$event_result[$i]["ename"]. '</h1>';
-                    echo '<p>' .$event_result[$i]["description"]. '</p>';
-                    echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i]["start_time"]. '</font></strong></p>';
-                    echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["end_time"]. '</font></strong></p>';
-                    echo '</div>';
-                    $i++;
-                  }
-                 ?>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <h3>calendar?</h3>
-            </div>
           </div>
         </div>
       </div>
