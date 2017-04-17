@@ -51,7 +51,7 @@
     include "../db/query_rso.php";
     //TODO query correct RSO to display for each user (Super, Admin, Student)
     //query RSO from Universities that ae managed by SuperAdmin
-    
+
     $rsoAndUniversityInfo = getRSOsForStudent();
 
     //if page is not set, then default to page 0
