@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Create University</title>
+    <title>Registration - Eventi</title>
 
     <link rel="stylesheet" href="/stylesheets/create_university.css">
 

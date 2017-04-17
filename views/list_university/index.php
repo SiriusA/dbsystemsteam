@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create University</title>
+    <title>University List - Eventi</title>
 
 <!--    <link rel="stylesheet" href="/stylesheets/list_university.css">-->
 

@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Create RSO</title>
+    <title>Create an RSO - Eventi</title>
 
     <link rel="stylesheet" href="/stylesheets/create_university.css">
 

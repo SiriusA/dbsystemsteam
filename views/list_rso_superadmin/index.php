@@ -9,7 +9,7 @@ if($_SESSION["userLoggedIn"] == false)
 <!DOCTYPE html>
 <html>
 <head>
-    <title>List RSO</title>
+    <title>List RSOs - Eventi</title>
 
     <link rel="stylesheet" href="/stylesheets/list_rso.css">
 

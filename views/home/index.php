@@ -38,7 +38,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create University</title>
+    <title>Home - Eventi</title>
 
     <link rel="stylesheet" href="/stylesheets/create_university.css">
 

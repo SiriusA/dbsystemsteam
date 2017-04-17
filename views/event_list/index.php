@@ -17,7 +17,7 @@
 
     <!-- Use title if it's in the page YAML frontmatter -->
 
-    <title>Events - Eventi</title>
+    <title>Event List - Eventi</title>
 
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create University</title>
+    <title>My Events - Eventi</title>
 
     <!--    <link rel="stylesheet" href="/stylesheets/list_university.css">-->
 

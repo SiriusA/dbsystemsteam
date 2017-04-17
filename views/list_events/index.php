@@ -9,6 +9,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <title>Events - Eventi</title>
+
     <meta charset="utf-8">
 
     <!-- Always force latest IE rendering engine or request Chrome Frame -->

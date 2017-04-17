@@ -11,7 +11,7 @@
   <head>
 
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>404 - Eventi</title>
+    <title>404 Not Found</title>
 
     <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" />
 
@@ -22,13 +22,13 @@
 
       <?php
         if($_SESSION["usertype"] == 1){
-            include_once "../nav_bar/nav_bar_super.php";
+            include_once "../nav_bar/test.php";
         }
         if($_SESSION["usertype"] == 2){
-            include_once "../nav_bar/nav_bar_admin.php";
+            include_once "../nav_bar/test.php";
         }
         else if ($_SESSION["usertype"] == 3){
-            include_once "../nav_bar/nav_bar_student.php";
+            include_once "../nav_bar/test.php";
         }
       ?>
 
