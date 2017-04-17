@@ -30,6 +30,9 @@
     {
         $uname = $row[0];
     }
+
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +60,35 @@
 
         if($_SESSION["usertype"] == 3)
             include "../nav_bar/student_navbar.php";
-        
+        echo '<div class="list-group-item">';
         echo '<h3>Welcome '.$first_name.' '.$last_name.'!</h3>';
-        
-        echo '<p> Your University: '.$uname.' </p>';
+        echo '<h5> Your University: '.$uname.' </h5>';
+        echo '</div>';
+        echo '<div class="list-group-item">';
+        echo '<h4> Pending RSOs:</h4>';
+        $sid = $_SESSION["sid"];
+        $rid = array();
+        $rname = array();
 
+        $result = db_query("SELECT J.rid FROM `joins` J  WHERE `sid` = '$sid' AND `approval` = '0' ");
+        while($row = mysqli_fetch_array($result))
+        {
+            $rid = $row[0];
+            $result1 = db_query("SELECT R.rname FROM `rso_owned` R  WHERE `rid` = '$rid'");
+            while($row1 = mysqli_fetch_array($result1))
+            {
+                $rname= $row1[0];
+                echo '<h5>'; print_r($rname); echo '</h5>';
+                echo '<div class="container">
+                    <span><a href = "../home">Approve</a></span>
+                    <span><a href = "../home">Deny</a></span>
+                </div>';
+ 
+            }
+        }
+
+        echo '</div>';
+        
     ?>
 
     
