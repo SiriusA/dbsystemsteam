@@ -74,9 +74,6 @@
                         <div class="col-md-8">
                             <a href="../page_rso/index.php?index='.($rsoAndUniversityInfo[$i + $index]["rid"]).'" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["rname"].' - '.$rsoAndUniversityInfo[$i + $index]["description"].'</a>
                         </div>
-                        <div class="col-md-2">
-                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["uname"].'</a>
-                        </div>
                         <div class="col-sm-1">
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["approved"].'</a>
                         </div>
@@ -96,9 +93,6 @@
             echo     '<div class="row">
                         <div class="col-sm-8">
                             <a href="../page_rso/index.php?index='.$rsoAndUniversityInfo[$i]["rid"].'" class="list-group-item">'.$rsoAndUniversityInfo[$i]["rname"].' - '.$rsoAndUniversityInfo[$i]["description"].'</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["uname"].'</a>
                         </div>
                         <div class="col-sm-1">
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["approved"].'</a>
