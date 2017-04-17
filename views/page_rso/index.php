@@ -115,7 +115,9 @@
                 else
                   while($i < 20 && $i < sizeof($event_result)){
                     echo '<div class="list-group-item">';
-                    echo '<h1>' .$event_result[$i]["ename"]. '</h1>';
+                    $startTimeHold = date_create_from_format("Y-m-d H:i:s", $event_result[$i]["start_time"]);
+                    $startTimeHold = $startTimeHold->format("YmdHis");
+                    echo '<h1><a href="../page_event/index.php?time='.$startTimeHold.'&place='.$event_result[$i]["lid"].'" class="list-group-item">' .$event_result[$i]["ename"]. '</a></h1>';
                     echo '<p>' .$event_result[$i]["description"]. '</p>';
                     echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i]["start_time"]. '</font></strong></p>';
                     echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["end_time"]. '</font></strong></p>';
