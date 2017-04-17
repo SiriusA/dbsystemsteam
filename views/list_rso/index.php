@@ -71,7 +71,7 @@
         for($i = 0; $i < 10; $i++){
             echo     '<div class="row">
                         <div class="col-md-8">
-                            <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i + $index]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.($rsoAndUniversityInfo[$i + $index]["rid"]).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i + $index]["description"].'</a>
                         </div>
                         <div class="col-md-2">
                             <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["uname"].'</a>
@@ -89,7 +89,7 @@
         for($i = $index; $i < sizeof($rsoAndUniverstiyInfo); $i++){
             echo     '<div class="row">
                         <div class="col-sm-8">
-                            <a href="../rso_description/index.php?index='.$i.'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.$rsoAndUniversityInfo[$i]["rid"].'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
                         </div>
                         <div class="col-sm-2">
                             <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["uname"].'</a>

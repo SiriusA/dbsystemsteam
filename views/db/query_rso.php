@@ -54,6 +54,7 @@ function getRSObyID($rid)
 {
   $result = db_query("SELECT DISTINCT *
                       FROM rso_owned R
+                      INNER JOIN user ON R.sid = user.sid
                       WHERE R.rid = " . $rid . "");
 
   if($result === FALSE)

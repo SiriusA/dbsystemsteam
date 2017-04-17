@@ -63,7 +63,16 @@
     include_once "../db/query_events.php";
 
     //clean please
-    $rsodata = getRSObyID(test_input($_SERVER['QUERY_STRING']));
+
+    //set index if not set
+    if(!empty($_GET["index"])){
+      $index = test_input($_GET["index"]);
+    }
+    else{
+      $index = 0;
+    }
+
+    $rsodata = getRSObyID($index);
 
   ?>
 
@@ -78,7 +87,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <h3>imasine</h3>
+              <img src="../images/'.$rsoDescription[$index]["rpicture"].'" class="img-rounded" width="304" height="236">
             </div>
           </div>
           <div class="col-md-12">
@@ -91,6 +100,10 @@
               <h1><center>Events</center></h1>
             </div>
             <div class="col-md-4">
+              <h3>Admin Contact</h3>
+                  <?php
+                  echo $rsodata["email"].'';
+                  ?>
             </div>
           </div>
           <div class="row">
