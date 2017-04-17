@@ -78,11 +78,11 @@
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["uname"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["approved"].'</a>
                         </div>
                         <div class="col-sm-1">
                             <form action="join_rso.php" method="post">
-                                <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniverstiyInfo[$i + $index]["rid"].'">Join</button>
+                                <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniversityInfo[$i + $index]["rid"].'">Join</button>
                             </form>
                         </div>
                       </div>';
@@ -101,11 +101,11 @@
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["uname"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["approved"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["approved"].'</a>
                         </div>
                         <div class="col-sm-1">
                             <form action="join_rso.php" method="post">
-                                <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniverstiyInfo[$i]["rid"].'">Join</button>
+                                <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniversityInfo[$i]["rid"].'">Join</button>
                             </form>
                         </div>
                         </div>
