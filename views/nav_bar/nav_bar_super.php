@@ -29,7 +29,7 @@
         </li>
         <li><a href="/rso">RSOs</a>
           <ul>
-            <li><a href="/list_events">List RSOs</a></li>
+            <li><a href="/list_rso">List RSOs</a></li>
             <li><a href="/rso">My RSOs</a></li>
             <li><a href="/create_rso">Create an RSO</a></li>
           </ul>
