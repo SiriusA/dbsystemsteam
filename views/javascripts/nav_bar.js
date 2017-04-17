@@ -3,14 +3,20 @@ $(document).ready(function() {
 		  $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
 		  $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
 		  $(".menu > ul").before("<a href=\"#\" class=\"menu-mobile\">&nbsp;</a>");
-		  $(".menu > ul > li").hover(function(e) {
-		    if ($(window).width() > 860) {
-		      $(this).children("ul").stop(true, false).fadeToggle(150);
+		  $(".menu > ul > li").mouseenter(function(e) {
+		    if ($(window).width() > 780) {
+		      $(this).children("ul").show();
+		      e.preventDefault();
+		    }
+		  });
+			$(".menu > ul > li").mouseleave(function(e) {
+		    if ($(window).width() > 780) {
+		      $(this).children("ul").hide();
 		      e.preventDefault();
 		    }
 		  });
 		  $(".menu > ul > li").click(function() {
-		    if ($(window).width() <= 860) {
+		    if ($(window).width() <= 780) {
 		      $(this).children("ul").fadeToggle(150);
 		    }
 		  });
