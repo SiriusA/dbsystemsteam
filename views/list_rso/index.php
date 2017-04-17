@@ -71,7 +71,7 @@
         for($i = 0; $i < 10; $i++){
             echo     '<div class="row">
                         <div class="col-md-8">
-                            <a href="../rso_description/index.php?index='.($rsoAndUniversityInfo$i + $index]["rid"]).'" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["rname"].' - '.$rsoAndUniversityInfo[$i + $index]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.($rsoAndUniversityInfo[$i + $index]["rid"]).'" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["rname"].' - '.$rsoAndUniversityInfo[$i + $index]["description"].'</a>
                         </div>
                         <div class="col-md-2">
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["uname"].'</a>
