@@ -9,6 +9,7 @@
             <li><a href="/list_events">Events List</a></li>
             <li><a href="">My RSOs</a></li>
             <li><a href="/rso">RSO List</a></li>
+            <li><a href="/create_rso">Create RSO</a></li>
             <li><a href="">Search</a></li>
             <li><a href="/db/logout.php">Log Out</a></li>
         </ul>
