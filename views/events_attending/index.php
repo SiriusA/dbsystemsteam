@@ -1,3 +1,10 @@
+<?php
+     session_start();
+
+     if($_SESSION["userLoggedIn"] == false)
+         header('Location: /');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +26,7 @@
 
 <?php
 
-    session_start();
+
     if($_SESSION["usertype"] == 2)
         include "../nav_bar/admin_navbar.php";
     else if ($_SESSION["usertype"] == 3){
