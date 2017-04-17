@@ -28,17 +28,17 @@
 
 <!--    TODO place correct navbar depending on user-->
 <!--    navbar start-->
-      <?php
-        if($_SESSION["usertype"] == 1){
-            include_once "../nav_bar/super_admin_navbar.php";
-        }
-        if($_SESSION["usertype"] == 2){
-            include_once "../nav_bar/admin_navbar.php";
-        }
-        else if ($_SESSION["usertype"] == 3){
-            include_once "../nav_bar/student_navbar.php";
-        }
-      ?>
+<?php
+  if($_SESSION["usertype"] == 1){
+      include_once "../nav_bar/nav_bar_super.php";
+  }
+  if($_SESSION["usertype"] == 2){
+      include_once "../nav_bar/nav_bar_admin.php";
+  }
+  else if ($_SESSION["usertype"] == 3){
+      include_once "../nav_bar/nav_bar_student.php";
+  }
+?>
 <!--navbar end-->
 
     <div class="container-fluid">
@@ -51,6 +51,7 @@
     include "../db/query_rso.php";
     //TODO query correct RSO to display for each user (Super, Admin, Student)
     //query RSO from Universities that ae managed by SuperAdmin
+    
     $rsoAndUniversityInfo = getRSOsForStudent();
 
     //if page is not set, then default to page 0
@@ -76,8 +77,11 @@
                         <div class="col-md-2">
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["uname"].'</a>
                         </div>
-                        <div class="col-sm-2">
-                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["approved"].'</a>
+                        <div class="col-sm-1">
+                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="#" class="list-group-item">Join</a>
                         </div>
                       </div>';
         }
@@ -94,8 +98,11 @@
                         <div class="col-sm-2">
                             <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["uname"].'</a>
                         </div>
-                        <div class="col-sm-2">
-                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["approved"].'</a>
+                        <div class="col-sm-1">
+                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["approved"].'</a>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="#" class="list-group-item">Join</a>
                         </div>
                       </div>';
         }
