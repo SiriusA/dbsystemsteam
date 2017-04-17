@@ -14,28 +14,18 @@
 
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="../stylesheets/university_description.css">
     <link rel="stylesheet" href="../stylesheets/footer.css">
 
-
-    <!-- <script src="/javascripts/modernizr.js" type="text/javascript"></script> -->
-
-    <link href="/images/favicon.png" rel="icon" type="image/png" />
-
-    <?php
-      include ("../db/query_universities.php");
-
-      if(!empty($_GET["index"])){
-          $index = $_GET["index"];
-      }
-
-      else{
-          $index = 0;
-      }
-
-      $universityDetails = getUniversities();
-      $universityLocation = getUniversityLocation($universityDetails[$index]["uid"])
-    ?>
   </head>
 
   <body>
@@ -50,22 +40,39 @@
       else if ($_SESSION["usertype"] == 3){
           include_once "../nav_bar/nav_bar_student.php";
       }
+
+      include ("../db/query_universities.php");
+
+      if(!empty($_GET["index"])){
+          $index = $_GET["index"];
+      }
+
+      else{
+          $index = 0;
+      }
+
+      $universityDetails = getUniversities();
+      $universityLocation = getUniversityLocation($universityDetails[$index]["uid"]);
     ?>
 
     <!-- MAIN CONTENT OF PAGE -->
-    <div>
+    <div class="list-group-item">
       <h1 id="university_name"><?= $universityDetails[$index]["uname"];?></h1>
     </div>
 
+<div class="container">
     <div class="row">
-      <div class="column_left">
+      <div class="col-md-4">
         <h3>University Description</h3>
         <p>
           <?= $universityDetails[$index]["description"]; ?>
         </p>
       </div>
 
-      <div class="column_right">
+      <div class="col-md-4"></div>
+
+
+      <div class="col-md-4">
         <h3>University Location</h3>
         <p>
           Lat: <?= $universityLocation["longitude"]; ?>
@@ -75,19 +82,23 @@
     </div>
 
     <div class="row">
-      <div class="column_left">
+      <div class="col-md-4">
         <h3>Student Count</h3>
         <p>
           <?= $universityDetails[$index]["studentcount"]; ?>
         </p>
       </div>
 
-      <div class="column_right">
+      <div class="col-md-4"></div>
+
+      <div class="col-md-4">
         <h3>University Picture</h3>
         <p><?= $universityDetails[$index]["upicture"]; ?></p>
         <img src="../images/<?= $universityDetails[$index]["upicture"]; ?>"/>
       </div>
     </div>
+
+  </div>
 
     <!-- FOOTER OF PAGE -->
     <footer>

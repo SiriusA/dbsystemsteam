@@ -38,9 +38,7 @@ function getUniversityLocation($uid){
     }
 
     if($row = mysqli_fetch_array($result)){
-        echo "success";
         return $row;
     }
-    echo "fail";
     return ;
 }

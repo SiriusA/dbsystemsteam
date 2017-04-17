@@ -67,8 +67,6 @@
           include_once "../nav_bar/nav_bar_student.php";
       }
 
-        if($_SESSION["usertype"] == 3)
-            include "../nav_bar/student_navbar.php";
         echo '<div class="list-group-item">';
         echo '<h3>Welcome '.$first_name.' '.$last_name.'!</h3>';
         echo '<h5> Your University: '.$uname.' </h5>';
