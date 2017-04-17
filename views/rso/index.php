@@ -3,7 +3,7 @@
   session_start();
 
   if($_SESSION["userLoggedIn"] == false)
-    header('Location: /');
+		 header('Location: /');
 ?>
 
 <!doctype html>
@@ -17,39 +17,40 @@
 
     <!-- Use title if it's in the page YAML frontmatter -->
 
-    <title>RSOs - Eventi</title>
+    <title>Events - Eventi</title>
 
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 
     <link href="/stylesheets/nav_bar.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
 
+
     <script src="/javascripts/modernizr.js" type="text/javascript"></script>
+
+    <link href="/images/favicon.png" rel="icon" type="image/png" />
+
       <!-- 3 links needed for bootstrap-->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-      <link href="/images/favicon.png" rel="icon" type="image/png" />
-<!--    <a href = "/db/logout.php" class = "topcorner">Log Out</a-->
+<!--      <a href = "/db/logout.php" class = "topcorner">Log Out</a>-->
 
   </head>
-<body>
+
+
   <?php
-    if($_SESSION["usertype"] == 1){
-        include_once "../nav_bar/nav_bar_super.php";
-    }
-    if($_SESSION["usertype"] == 2){
-        include_once "../nav_bar/nav_bar_admin.php";
-    }
-    else if ($_SESSION["usertype"] == 3){
-        include_once "../nav_bar/nav_bar_student.php";
-    }
-
-    include "../db/query_rso.php";
-    $myRSOs = getRSOJoined();
-
+  if($_SESSION["usertype"] == 1){
+      include_once "../nav_bar/nav_bar_super.php";
+  }
+  if($_SESSION["usertype"] == 2){
+      include_once "../nav_bar/nav_bar_admin.php";
+  }
+  else if ($_SESSION["usertype"] == 3){
+      include_once "../nav_bar/nav_bar_student.php";
+  }
   ?>
+
     <div id="wrapper">
         <div class="hero">
           <div class="row">
@@ -57,6 +58,8 @@
               <h1 class="title_bar">RSO Name</h1>
 
                 <?php
+                include "../db/query_rso.php";
+                $myRSOs = getRSOJoined();
                 //if page is not set, then default to page 0
                 if(empty($_GET["page"])){
                     $page = 0;
@@ -126,11 +129,12 @@
                 //end pager
 
                 ?>
-                ?>
+
             </div>
           </div>
-        </div>
 
+        </div>
+      </div>
 
     <!-- FOOTER OF PAGE -->
     <footer>

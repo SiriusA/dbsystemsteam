@@ -45,12 +45,12 @@ else{
     include "../db/query_rso.php";
     //TODO query correct RSO to display for each user (Super, Admin, Student)
     //query RSO from Universities that ae managed by SuperAdmin
-    $rsoAndUniverstiyInfo = getRSOsFromManagedUniversities();
+    $rsoAndUniversityInfo = getRSOsFromManagedUniversities();
 
     //if page is not set, then default to page 0
     if(empty($_GET["page"])){
         $page = 0;
-        $remaining = sizeof($rsoAndUniverstiyInfo);
+        $remaining = sizeof($rsoAndUniversityInfo);
     }
     else{
         $page = $_GET["page"];
@@ -61,17 +61,17 @@ else{
     //        only display 10
     echo '<ul class="list-group">';
     if($remaining > 10){
-        $index = sizeof($rsoAndUniverstiyInfo) - $remaining;
+        $index = sizeof($rsoAndUniversityInfo) - $remaining;
         for($i = 0; $i < 10; $i++){
             echo     '<div class="row">
                         <div class="col-sm-8">
-                            <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["rname"].' - '.$rsoAndUniversityInfo[$i]["description"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["uname"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["uname"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i + $index]["approved"].'</a>
                         </div>
                       </div>';
         }
@@ -79,17 +79,17 @@ else{
     }
 //        display what is left
     else{
-        $index = sizeof($rsoAndUniverstiyInfo) - $remaining;
-        for($i = $index; $i < sizeof($rsoAndUniverstiyInfo); $i++){
+        $index = sizeof($rsoAndUniversityInfo) - $remaining;
+        for($i = $index; $i < sizeof($rsoAndUniversityInfo); $i++){
             echo     '<div class="row">
                         <div class="col-sm-8">
-                            <a href="../rso_description/index.php?index='.$i.'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.$i.'" class="list-group-item">'.$rsoAndUniversityInfo[$i]["rname"].' - '.$rsoAndUniversityInfo[$i]["description"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["uname"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["uname"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["approved"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniversityInfo[$i]["approved"].'</a>
                         </div>
                       </div>';
         }
