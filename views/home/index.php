@@ -38,7 +38,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home - Eventi</title>
+    <title>Home</title>
 
     <link rel="stylesheet" href="/stylesheets/create_university.css">
 
@@ -82,21 +82,38 @@
         {
             $rid = $row[0];
             $result1 = db_query("SELECT R.rname FROM `rso_owned` R  WHERE `rid` = '$rid'");
+            $approve_button = '0';
             while($row1 = mysqli_fetch_array($result1))
             {
                 $rname= $row1[0];
-                echo '<h5>'; print_r($rname); echo '</h5>';
-                echo '<div class="container">
-                    <span><a href = "../home">Approve</a></span>
-                    <span><a href = "../home">Deny</a></span>
-                </div>';
-
+                $choice = '0';
+                echo $rname;
+                $rid2 = $rid;
+                echo '<form action = "http://localhost/home/pending_rso.php" method = "post">
+                    <input type = "submit" name = "'.$rid2.'" value = "Join"/>
+                    <input type = "submit" name = "'.$rid2.'" value = "Deny"/>
+                    </form>';
             }
-        }
 
-        echo '</div>';
+        }
 
     ?>
 
+
+<script>
+    function approve()
+    {
+         alert("You chose approve");
+         '<?php $choice = '1';?>';
+
+    }
+
+    function deny()
+    {
+        alert("You chose deny");
+        '<?php $choice = '2';?>';
+    }
+
+</script>
 
 </body>
