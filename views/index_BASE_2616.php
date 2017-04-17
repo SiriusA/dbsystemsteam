@@ -14,7 +14,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-		<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+		<link href="/images/favicon.png" rel="icon" type="image/png" />
 
 </head>
 

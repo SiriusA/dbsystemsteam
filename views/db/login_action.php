@@ -20,7 +20,7 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 //select U.sid from user U where email = "$email" AND password='$pass'
-$result = db_query("SELECT U.sid, U.utype, U.email FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
+$result = db_query("SELECT U.sid, U.utype, U.email, U.uid FROM `user` U WHERE `email` = '$email' AND `password` = '$password' ");
 if($result == false){
     echo "somethings wrong";
 }
@@ -38,6 +38,7 @@ else{
     $_SESSION["userLoggedIn"] = true;
     //used to save images to unique names( ex. alex@gmail.comIMG123.jpg)
     $_SESSION["email"] = $row[2];
+    $_SESSION["uid"] = $row[3];
 
     $result->close();
 
