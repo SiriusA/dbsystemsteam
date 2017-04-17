@@ -5,36 +5,40 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    	<meta charset="utf-8">
+    <title>Create University</title>
 
-    	<!-- Always force latest IE rendering engine or request Chrome Frame -->
-   		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/create_university.css">
 
-    	<!-- Use title if it's in the page YAML frontmatter -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    	<title>Registration - Eventi</title>
-    	<meta name="description" content="UCF Database Systems Spring 2017 Project" />
-    	<link rel="stylesheet" href="../stylesheets/university_description.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    	<script src="/javascripts/modernizr.js" type="text/javascript"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    	<link href="/images/favicon.png" rel="icon" type="image/png" />
+</head>
 
 	</head>
 	 <body>
     <form action = "http://localhost/registration/register.php" method= "post">
     <!-- NAVIGATION BAR -->
     <div>
-      <nav>
-        <ul class="menu_bar">
-           <li class=""><a href="../">Login</a></li>
-            <li class=""><a href="../">Home</a></li>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a href="../">Home</a></li>
+            <li><a href="../">Login</a></li>
+        </ul>
+    </div>
+
         </ul>
       </nav>
-    <div>
+    <div class="list-group-item">
       <h1 id= "university_name">Register</h1>
     </div>
+  <div class="list-group-item">
 	
   <p>First Name:
   </p>
@@ -58,15 +62,21 @@
   <option value="125">University of Florida</option>
   </select>
   
+  <p>
 
   <p>Email Address:
   </p>
   <input type= "text" name="email_address" size "30" maxlength = "45" value = ""/>
   
   <p>
+  </p>
+
+  <p>
 	<input type = "submit" name ="submit1" value="Sign Up" />
 	</p>
-	</form>
+
+
+	</div>
 </body>
 </html>
 
