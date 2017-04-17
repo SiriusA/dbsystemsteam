@@ -61,14 +61,17 @@
 
 <body>
 
-<?php
-    if($_SESSION["usertype"] == 2){
-        include "../nav_bar/admin_navbar.php";
-    }
+  <?php
     if($_SESSION["usertype"] == 1){
-		    include "../nav_bar/super_admin_navbar.php";
-	  }
-?>
+        include_once "../nav_bar/nav_bar_super.php";
+    }
+    if($_SESSION["usertype"] == 2){
+        include_once "../nav_bar/nav_bar_admin.php";
+    }
+    else if ($_SESSION["usertype"] == 3){
+        include_once "../nav_bar/nav_bar_student.php";
+    }
+  ?>
 
 
 

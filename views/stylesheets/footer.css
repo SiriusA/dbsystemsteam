@@ -6,7 +6,7 @@ ul.footer{
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #334139;
+  background-color: #F5F5F5;
 }
 
 ul.footer li {
@@ -26,13 +26,13 @@ ul.footer li a img{
 
 ul.footer li a:link{
 
-  color: #FFFFFF;
+  color: #000;
 }
 
 ul.footer li a:visited{
-  color: #FFFFFF;
+  color: #000;
 }
 
 ul.footer li a:hover{
-  color: #9aecbd;
+  color: #03a9f4;
 }

@@ -34,14 +34,17 @@
 <!--    <a href = "/db/logout.php" class = "topcorner">Log Out</a-->
 
   </head>
-<body
+<body>
   <?php
-
-  if($_SESSION["usertype"] == 2)
-      include "../nav_bar/admin_navbar.php";
-  else if ($_SESSION["usertype"] == 3){
-      include "../nav_bar/student_navbar.php";
-  }
+    if($_SESSION["usertype"] == 1){
+        include_once "../nav_bar/nav_bar_super.php";
+    }
+    if($_SESSION["usertype"] == 2){
+        include_once "../nav_bar/nav_bar_admin.php";
+    }
+    else if ($_SESSION["usertype"] == 3){
+        include_once "../nav_bar/nav_bar_student.php";
+    }
   ?>
     <div id="wrapper">
         <div class="hero">
