@@ -108,7 +108,6 @@
                                 <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniversityInfo[$i]["rid"].'">Join</button>
                             </form>
                         </div>
-                        </div>
                       </div>';
         }
     }
