@@ -12,7 +12,7 @@ function db_connect(){
 
     if(!isset($connection)){
 
-        $config = parse_ini_file("../../config.ini");
+        $config = parse_ini_file("../config.ini");
 
         // Create connection
         $connection = mysqli_connect("localhost", $config["username"], $config["password"], $config["dbname"]);
@@ -47,7 +47,7 @@ function db_error(){
 }
 
 function getConnObj(){
-    $config = parse_ini_file("../../config.ini");
+    $config = parse_ini_file("../config.ini");
     $conn = new mysqli("localhost", $config["username"], $config["password"], $config["dbname"]);
     return $conn;
 }

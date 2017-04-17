@@ -9,7 +9,7 @@
             <li><a href="/list_events">Events List</a></li>
             <li><a href="/create_event">Create Event</a></li>
             <li><a href="">My RSOs</a></li>
-            <li><a href="/rso">RSO List</a></li>
+            <li><a href="/list_rso">RSO List</a></li>
             <li><a href="">Search</a></li>
             <li><a href="/db/logout.php">Log Out</a></li>
         </ul>

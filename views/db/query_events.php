@@ -32,7 +32,7 @@ function getEventsList(){
     $sid = $_SESSION["sid"];
 
 
-    $result = db_query("SELECT E.ename, E.description, E.start_time, E.end_time, E.approved, location.url, location.longitude, location.latitude
+    $result = db_query("SELECT E.ename, E.description, E.start_time, E.end_time, E.approved, E.lid, location.url, location.longitude, location.latitude
                         FROM events_hosted_located E
                         INNER JOIN location ON E.lid = location.lid
                         INNER JOIN joins ON joins.rid = E.rid
@@ -55,4 +55,38 @@ function getEventsList(){
     }
 
     return $eNames;
+}
+
+function getRSOeventLoc($rid)
+{
+  $result = db_query("SELECT *
+                      FROM events_hosted_located E
+                      INNER JOIN location ON E.lid = location.lid
+                      WHERE E.rid = " . $rid . "");
+
+  if($result === false)
+  {
+    echo "something went wrong";
+  }
+
+  $eNames = array();
+  while($row = mysqli_fetch_array($result)){
+      $eNames[] = $row;
+  }
+
+  return $eNames;
+}
+
+function getEventbyTimePlace($time, $place)
+{
+  $result = db_query("SELECT DISTINCT *
+                      FROM events_hosted_located E
+                      WHERE E.start_time = " . $time . " AND E.lid = " . $place . "");
+
+  if($result === FALSE)
+  {
+    echo "something went wrong";
+  }
+
+  return $result->fetch_array();
 }
