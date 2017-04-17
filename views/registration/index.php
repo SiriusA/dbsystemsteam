@@ -25,13 +25,17 @@
     <form action = "http://localhost/registration/register.php" method= "post">
     <!-- NAVIGATION BAR -->
     <div>
-    <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li><a href="../">Home</a></li>
-            <li><a href="../">Login</a></li>
-        </ul>
-    </div>
+      <?php
+        if($_SESSION["usertype"] == 1){
+            include_once "../nav_bar/nav_bar_super.php";
+        }
+        if($_SESSION["usertype"] == 2){
+            include_once "../nav_bar/nav_bar_admin.php";
+        }
+        else if ($_SESSION["usertype"] == 3){
+            include_once "../nav_bar/nav_bar_student.php";
+        }
+      ?>
 
         </ul>
       </nav>
@@ -39,11 +43,11 @@
       <h1 id= "university_name">Register</h1>
     </div>
   <div class="list-group-item">
-	
+
   <p>First Name:
   </p>
 	<input type= "text" name="first_name" size "30" maxlength = "45" value = ""/>
-	
+
 
 	<p>Last Name:
   </p>
@@ -52,22 +56,22 @@
   <p>Password:
   </p>
   <input type= "text" name="pwd" size "30" maxlength = "45" value = ""/>
-	
-  <p>University: 
-  </p>             
+
+  <p>University:
+  </p>
   <select name="university_id">
   <option value="">Select...</option>
   <option value="124" >Florida State University</option>
   <option value="1">University of Central Florida</option>
   <option value="125">University of Florida</option>
   </select>
-  
+
   <p>
 
   <p>Email Address:
   </p>
   <input type= "text" name="email_address" size "30" maxlength = "45" value = ""/>
-  
+
   <p>
   </p>
 
@@ -79,5 +83,3 @@
 	</div>
 </body>
 </html>
-
-

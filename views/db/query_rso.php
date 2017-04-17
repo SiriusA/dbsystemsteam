@@ -72,7 +72,7 @@ function getUniversitiesRSO()
     $uid = $_SESSION["uid"];
     $result = db_query("SELECT DISTINCT R.rname, R.description, R.approved
                         FROM rso_owned R, `user` U
-                        WHERE U.uid='.$uid.' AND U.sid=R.sid");
+                        WHERE U.uid='$uid' AND U.sid=R.sid");
 
     if($result == false){
         echo "something went wrong";

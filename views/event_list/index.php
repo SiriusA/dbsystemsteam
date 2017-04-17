@@ -35,40 +35,21 @@
 
 
     <?php require_once "../db/events_feed.php";
-    
+
       fillEventTable("http://events.ucf.edu/feed.rss");
       ?>
 
-    <div class="contain-to-grid">
-      <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-          <li class="name">
-            <h1><a href="/home">Home</a></h1>
-          </li>
-        </ul>
-
-        <section class="top-bar-section">
-          <ul class="right">
-            <?php
-              if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
-              {
-               header("location: ../");
-              }
-              if($_SESSION["usertype"]== 2)
-              {
-                echo '<li class=""><a href="/create_event/">Create Event</a></li>';
-              }
-            ?>
-            <li class=""><a href="/create_rso/">Create RSO</a></li>
-            <li class=""><a href="/rso">RSOs</a></li>
-            <li class=""><a href="/university_description">Universities</a></li>
-            <li class=""><a href="/event_list">Events</a></li>
-            <li class=""><a target="_blank" href="/phpinfo.php">My Account</a></li>
-            <li class=""><a href="/phpmyadmin/">Search</a></li>
-          </ul>
-        </section>
-      </nav>
-    </div>
+      <?php
+        if($_SESSION["usertype"] == 1){
+            include_once "../nav_bar/nav_bar_super.php";
+        }
+        if($_SESSION["usertype"] == 2){
+            include_once "../nav_bar/nav_bar_admin.php";
+        }
+        else if ($_SESSION["usertype"] == 3){
+            include_once "../nav_bar/nav_bar_student.php";
+        }
+      ?>
 
     <div id="wrapper">
         <div class="hero">
