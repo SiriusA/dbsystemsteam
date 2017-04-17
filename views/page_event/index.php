@@ -38,6 +38,24 @@
 
   </head>
 
+<body>
+  <!-- FACEBOOK PLUGIN -->
+    <div id="fb-root"></div>
+      <script>
+        (function(d, s, id) {
+
+          var js, fjs = d.getElementsByTagName(s)[0];
+
+          if (d.getElementById(id))
+            return;
+
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+          fjs.parentNode.insertBefore(js, fjs);
+        }
+        (document, 'script', 'facebook-jssdk'));
+      </script>
+  <!-- END FACEBOOK PLUGIN-->
 
   <?php
     include_once "../nav_bar/only_nav_bar.php";
@@ -101,6 +119,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Facebook share button-->
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
+
+      <div class="col-md-2">
+        <div class="fb-share-button" data-href="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>" data-layout="button" data-mobile-iframe="true">
+          <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2FshareURL.com%2F&amp;src=sdkpreparse">Share</a>
+        </div>
+      </div>
+    </div>
 
     <!-- FOOTER OF PAGE -->
     <footer>
