@@ -43,12 +43,15 @@
 
     <div class="container-fluid">
         <h2>List RSO</h2>
-    <?php
+
+        <a role="button" class="btn btn-primary" href="../create_rso">Create New RSO</a>
+
+        <?php
 
     include "../db/query_rso.php";
     //TODO query correct RSO to display for each user (Super, Admin, Student)
     //query RSO from Universities that ae managed by SuperAdmin
-    $rsoAndUniverstiyInfo = getRSOsFromManagedUniversities();
+    $rsoAndUniverstiyInfo = getRSOsForStudent();
 
     //if page is not set, then default to page 0
     if(empty($_GET["page"])){
@@ -68,7 +71,7 @@
         for($i = 0; $i < 10; $i++){
             echo     '<div class="row">
                         <div class="col-sm-8">
-                            <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
+                            <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i + $index]["description"].'</a>
                         </div>
                         <div class="col-sm-1">
                             <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["uname"].'</a>
