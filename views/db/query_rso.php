@@ -70,7 +70,7 @@ function getRSObyID($rid)
 function getUniversitiesRSO()
 {
     $uid = $_SESSION["uid"];
-    $result = db_query("SELECT DISTINCT R.rname, R.description, R.approved
+    $result = db_query("SELECT DISTINCT R.rname, R.description, R.approved, R.rid
                         FROM rso_owned R, `user` U
                         WHERE U.uid='$uid' AND U.sid=R.sid");
 

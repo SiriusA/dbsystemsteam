@@ -81,7 +81,9 @@
                             <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">Join</a>
+                            <form action="join_rso.php" method="post">
+                                <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniverstiyInfo[$i + $index]["rid"].'">Join</button>
+                            </form>
                         </div>
                       </div>';
         }
@@ -102,7 +104,9 @@
                             <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["approved"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">Join</a>
+                            <form action="join_rso.php" method="post">
+                                <button type="submit" class="list-group-item" name="rso" value="'.$rsoAndUniverstiyInfo[$i]["rid"].'">Join</button>
+                            </form>
                         </div>
                         </div>
                       </div>';
