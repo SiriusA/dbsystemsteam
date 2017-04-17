@@ -15,11 +15,11 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta property="og:url"           content="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>" />
+    <meta property="og:url"           content="" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Eventi" />
     <meta property="og:description"   content="Check out this event!" />
-    <meta property="og:image"         content="/image/hope.png" />
+    <meta property="og:image"         content="../image/hope.png" />
     <!-- Use title if it's in the page YAML frontmatter -->
 
     <title>Events - Eventi</title>
@@ -131,7 +131,7 @@
       <div class="col-md-2"></div>
 
       <div class="col-md-2">
-        <div class="fb-share-button" data-href="<?= "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>" data-layout="button" data-mobile-iframe="true">
+        <div class="fb-share-button" data-href="" data-layout="button" data-mobile-iframe="true">
           <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2FshareURL.com%2F&amp;src=sdkpreparse">Share</a>
         </div>
       </div>
