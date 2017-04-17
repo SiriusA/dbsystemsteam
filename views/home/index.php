@@ -31,7 +31,7 @@
         $uname = $row[0];
     }
 
-    
+
 
 ?>
 
@@ -57,6 +57,15 @@
 
     <!--Display correct navbar-->
     <?php
+      if($_SESSION["usertype"] == 1){
+          include_once "../nav_bar/nav_bar_super.php";
+      }
+      if($_SESSION["usertype"] == 2){
+          include_once "../nav_bar/nav_bar_admin.php";
+      }
+      else if ($_SESSION["usertype"] == 3){
+          include_once "../nav_bar/nav_bar_student.php";
+      }
 
         if($_SESSION["usertype"] == 3)
             include "../nav_bar/student_navbar.php";
@@ -83,14 +92,13 @@
                     <span><a href = "../home">Approve</a></span>
                     <span><a href = "../home">Deny</a></span>
                 </div>';
- 
+
             }
         }
 
         echo '</div>';
-        
+
     ?>
 
-    
-</body>
 
+</body>

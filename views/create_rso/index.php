@@ -26,12 +26,18 @@
 
 	<body class="index">
 		<form action = "http://localhost/create_rso/rso_added.php" method= "post">
-     <?php
-        if($_SESSION["usertype"] == 3)
-          include "../nav_bar/student_navbar.php";
-        else if($_SESSION["usertype" == 2])
-          include "../nav_bar/admin_navbar.php";
-      ?>
+
+			<?php
+				if($_SESSION["usertype"] == 1){
+						include_once "../nav_bar/nav_bar_super.php";
+				}
+				if($_SESSION["usertype"] == 2){
+						include_once "../nav_bar/nav_bar_admin.php";
+				}
+				else if ($_SESSION["usertype"] == 3){
+						include_once "../nav_bar/nav_bar_student.php";
+				}
+			?>
 
         <h1 class="title_bar">Create RSO</h1>
         <div class="list-group-item">
@@ -56,7 +62,7 @@
             <p>
                 Once these members have created an account, they will recieve an invite to join your RSO.
             </p>
-                        
+
           <p>Member 1 Email:
           </p>
           <input type= "text" name="rso_member_email_1" size "30" maxlength = "40" value = ""/>

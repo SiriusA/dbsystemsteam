@@ -13,7 +13,11 @@
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>404 Not Found</title>
 
+<<<<<<< HEAD
     <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" />
+=======
+		<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+>>>>>>> 97769a71e4a4e947074ebb23feb4b7dbe0ebe329
 
 
   </head>
@@ -22,13 +26,13 @@
 
       <?php
         if($_SESSION["usertype"] == 1){
-            include_once "../nav_bar/nav_bar_super.php";
+            include_once "../nav_bar/test.php";
         }
         if($_SESSION["usertype"] == 2){
-            include_once "../nav_bar/nav_bar_admin.php";
+            include_once "../nav_bar/test.php";
         }
         else if ($_SESSION["usertype"] == 3){
-            include_once "../nav_bar/nav_bar_student.php";
+            include_once "../nav_bar/test.php";
         }
       ?>
 

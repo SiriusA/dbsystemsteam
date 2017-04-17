@@ -28,20 +28,17 @@
 
     <!--    TODO place correct navbar depending on user-->
     <!--    navbar SuperAdmin start-->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Events</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="../create_university">Create University</a></li>
-                <li><a href="../list_university">List University</a></li>
-                <li class="active"><a href="../list_rso">List RSO</a></li>
-                <li><a href="#">List Events</a></li>
-            </ul>
-        </div>
-    </nav>
+    <?php
+      if($_SESSION["usertype"] == 1){
+          include_once "../nav_bar/nav_bar_super.php";
+      }
+      if($_SESSION["usertype"] == 2){
+          include_once "../nav_bar/nav_bar_admin.php";
+      }
+      else if ($_SESSION["usertype"] == 3){
+          include_once "../nav_bar/nav_bar_student.php";
+      }
+    ?>
     <!--    navbar end-->
 
     <!--    Content Start-->

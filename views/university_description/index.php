@@ -15,6 +15,8 @@
     <meta name="description" content="UCF Database Systems Spring 2017 Project" />
 
     <link rel="stylesheet" href="../stylesheets/university_description.css">
+    <link rel="stylesheet" href="../stylesheets/footer.css">
+
 
     <!-- <script src="/javascripts/modernizr.js" type="text/javascript"></script> -->
 
@@ -38,29 +40,17 @@
 
   <body>
     <!-- NAVIGATION BAR -->
-    <div>
-      <nav>
-        <ul class="menu_bar">
-          <li><a href = "/db/logout.php">Log Out</a></li>
-          <?php
-              if($_SESSION["usertype"] != 1 && $_SESSION["usertype"] != 2 && $_SESSION["usertype"] != 3)
-              {
-                header("location: ../");
-              }
-              if($_SESSION["usertype"]== 2)
-              {
-                echo '<li class=""><a href="/create_event/">Create Event</a></li>';
-              }
-          ?>
-          <li class="left"><a href="/">Home</a></li>
-          <li><a href="">Search</a></li>
-          <li><a href="">My Account</a></li>
-          <li><a href="/event_list">Events</a></li>
-          <li><a href="/university_description">Universities</a></li>
-          <li><a href="/rso">RSOs</a></li>
-        </ul>
-      </nav>
-    </div>
+    <?php
+      if($_SESSION["usertype"] == 1){
+          include_once "../nav_bar/nav_bar_super.php";
+      }
+      if($_SESSION["usertype"] == 2){
+          include_once "../nav_bar/nav_bar_admin.php";
+      }
+      else if ($_SESSION["usertype"] == 3){
+          include_once "../nav_bar/nav_bar_student.php";
+      }
+    ?>
 
     <!-- MAIN CONTENT OF PAGE -->
     <div>
