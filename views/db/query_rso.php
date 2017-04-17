@@ -8,7 +8,7 @@
 
 include_once "connection.php";
 
-//used in list_rso and rso description
+//used in /list_rso and /rso description and /rso
 //Queries all RSO that Superadmin may manage
 function getRSOsFromManagedUniversities(){
     $sid = $_SESSION["sid"];
@@ -51,13 +51,31 @@ function getRSOsForStudent()
 }
 
 //get RSOs from university the student is attending
-//TODO fix this query
 function getUniversitiesRSO()
 {
     $uid = $_SESSION["uid"];
     $result = db_query("SELECT DISTINCT R.rname, R.description, R.approved, R.rid
                         FROM rso_owned R, `user` U
                         WHERE U.uid='$uid' AND U.sid=R.sid");
+
+    if($result == false){
+        echo "something went wrong";
+    }
+
+    //save each row in array
+    $myRso = array();
+    while($row = mysqli_fetch_array($result)){
+        $myRso[] = $row;
+    }
+
+    return $myRso;
+}
+
+function getRSOJoined(){
+    $sid = $_SESSION["sid"];
+    $result = db_query("SELECT R.rname, R.description
+                        FROM rso_owned R, joins J
+                        WHERE J.sid='$sid' AND J.rid=R.rid");
 
     if($result == false){
         echo "something went wrong";
