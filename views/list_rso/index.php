@@ -51,7 +51,7 @@
     include "../db/query_rso.php";
     //TODO query correct RSO to display for each user (Super, Admin, Student)
     //query RSO from Universities that ae managed by SuperAdmin
-    $rsoAndUniverstiyInfo = getRSOsForStudent();
+    $rsoAndUniverstiyInfo = getUniversitiesRSO();
 
     //if page is not set, then default to page 0
     if(empty($_GET["page"])){
@@ -74,10 +74,10 @@
                             <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["rname"].' - '.$rsoAndUniverstiyInfo[$i + $index]["description"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["uname"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
+                            <a href="#" class="list-group-item">Join</a>
                         </div>
                       </div>';
         }
@@ -92,10 +92,10 @@
                             <a href="../rso_description/index.php?index='.$i.'" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["rname"].' - '.$rsoAndUniverstiyInfo[$i]["description"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["uname"].'</a>
+                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i + $index]["approved"].'</a>
                         </div>
                         <div class="col-sm-1">
-                            <a href="#" class="list-group-item">'.$rsoAndUniverstiyInfo[$i]["approved"].'</a>
+                            <a href="#" class="list-group-item">Join</a>
                         </div>
                       </div>';
         }
