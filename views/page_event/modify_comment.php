@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+<body>
 <?php
 
     session_start();
@@ -6,8 +10,7 @@
 
     $comment = trim($_POST['comment_to_submit']);
 
-    if(isset($_POST['submit']))
-    {
+
     	$data_missing = array();
 
     	if(empty($_POST['comment_to_submit']))
@@ -16,18 +19,18 @@
     	}
     	else
     	{
-    		$comment = trim($POST['comment_to_submit']);
+    		$comment = trim($_POST['comment_to_submit']);
     	}
 
     $sid = $_SESSION["sid"];
-    
+
     if(empty($data_missing))
     {
 
     	$result = db_query("INSERT INTO comment (timestamp, sid, start_time, lid, comment)
-    		                  VALUES(CURRENT_DATE(), '$sid', '20000101', '35', '$comment')");
+    		                  VALUES(CURRENT_TIMESTAMP(), '$sid', '".$_POST["time"]."', '".$_POST["place"]."', '$comment')");
 
-    	if($result == false)
+    	if($result === false)
             echo "Insertion went wrong";
         else
         {
@@ -40,7 +43,7 @@
             */
         }
 
-    }
+
   }
 
 /*
@@ -53,10 +56,12 @@
     	$sid[]= $row[0];
     }
 
-
     $result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[0]', '$rid')");
     $result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[1]', '$rid')");
     $result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[2]', '$rid')");
     $result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[3]', '$rid')");
     */
 ?>
+
+</body>
+</html>

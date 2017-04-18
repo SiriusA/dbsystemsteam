@@ -147,8 +147,8 @@
             <div class="container">
               <I>Add a comment</I><br>
               <textarea name="comment_to_submit" rows="4" cols="60"></textarea><br>
-              <input type="hidden" name="time" value='<?php $time ?>'>
-              <input type="hidden" name="place" value='<?php $place ?>'>
+              <input type="hidden" name="time" value='<?php echo $time ?>'>
+              <input type="hidden" name="place" value='<?php echo $place ?>'>
               <input type="submit" name="Submit">
             </div>
 
