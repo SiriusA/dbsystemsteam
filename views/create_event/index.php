@@ -109,6 +109,37 @@
 		Start Time: <input type="datetime-local" name="starttime"> End Time: <input type="datetime-local" name="endtime"><br>
 		Description: <textarea name="description" rows="10" cols="40"></textarea><br>
 		Phone: <input type="text" name="phone"> Email: <input type="text" name="email"><br>
+
+    <input id="lat" type="hidden" name="lat" value="123">
+    <input id="lng" type="hidden" name="lng" value="123">
+    <?php
+
+
+
+          $loc_query = "SELECT *
+          FROM location L
+          WHERE L.uid = " . 1 . ";";
+          $location_list = db_query($rso_query);
+
+
+    			//retrieve rsos
+    			$loc_ent = $location_list->fetch_array();
+    			$loc_str = "<option value='-1'";
+    			while($rso_id !== NULL)
+    			{
+    				$loc_str = $loc_str . "<option value = " . $loc_ent["lid"] . ">" . $loc_ent["lname"] . "</option>";
+    				$rso_id = $rso_ids_result->fetch_array();
+    			}
+
+
+    			echo '<div class = "form-group">
+    				<label for="rso">RSO:</label>
+    				<select class="form-control" id="rso" name="rso">
+    					' . $rso_olist . '
+    				</select>
+    			</div>';
+     ?>
+    Location Name: <input type="text" name="lname"><br>
 		<input type="submit" name="Submit"><br>
 
 		<div class="col-sm-7">
