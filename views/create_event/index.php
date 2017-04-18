@@ -169,7 +169,7 @@
 
     			echo '<div class = "form-group">
     				<label for="loc">Location:</label>
-    				<select class="form-control" id="loc" name="loc">
+    				<select class="form-control" id="lid" name="lid">
     					' . $loc_str . '
     				</select>
     			</div>';

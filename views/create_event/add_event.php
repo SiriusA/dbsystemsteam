@@ -6,6 +6,8 @@
 
 <?php
 include_once "../db/connection.php";
+session_start();
+
 $conn = getConnObj();
 
 $eventname = $starttime = $endtime = $desc = $phone = $email = $lat = $lng = $lname = $lid = "";
@@ -21,8 +23,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = test_input($_POST["email"]);
 	$lid = test_input($_POST["lid"]);
 	$lname = test_input($_POST["lname"]);
-	$lat = test_input($_POST["latitude"]);
-	$lng = test_input($_POST["longitude"]);
+	$lat = test_input($_POST["lat"]);
+	$lng = test_input($_POST["lng"]);
 
 
 	//echo("testing insert");
@@ -37,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	OR ('" . $starttime . "' <= e2.end_time AND e2.end_time < '" . $endtime . "')
 	);";
 	//echo($timetable_collision);
-	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
+	//$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
 
 	/*
 	$res2 = $conn->query("SELECT L.lname
@@ -46,8 +48,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	*/
 	if($lid == -1)
 	{
-		$conn->query("INSERT INTO location (longitude, latitude, lname);
-									VALUES (".$lng.", ".$lat.", ".$lname.")");
+		$redog = $conn->query("INSERT INTO location (longitude, latitude, lname, uid)
+									VALUES (".$lng.", ".$lat.", '".$lname."', ".$_SESSION["uid"].")");
+		if($redog !== TRUE)
+		{
+			echo $conn->error;
+		}
 	}
 	else {
 		$location = $lid;
@@ -61,19 +67,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		$approved = 1;
 	}
-	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", " . $location . ", ".$approved.", 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
+	$conn2 = getConnObj();
+	$eventIns = $conn2->prepare("INSERT INTO events_hosted_located (approved, description, email, ename, end_time, lid, phone, rid, start_time, type, visibility)
+															VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
+	$eventIns->bind_param("ssssisisi", $desc, $email, $eventname, $endtime, $location, $phone, $rso, $starttime, $approved);
+	//$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", '" . $location . "', ".$approved.", 1, 1, " . $eventname . ", " . $phone . ", '" . $email . "', " . $desc . ");";
 	//echo $insert_data_str;
-	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
+	//$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	db_query("USE event;");
 
 	$result = $conn->query($timetable_collision);
 	if($result->num_rows == 0) {
-		if($conn->query($insert_actual)=== TRUE) {
-
+		//if($conn->query($insert_actual)=== TRUE) {
+		if($eventIns->execute()) {
 			//echo "new record created <br>";
 			echo("insert successful");
 		} else {
-			echo "Error: " . $insert_actual . "<br>" . $conn->error;
+			//echo "Error: " . $insert_actual . "<br>" . $conn->error;
 		}
 	} else {
 		echo "Collision Detected";
