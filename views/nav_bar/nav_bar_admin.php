@@ -34,14 +34,13 @@
             <li><a href="/create_rso">Create an RSO</a></li>
           </ul>
         </li>
-        <li><a href="/list_university">Universities</a>
+        <li><a href="/list_university">University</a>
           <ul>
-            <li><a href="/list_university">List Universities</a></li>
-            <li><a href="/create_university">Create a Univesity</a></li>
+            <li><a href="/university_description">My University</a></li>
           </ul>
         </li>
         <li><a href="#">Search</a></li>
-        <li><a href="/">Logout</a></li>
+        <li><a href="/db/logout.php">Logout</a></li>
 
       </ul>
     </div>
