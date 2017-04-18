@@ -21,27 +21,6 @@
       <ul class="clearfix">
         <li><a href="/">Home</a></li>
         <li><a href="/">Login</a>
-          <ul>
-            <li><a href="/list_events">List Events</a></li>
-            <li><a href="/events_attending">My Events</a></li>
-            <li><a href="/create_event">Create an Event</a></li>
-          </ul>
-        </li>
-        <li><a href="/rso">RSOs</a>
-          <ul>
-            <li><a href="/list_rso">List RSOs</a></li>
-            <li><a href="/rso">My RSOs</a></li>
-            <li><a href="/create_rso">Create an RSO</a></li>
-          </ul>
-        </li>
-        <li><a href="/list_university">Universities</a>
-          <ul>
-            <li><a href="/list_university">List Universities</a></li>
-            <li><a href="/create_university">Create a Univesity</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Search</a></li>
-        <li><a href="/">Logout</a></li>
 
       </ul>
     </div>
