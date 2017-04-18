@@ -13,20 +13,41 @@ include "connection.php";
 function getUniversities(){
 
 //query all universites created by me
-    $result = db_query("SELECT U.uid, U.uname, U.description, U.studentcount, U.upicture
-                        FROM university_created U");
-    if($result == false){
-        echo "something went wrong";
+    if($_SESSION['utype'] == 1)
+    {
+        $result = db_query("SELECT U.uid, U.uname, U.description, U.studentcount, U.upicture
+                            FROM university_created U");
+        if($result == false){
+            echo "something went wrong";
+        }
+        $uNames = array();
+        while($row = mysqli_fetch_array($result)){
+//        echo "uid: " . $row["uid"] . ", name: " . $row["uname"] . ", desc: " . $row["description"] . "<br>";
+            $uNames[] = $row;
+         }
+
+        return $uNames;
     }
+    else
+    {
+        $sid = $_SESSION['sid'];
+        $result1 = db_query("SELECT U.uid, U.uname, U.description, U.studentcount, U.upicture FROM university_created U, user Us WHERE Us.sid = '$sid' AND Us.uid = U.uid");
+        if($result1 == false){
+            echo "something went wrong";
+        }
+
+        $uNames = array();
+        while($row = mysqli_fetch_array($result1)){
+//        echo "uid: " . $row["uid"] . ", name: " . $row["uname"] . ", desc: " . $row["description"] . "<br>";
+            $uNames[] = $row;
+         }
+
+         return $uNames;
+    }
+
 
 //print each universites out
-    $uNames = array();
-    while($row = mysqli_fetch_array($result)){
-//        echo "uid: " . $row["uid"] . ", name: " . $row["uname"] . ", desc: " . $row["description"] . "<br>";
-        $uNames[] = $row;
-    }
-
-    return $uNames;
+    
 }
 
 function getUniversityLocation($uid){

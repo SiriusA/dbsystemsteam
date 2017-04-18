@@ -88,13 +88,37 @@
 				$rso_olist = $rso_olist . "<option value = " . $rso_id[0] . ">" . $rso_id[1] . "</option>";
 				$rso_id = $rso_ids_result->fetch_row();
 			}
-			if($_SESSION["usertype"] == 3){
+			if($_SESSION["usertype"] <= 2){
 				//hardcode, fix later
 				$uni_id = 0;
+
+        if($_SESSION["usertype"] == 2)
+        {
+          $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                  FROM university_created U
+                                  INNER JOIN user ON user.uid = U.uid
+                                  WHERE user.sid = " . $_SESSION["sid"] . "");
+        }
+        else {
+          $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                  FROM university_created U
+                                  INNER JOIN user ON user.sid = U.sid
+                                  WHERE user.sid = " . $_SESSION["sid"] . "");
+        }
+
+        $uni_row = $result_uni->fetch_array();
+
+
+
 				//make negative to differentiate from rso ids
-				$uni_id = 0 - $uni_id - 1;
-				$rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . "ucf" . "</option>";
-			}
+        while($uni_row !== NULL)
+        {
+          $uni_id = 0 - $uni_id - $uni_row["uid"];
+          $rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . $uni_row["uname"] . "</option>";
+          $uni_row = $result_uni->fetch_array();
+        }
+
+      }
 
 			echo '<div class = "form-group">
 				<label for="rso">RSO:</label>
@@ -109,6 +133,37 @@
 		Start Time: <input type="datetime-local" name="starttime"> End Time: <input type="datetime-local" name="endtime"><br>
 		Description: <textarea name="description" rows="10" cols="40"></textarea><br>
 		Phone: <input type="text" name="phone"> Email: <input type="text" name="email"><br>
+
+    <input id="lat" type="hidden" name="lat" value="123">
+    <input id="lng" type="hidden" name="lng" value="123">
+    <?php
+
+
+
+          $loc_query = "SELECT *
+          FROM location L
+          WHERE L.uid = " . 1 . ";";
+          $location_list = db_query($rso_query);
+
+
+
+    			$loc_ent = $location_list->fetch_array();
+    			$loc_str = "<option value='-1'";
+    			while($rso_id !== NULL)
+    			{
+    				$loc_str = $loc_str . "<option value = " . $loc_ent["lid"] . ">" . $loc_ent["lname"] . "</option>";
+    				$loc_ent = $location_list->fetch_array();
+    			}
+
+
+    			echo '<div class = "form-group">
+    				<label for="loc">Location:</label>
+    				<select class="form-control" id="loc" name="loc">
+    					' . $loc_str . '
+    				</select>
+    			</div>';
+     ?>
+    Location Name: <input type="text" name="lname"><br>
 		<input type="submit" name="Submit"><br>
 
 		<div class="col-sm-7">

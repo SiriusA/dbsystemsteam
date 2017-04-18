@@ -13,11 +13,12 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
+
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
-    color: white;
     padding: 14px 20px;
+    color: white;
+    background-color: #4444;
     margin: 8px 0;
     border: none;
     cursor: pointer;
@@ -33,7 +34,8 @@ button:hover {
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
-    background-color: #f44336;
+    color: white;
+    background-color: #08302f;
 }
 
 /* Center the avatar image inside this container */
@@ -50,9 +52,17 @@ img.avatar {
 
 /* Add padding to containers */
 .container {
-    padding: 16px;
+    padding: 1px;
 }
 
+#icon {
+   height:100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   vertical-align: middle;
+   text-align: center;
+}
 /* The "Forgot password" text */
 span.psw {
     float: right;

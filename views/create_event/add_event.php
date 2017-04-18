@@ -8,7 +8,7 @@
 include_once "../db/connection.php";
 $conn = getConnObj();
 
-$eventname = $starttime = $endtime = $desc = $phone = $email = "";
+$eventname = $starttime = $endtime = $desc = $phone = $email = $lat = $lng = $lname = $lid = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$eventname = test_input($_POST["eventname"]);
@@ -19,6 +19,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$desc = test_input($_POST["description"]);
 	$phone = test_input($_POST["phone"]);
 	$email = test_input($_POST["email"]);
+	$lid = test_input($_POST["lid"]);
+	$lname = test_input($_POST["lname"]);
+	$lat = test_input($_POST["latitude"]);
+	$lng = test_input($_POST["longitude"]);
 
 
 	echo("testing insert");
@@ -34,7 +38,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	);";
 	echo($timetable_collision);
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
-	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", " . $location . ", 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
+	$approved = 0;
+	if($_SESSION["usertype"] == 3)
+	{
+		$approved = 1;
+	}
+	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", " . $location . ", ".$approved.", 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
 	echo $insert_data_str;
 	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	db_query("USE event;");
