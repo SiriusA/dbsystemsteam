@@ -80,12 +80,21 @@ if($_SESSION["usertype"] == 1){
                     echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["end_time"]. '</font></strong></p>';
                     echo '<p><strong><font size="1%"> Status: ' .$event_result[$i]["approved"]. '</font></strong></p>';
                     echo '<div class="row">';
-                        echo '<div class="col-sm-1">';
-                            echo '<a href="#" class="list-group-item">'.$isApproved.'</a>';
-                        echo '</div>';
+                        if($isApproved == "Approved"){
+                            echo '<div class="col-sm-1">';
+                                echo '<a href="#" class="list-group-item" style="background-color: #00bf00">'.$isApproved.'</a>';
+                            echo '</div>';
+                        }
                         if($isApproved == "Pending"){
                             echo '<div class="col-sm-1">';
-                                echo '<a href="#" class="list-group-item">ApproveNow</a>';
+                                echo '<a href="#" class="list-group-item" style="background-color:lightcoral">'.$isApproved.'</a>';
+                            echo '</div>';
+                            echo '<div class="col-sm-1">';
+                                echo '<form method="post" action="updateApproval.php">
+                                        <button type="submit" name="approved" value="1" class="list-group-item" style="background-color: #00bfbf">ApproveNow</button>
+                                        <input type="hidden" name="startTime" value="'.$event_result[$i]["start_time"].'">
+                                        <input type="hidden" name="lid" value="'.$event_result[$i]["lid"].'">
+                                      </form>';
                             echo '</div>';
                         }
                     echo '</div>';
