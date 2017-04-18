@@ -20,11 +20,12 @@
     	}
 
     $sid = $_SESSION["sid"];
-
+    
     if(empty($data_missing))
     {
+
     	$result = db_query("INSERT INTO comment (timestamp, sid, start_time, lid, comment)
-    		                  VALUES(CURRENT_DATE(), '$sid', '$XXX', '$XXXX', '$comment')");
+    		                  VALUES(CURRENT_DATE(), '$sid', '20000101', '35', '$comment')");
 
     	if($result == false)
             echo "Insertion went wrong";
