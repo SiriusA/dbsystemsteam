@@ -8,7 +8,7 @@
 include_once "../db/connection.php";
 $conn = getConnObj();
 
-$eventname = $starttime = $endtime = $desc = $phone = $email = "";
+$eventname = $starttime = $endtime = $desc = $phone = $email = $lat = $lng"";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$eventname = test_input($_POST["eventname"]);
@@ -19,6 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$desc = test_input($_POST["description"]);
 	$phone = test_input($_POST["phone"]);
 	$email = test_input($_POST["email"]);
+	$lat = test_input($_POST["latitude"]);
+	$lng = test_input($_POST["longitude"]);
 
 
 	echo("testing insert");
