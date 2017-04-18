@@ -140,16 +140,27 @@
 
 
 
-          $loc_query = "SELECT *
-          FROM location L
-          WHERE L.uid = " . 1 . ";";
-          $location_list = db_query($rso_query);
+          if($_SESSION["usertype"] == 2)
+          {
+            $loc_query = "SELECT *
+                          FROM location L
+                          WHERE L.uid = " . $_SESSION["uid"] . ";";
+          }
+          else {
+            $loc_query = "SELECT *
+                          FROM location L
+                          INNER JOIN university_created ON L.uid = university_created.uid
+                          WHERE university_created.sid = " . $_SESSION["sid"] . ";";
+          }
+
+
+          $location_list = db_query($loc_query);
 
 
 
     			$loc_ent = $location_list->fetch_array();
-    			$loc_str = "<option value='-1'";
-    			while($rso_id !== NULL)
+    			$loc_str = "<option value='-1'>New Location</option>";
+    			while($loc_ent !== NULL)
     			{
     				$loc_str = $loc_str . "<option value = " . $loc_ent["lid"] . ">" . $loc_ent["lname"] . "</option>";
     				$loc_ent = $location_list->fetch_array();
