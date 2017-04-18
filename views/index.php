@@ -21,7 +21,11 @@
 <body>
 
 <form action="/db/login_action.php" method="post">
-		
+<table id="icon">
+  <tr>
+    <td><img src="/images/logo.png" alt="" height="100" width= "220" /></td>
+  </tr>
+</table>
     <div class="container">
         <label><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="email" required>
@@ -49,3 +53,5 @@
     if(isset($_GET["error"]) && $_GET["error"] == "1"){
         echo "<script>alert('Error message: Credentials are incorrect');</script>";
     }
+
+?>
