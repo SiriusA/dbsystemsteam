@@ -5,99 +5,41 @@
 session_start();
 
 include_once "../db/connection.php";
+if(empty($_POST["rso_name"] ) || empty($_POST["rso_description"]) || empty($_POST["rso_member_email_1"] ) || empty($_POST["rso_member_email_2"] ) || empty($_POST["rso_member_email_3"] ) || empty($_POST["rso_member_email_4"] ))
+{
+    	echo "Something is not set";
+    	header('Location: index.php?error=1');
+    	exit();
+ }
 $rname = trim($_POST['rso_name']);
 $description = trim($_POST['rso_description']);
 $mem1 = trim($_POST['rso_member_email_1']);
 $mem2 = trim($_POST['rso_member_email_2']);
 $mem3 = trim($_POST['rso_member_email_3']);
 $mem4 = trim($_POST['rso_member_email_4']);
-if(isset($_POST['submit']))
-{
-	$data_missing = array();
-
-	if(empty($_POST['rso_name']))
-	{
-		$data_missing[] = 'RSO Name';
-	}
-	else
-	{
-		$rname = trim($POST['rso_name']);
-	}
-
-	if(empty($_POST['rso_description']))
-	{
-		$data_missing[] = 'RSO Description';
-	}
-	else
-	{
-		$description = trim($POST['rso_description']);
-	}
-
-	if(empty($_POST['rso_member_email_1']))
-	{
-		$data_missing[] = 'Member 1 Email';
-	}
-	else
-	{
-		$rsoemail = trim($POST['rso_member_email_1']);
-	}
-
-	if(empty($_POST['rso_member_email_2']))
-	{
-		$data_missing[] = 'Member 2 Email';
-	}
-	else
-	{
-		$rsoemail = trim($POST['rso_member_email_2']);
-	}
-
-	if(empty($_POST['rso_member_email_3']))
-	{
-		$data_missing[] = 'Member 3 Email';
-	}
-	else
-	{
-		$rsoemail = trim($POST['rso_member_email_3']);
-	}
-
-	if(empty($_POST['rso_member_email_4']))
-	{
-		$data_missing[] = 'Member 4 Email';
-	}
-	else
-	{
-		$rsoemail = trim($POST['rso_member_email_4']);
-	}
-}
-
-$sid = $_SESSION["sid"];
+$usersid = $_SESSION["sid"];
 $approved = 0;
 $rpicture = "empty";
 $rid;
 
 
-if(empty($data_missing))
-{
-	$result = db_query("INSERT INTO rso_owned (rid, sid, rname, description, approved, rpicture)
-		VALUES(NULL, '$sid', '$rname', '$description', '$approved', '$rpicture')");
-
+$result = db_query("INSERT INTO rso_owned (rid, sid, rname, description, approved, rpicture)
+		VALUES(NULL, '$usersid', '$rname', '$description', '$approved', '$rpicture')");
 
 
 	if($result == false)
-        echo "Insertion went wrong";
-    else
-    {
-    	echo "insertion went through";
-    	$rid = 'mysqli_insert_id';
+	    echo "<script>alert('Error: Something Went Wrong with Insertion!');
+		window.location.replace(\"http://localhost/create_rso\");</script>";
+	else
+	{
+		$rid = 'mysqli_insert_id';
 
-        $connection = db_connect();
-        $GLOBALS["rid"] = mysqli_insert_id($connection);
-    }
-}
-
+	    $connection = db_connect();
+	    $GLOBALS["rid"] = mysqli_insert_id($connection);
+	}
 
 
-$result = db_query("SELECT U.sid FROM `user` U WHERE `email` = '$mem1' OR `email` = '$mem2' OR `email` = '$mem3' OR `email` = '$mem4'");
+$result = db_query("SELECT U.sid FROM `user` U WHERE `email` = '$mem1' OR `email` = '$mem2' OR `email` = '$mem3' OR `email` = '$mem4' OR `email` = '$mem4'");
 
 $sid = array();
 
@@ -105,12 +47,34 @@ while($row = mysqli_fetch_array($result)){
 	$sid[]= $row[0];
 }
 
+if (!empty($sid[3]))
+{
+	for($i = '0'; $i < '4'; $i++)
+	{
+		if($sid[$i] == $_SESSION["sid"])
+		{
+			echo "<script>alert('You cannot enter your own email!');</script>";
+			$result = db_query("DELETE FROM rso_owned WHERE `sid` = '$usersid' AND `rid` = '$rid'");
+			echo "<script>window.location.replace(\"http://localhost/create_rso\");</script>";
+		}
 
-$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[0]', '$rid')");
-$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[1]', '$rid')");
-$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[2]', '$rid')");
-$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[3]', '$rid')");
+	}
 
+	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[0]', '$rid')");
+	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[1]', '$rid')");
+	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[2]', '$rid')");
+	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[3]', '$rid')");
+	echo "<script>alert('Your RSO Has Been Created!');
+	window.location.replace(\"http://localhost/rso\");</script>";
+
+
+}
+else
+{
+	echo "<script>alert('You are missing a valid user email!')</script>";
+	$result = db_query("DELETE FROM rso_owned WHERE `sid` = '$usersid' AND `rid` = '$rid'");
+	echo "<script>window.location.replace(\"http://localhost/create_rso\");</script>";
+}
 
 ?>
 </body>
