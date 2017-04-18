@@ -88,13 +88,37 @@
 				$rso_olist = $rso_olist . "<option value = " . $rso_id[0] . ">" . $rso_id[1] . "</option>";
 				$rso_id = $rso_ids_result->fetch_row();
 			}
-			if($_SESSION["usertype"] == 3){
+			if($_SESSION["usertype"] <= 2){
 				//hardcode, fix later
 				$uni_id = 0;
+
+        if($_SESSION["usertype"] == 2)
+        {
+          $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                  FROM university_created U
+                                  INNER JOIN user ON user.uid = U.uid
+                                  WHERE user.sid = " . $_SESSION["sid"] . "");
+        }
+        else {
+          $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                  FROM university_created U
+                                  INNER JOIN user ON user.sid = U.sid
+                                  WHERE user.sid = " . $_SESSION["sid"] . "");
+        }
+
+        $uni_row = $result_uni->fetch_array();
+
+
+
 				//make negative to differentiate from rso ids
-				$uni_id = 0 - $uni_id - 1;
-				$rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . "ucf" . "</option>";
-			}
+        while($uni_row !== NULL)
+        {
+          $uni_id = 0 - $uni_id - $uni_row["uid"];
+          $rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . $uni_row["uname"] . "</option>";
+          $uni_row = $result_uni->fetch_array();
+        }
+
+      }
 
 			echo '<div class = "form-group">
 				<label for="rso">RSO:</label>

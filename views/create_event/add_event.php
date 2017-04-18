@@ -38,7 +38,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	);";
 	echo($timetable_collision);
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
-	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", " . $location . ", 1, 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
+	$approved = 0;
+	if($_SESSION["usertype"] == 3)
+	{
+		$approved = 1;
+	}
+	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", " . $location . ", ".$approved.", 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
 	echo $insert_data_str;
 	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	db_query("USE event;");
