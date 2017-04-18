@@ -39,16 +39,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo($timetable_collision);
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
 
+	/*
 	$res2 = $conn->query("SELECT L.lname
 								FROM location L
 								WHERE L.lid = " . $lid . "");
-	if($res2->num_rows == 0)
+	*/
+	if($lid == -1)
 	{
 		$conn->query("INSERT INTO location (longitude, latitude, lname);
 									VALUES (".$lng.", ".$lat.", ".$lname.")");
 	}
 	else {
-		$location = $res2->fetch_array()["lid"];
+		$location = $lid;
 	}
 
 	$approved = 0;
