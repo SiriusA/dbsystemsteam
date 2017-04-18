@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$lng = test_input($_POST["longitude"]);
 
 
-	echo("testing insert");
+	//echo("testing insert");
 
 	$timetable_collision = "SELECT e2.lid, e2.start_time
 	FROM Events_Hosted_Located e2
@@ -36,23 +36,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	OR ('" . $starttime . "' <= e2.start_time AND e2.start_time < '" . $endtime . "')
 	OR ('" . $starttime . "' <= e2.end_time AND e2.end_time < '" . $endtime . "')
 	);";
-	echo($timetable_collision);
+	//echo($timetable_collision);
 	$insert_def_str = "(start_time, end_time, rid, lid, approved, type, visibility, ename, phone, email, description) ";
+
+	$res2 = $conn->query("SELECT L.lname
+								FROM location L
+								WHERE L.lid = " . $lid . "");
+	if($res2->num_rows == 0)
+	{
+		$conn->query("INSERT INTO location (longitude, latitude, lname);
+									VALUES (".$lng.", ".$lat.", ".$lname.")");
+	}
+	else {
+		$location = $res2->fetch_array()["lid"];
+	}
+
 	$approved = 0;
 	if($_SESSION["usertype"] == 3)
 	{
 		$approved = 1;
+	} else if($rso > 0)
+	{
+		$approved = 1;
 	}
 	$insert_data_str = "VALUES ('" . $starttime . "', '" . $endtime . "', " . $rso . ", " . $location . ", ".$approved.", 1, 1, '" . $eventname . "', '" . $phone . "', '" . $email . "', '" . $desc . "');";
-	echo $insert_data_str;
+	//echo $insert_data_str;
 	$insert_actual = "INSERT INTO Events_Hosted_Located" . $insert_def_str . " " . $insert_data_str;
 	db_query("USE event;");
 
 	$result = $conn->query($timetable_collision);
-	echo("<br> ye <br>");
 	if($result->num_rows == 0) {
 		if($conn->query($insert_actual)=== TRUE) {
-			echo "new record created <br>";
+
+			//echo "new record created <br>";
 			echo("insert successful");
 		} else {
 			echo "Error: " . $insert_actual . "<br>" . $conn->error;

@@ -159,7 +159,7 @@
 
 
     			$loc_ent = $location_list->fetch_array();
-    			$loc_str = "<option value='-1'";
+    			$loc_str = "<option value='-1'>New Location</option>";
     			while($rso_id !== NULL)
     			{
     				$loc_str = $loc_str . "<option value = " . $loc_ent["lid"] . ">" . $loc_ent["lname"] . "</option>";
