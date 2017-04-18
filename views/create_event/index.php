@@ -140,10 +140,21 @@
 
 
 
-          $loc_query = "SELECT *
-          FROM location L
-          WHERE L.uid = " . 1 . ";";
-          $location_list = db_query($rso_query);
+          if($_SESSION["usertype"] == 2)
+          {
+            $loc_query = "SELECT *
+                          FROM location L
+                          WHERE L.uid = " . $_SESSION["uid"] . ";";
+          }
+          else {
+            $loc_query = "SELECT *
+                          FROM location L
+                          INNER JOIN university_created ON L.uid = university_created.uid
+                          WHERE university_created.sid = " . $_SESSION["sid"] . ";";
+          }
+
+
+          $location_list = db_query($loc_query);
 
 
 
