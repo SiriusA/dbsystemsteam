@@ -2,11 +2,11 @@
 
  include_once "connection.php";
 
- function getEventComments(){
+ function getEventComments($time, $place){
 
     $result = db_query("SELECT C.comment, C.timestamp, U.first_name, U.last_name
-                        FROM comment C, Events_Hosted_Located E, user U
-                        WHERE C.start_time = E.start_time AND C.lid = E.lid");
+                        FROM comment C, user U
+                        WHERE C.start_time = ".$time." AND C.lid = ".$place."");
 
      if($result == false){
          echo "something went wrong";

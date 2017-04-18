@@ -168,7 +168,7 @@
 
       */
 
-      $eventComments = getEventComments();
+      $eventComments = getEventComments($time, $place);
 
       $i = 0;
 
