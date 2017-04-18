@@ -35,8 +35,8 @@ function getRSOsForStudent()
 
     $result = db_query("SELECT DISTINCT R.rname, R.approved, R.description, R.rpicture, R.rid, U.uname, Us.email
                         FROM rso_owned R, university_created U, `user` Us, `user` Us1
-                        WHERE Us1.sid = '$sid' AND R.sid = Us.sid AND U.uid = Us.uid
-                        AND Us1.uid = U.uid");
+                        WHERE Us1.sid = '$sid' AND (R.sid = Us.sid OR R.sid = Us1.sid)
+                        AND U.uid = Us.uid AND Us1.uid = U.uid");
 
     if($result == false){
         echo "something went wrong";
