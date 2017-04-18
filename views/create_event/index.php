@@ -122,20 +122,20 @@
           $location_list = db_query($rso_query);
 
 
-    			//retrieve rsos
+
     			$loc_ent = $location_list->fetch_array();
     			$loc_str = "<option value='-1'";
     			while($rso_id !== NULL)
     			{
     				$loc_str = $loc_str . "<option value = " . $loc_ent["lid"] . ">" . $loc_ent["lname"] . "</option>";
-    				$rso_id = $rso_ids_result->fetch_array();
+    				$loc_ent = $location_list->fetch_array();
     			}
 
 
     			echo '<div class = "form-group">
-    				<label for="rso">RSO:</label>
-    				<select class="form-control" id="rso" name="rso">
-    					' . $rso_olist . '
+    				<label for="loc">Location:</label>
+    				<select class="form-control" id="loc" name="loc">
+    					' . $loc_str . '
     				</select>
     			</div>';
      ?>
