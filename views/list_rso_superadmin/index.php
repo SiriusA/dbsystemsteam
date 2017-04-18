@@ -30,11 +30,8 @@ if($_SESSION["userLoggedIn"] == false)
 <!--    navbar start-->
 <?php
 
-if($_SESSION["usertype"] == 1)
-    include "../nav_bar/super_admin_navbar.php";
-else{
+include_once "../nav_bar/only_nav_bar.php";
 
-}
 ?>
 <!--navbar end-->
 

@@ -9,7 +9,27 @@
 
 include_once "connection.php";
 
+function getEventsManagedBySuper(){
 
+//    SELECT E.ename, E.description, E.approved
+//FROM events_hosted_located E, university_created U, location L
+//WHERE U.sid=1 AND U.uid=L.uid AND L.lid=E.lid
+    $sid = $_SESSION["sid"];
+    $result = db_query("SELECT E.ename, E.description, E.approved, E.start_time, E.end_time, E.lid
+                        FROM events_hosted_located E, university_created U, location L
+                        WHERE U.sid='$sid' AND U.uid=L.uid AND L.lid=E.lid");
+    if($result == false){
+        echo "something went wrong";
+    }
+
+    //save each row in array
+    $eventsAttending = array();
+    while($row = mysqli_fetch_array($result)){
+        $eventsAttending[] = $row;
+    }
+
+    return $eventsAttending;
+}
 function getEventsAttending(){
     $sid = $_SESSION["sid"];
     $result = db_query("SELECT E.ename, E.description, E.start_time, E.end_time, E.approved
