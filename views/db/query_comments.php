@@ -4,8 +4,9 @@
 
  function getEventComments($time, $place){
 
-    $result = db_query("SELECT C.comment, C.timestamp, U.first_name, U.last_name
-                        FROM comment C, user U
+    $result = db_query("SELECT C.comment, C.timestamp, user.first_name, user.last_name
+                        FROM comment C
+                        INNER JOIN user on C.sid = user.sid
                         WHERE C.start_time = ".$time." AND C.lid = ".$place."");
 
      if($result == false){
