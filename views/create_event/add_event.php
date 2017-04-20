@@ -46,10 +46,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 								FROM location L
 								WHERE L.lid = " . $lid . "");
 	*/
+
+	$uid = 1;
+
+	if($rso < 0)
+	{
+		$uid = $rso + (2*$rso);
+		$rso = NULL;
+	} else {
+		$uid = $_SESSION["uid"];
+	}
+
 	if($lid == -1)
 	{
 		$redog = $conn->query("INSERT INTO location (longitude, latitude, lname, uid)
-									VALUES (".$lng.", ".$lat.", '".$lname."', ".$_SESSION["uid"].")");
+									VALUES (".$lng.", ".$lat.", '".$lname."', ".$uid.")");
 		if($redog !== TRUE)
 		{
 			echo $conn->error;

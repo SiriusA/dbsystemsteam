@@ -62,8 +62,50 @@
 
 
 
-<form class="form-vertical" role="form" action="add_event.php" method="post">
+<form class="form-vertical" role="form" action="update_location.php" method="post">
+  <?php
 
+  			$rso_olist = "";
+
+  			if($_SESSION["usertype"] <= 2){
+  				//hardcode, fix later
+  				$uni_id = 0;
+
+          if($_SESSION["usertype"] == 2)
+          {
+            $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                    FROM university_created U
+                                    INNER JOIN user ON user.uid = U.uid
+                                    WHERE user.sid = " . $_SESSION["sid"] . "");
+          }
+          else {
+            $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                    FROM university_created U
+                                    INNER JOIN user ON user.sid = U.sid
+                                    WHERE user.sid = " . $_SESSION["sid"] . "");
+          }
+
+          $uni_row = $result_uni->fetch_array();
+
+
+
+  				//make negative to differentiate from rso ids
+          while($uni_row !== NULL)
+          {
+            $uni_id = $uni_row["uid"];
+            $rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . $uni_row["uname"] . "</option>";
+            $uni_row = $result_uni->fetch_array();
+          }
+
+        }
+
+  			echo '<div class = "form-group">
+  				<label for="rso">RSO:</label>
+  				<select class="form-control" id="uid" name="uid">
+  					' . $rso_olist . '
+  				</select>
+  			</div>';
+  		?>
 
     <input id="lat" type="hidden" name="lat" value="123">
     <input id="lng" type="hidden" name="lng" value="123">
@@ -122,7 +164,7 @@
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
+//              console.log(this.responseText);
               eval(this.responseText);
           }
       };
@@ -142,7 +184,7 @@
 
             var mapProp= {
                 center:new google.maps.LatLng(37.769,-122.446),
-                zoom:5,
+                zoom:15,
             };
             map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
             placeMarker(haightAshbury);
