@@ -87,15 +87,20 @@
     //                echo $eventAttendingList[0]["end_time"] . "<br>";
     //                echo $eventAttendingList[0]["approved"] . "<br>";
 
+//                    $startTimeHold = $startTimeHold->format("YmdHis");
+//                    echo '<h3><a href="../page_event/index.php?time='.$startTimeHold.'&place='.$event_result[$i]["lid"].'" class="list-group-item">' .$event_result[$i]["ename"]. '</a></h3>';
+
                     $nextPage = -1;
                     //        only display 7
                     echo '<ul class="list-group">';
                     if($remaining > 7){
                         $index = sizeof($eventAttendingList) - $remaining;
                         for($i = 0; $i < 7; $i++){
+                            $startTimeHold = date_create_from_format("Y-m-d H:i:s", $eventAttendingList[$i +$index]["start_time"]);
+                            $startTimeHold = $startTimeHold->format("YmdHis");
                             echo '<div class="row">
                                     <div class="col-sm-5">
-                                        <a href="../rso_description/index.php?index='.($i + $index).'" class="list-group-item">'.$eventAttendingList[$i + $index]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
+                                        <a href="../page_event/index.php?time='.$startTimeHold.'&place='.$eventAttendingList[$i + $index]["lid"].'" class="list-group-item">'.$eventAttendingList[$i + $index]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="#" class="list-group-item">'.$eventAttendingList[$i + $index]["start_time"].'</a>
@@ -114,9 +119,11 @@
                     else{
                         $index = sizeof($eventAttendingList) - $remaining;
                         for($i = $index; $i < sizeof($eventAttendingList); $i++){
+                            $startTimeHold = date_create_from_format("Y-m-d H:i:s", $eventAttendingList[$i]["start_time"]);
+                            $startTimeHold = $startTimeHold->format("YmdHis");
                             echo '<div class="row">
                                     <div class="col-sm-5">
-                                        <a href="../rso_description/index.php?index='.($i).'" class="list-group-item">'.$eventAttendingList[$i]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
+                                        <a href="../page_event/index.php?time='.$startTimeHold.'&place='.$eventAttendingList[$i]["lid"].'"  class="list-group-item">'.$eventAttendingList[$i]["ename"].' - '.$eventAttendingList[$i]["description"].'</a>
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="#" class="list-group-item">'.$eventAttendingList[$i]["start_time"].'</a>
