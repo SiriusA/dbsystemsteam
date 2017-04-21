@@ -59,7 +59,7 @@
             require_once "../db/events_feed.php";
             include_once "../db/query_events.php";
 
-//            fillEventTable("http://events.ucf.edu/feed.rss");
+            fillEventTable("http://events.ucf.edu/feed.rss");
 
             $event_result = getEventsList();
 
