@@ -27,7 +27,7 @@
     <div>
       <?php
             include_once "../nav_bar/nav_bar_register.php";
-        
+
       ?>
 
         </ul>
@@ -54,9 +54,22 @@
   </p>
   <select name="university_id">
   <option value="">Select...</option>
-  <option value="124" >Florida State University</option>
-  <option value="1">University of Central Florida</option>
-  <option value="125">University of Florida</option>
+  <?php
+    include_once "../db/connection.php";
+
+    $result_uni = db_query("SELECT DISTINCT U.uid, U.uname
+                        FROM university_created U");
+    $uni_row = $result_uni->fetch_array();
+    $uni_list = "";
+
+    while($uni_row !== NULL) {
+      $uni_id = $uni_row["uid"];
+      $uni_list = $uni_list . "<option value = " . $uni_id . ">" . $uni_row["uname"] . "</option>";
+      $uni_row = $result_uni->fetch_array();
+    }
+
+    echo $uni_list;
+   ?>
   </select>
 
   <p>
