@@ -118,9 +118,16 @@
     <div id="wrapper">
         <div class="hero">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
               <?php
                 echo '<h3 class="title_bar">' . $eventData["ename"] . "</h3>";
+              ?>
+            </div>
+            <div class="col-md-2">
+              <?php
+              echo '<form class="form-vertical" role="form" action="../db/attend_event.php?time='.$time.'&place='.$place.'&sid='.$_SESSION["sid"].'" method="post">';
+              echo '<input type="submit" name="Attend">';
+              echo '</form>';
               ?>
             </div>
           </div>

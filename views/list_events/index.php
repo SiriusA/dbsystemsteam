@@ -59,7 +59,7 @@
             require_once "../db/events_feed.php";
             include_once "../db/query_events.php";
 
-            //fillEventTable("http://events.ucf.edu/feed.rss");
+//            fillEventTable("http://events.ucf.edu/feed.rss");
 
             $event_result = getEventsList();
 
@@ -79,14 +79,14 @@
 
             if(sizeof($event_result) <= 0){
               echo '<div class="list-group-item">';
-              echo '<h3> Looks like you\'re university is lacking events! </h3>';
+              echo '<h3> Looks like your university is lacking events! </h3>';
               echo '</div>';
             }
 
             else {
-              if($remaining > 20){
+              if($remaining > 10){
                   $index = sizeof($event_result) - $remaining;
-                  for($i = $index; $i < 20 + $index; $i++){
+                  for($i = $index; $i < 10 + $index; $i++){
                     echo '<div class="list-group-item">';
                     $startTimeHold = date_create_from_format("Y-m-d H:i:s", $event_result[$i]["start_time"]);
                     $startTimeHold = $startTimeHold->format("YmdHis");

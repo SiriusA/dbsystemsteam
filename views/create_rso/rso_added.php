@@ -60,6 +60,7 @@ if (!empty($sid[3]))
 
 	}
 
+  $result = db_query("INSERT INTO joins(sid, rid) VALUES('$usersid', '$rid')");
 	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[0]', '$rid')");
 	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[1]', '$rid')");
 	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[2]', '$rid')");
@@ -79,5 +80,3 @@ else
 ?>
 </body>
 </html>
-
-	
