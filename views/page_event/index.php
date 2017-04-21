@@ -126,7 +126,7 @@
             <div class="col-md-2">
               <?php
               echo '<form class="form-vertical" role="form" action="../db/attend_event.php?time='.$time.'&place='.$place.'&sid='.$_SESSION["sid"].'" method="post">';
-              echo '<input type="submit" name="Attend">';
+              echo '<input type="submit" value="Attend">';
               echo '</form>';
               ?>
             </div>
