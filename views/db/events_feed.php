@@ -15,7 +15,7 @@ function fillEventTable($feed_url) {
     $conn3 = getConnObj();
     $eventIns = $conn->prepare("INSERT INTO events_hosted_located (approved, description, email, ename, end_time, lid, phone, rid, start_time, type, visibility)
                                 VALUES ('0', ?, ?, ?, ?, ?, ?, ?, ?, 0, 1)");
-    $eventIns->bind_param("ssssisis", $description, $contact_email, $name, $end_time, $locationid, $contact_phone, $rid, $start_time);
+    $eventIns->bind_param("ssssisis", $description, $contact_email, $ename, $end_time, $locationid, $contact_phone, $rid, $start_time);
     $locIns = $conn2->prepare("INSERT INTO location (uid, lname, url)
               VALUES ('1', ?, ?)");
     $locIns->bind_param("ss", $location_name, $location_url);

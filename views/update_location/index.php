@@ -26,19 +26,6 @@
 
   include ("../db/connection.php");
 
-  if(!empty($_SESSION["sid"]))
-  {
-  	//db_query("USE event;");
-  	$rso_query = "SELECT r.rid, r.rname
-  	FROM rso_owned r
-  	WHERE r.sid = " . $_SESSION["sid"] . ";";
-
-  	$rso_ids_result = db_query($rso_query);
-  //	if($result->num_rows != 0){
-  //		$rso_ids = $result->fetch_all();
-  //	}
-  }
-
 ?>
 
 <!DOCTYPE html>
@@ -75,64 +62,50 @@
 
 
 
-<form class="form-vertical" role="form" action="add_event.php" method="post">
+<form class="form-vertical" role="form" action="update_location.php" method="post">
+  <?php
 
-<?php
+  			$rso_olist = "";
 
+  			if($_SESSION["usertype"] <= 2){
+  				//hardcode, fix later
+  				$uni_id = 0;
 
-			//retrieve rsos
-			$rso_id = $rso_ids_result->fetch_row();
-			$rso_olist = "";
-			while($rso_id !== NULL)
-			{
-				$rso_olist = $rso_olist . "<option value = " . $rso_id[0] . ">" . $rso_id[1] . "</option>";
-				$rso_id = $rso_ids_result->fetch_row();
-			}
-			if($_SESSION["usertype"] <= 2){
-				//hardcode, fix later
-				$uni_id = 0;
+          if($_SESSION["usertype"] == 2)
+          {
+            $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                    FROM university_created U
+                                    INNER JOIN user ON user.uid = U.uid
+                                    WHERE user.sid = " . $_SESSION["sid"] . "");
+          }
+          else {
+            $result_uni = db_query("SELECT U.uname, user.sid, U.uid
+                                    FROM university_created U
+                                    INNER JOIN user ON user.sid = U.sid
+                                    WHERE user.sid = " . $_SESSION["sid"] . "");
+          }
 
-        if($_SESSION["usertype"] == 2)
-        {
-          $result_uni = db_query("SELECT U.uname, user.sid, U.uid
-                                  FROM university_created U
-                                  INNER JOIN user ON user.uid = U.uid
-                                  WHERE user.sid = " . $_SESSION["sid"] . "");
-        }
-        else {
-          $result_uni = db_query("SELECT U.uname, user.sid, U.uid
-                                  FROM university_created U
-                                  INNER JOIN user ON user.sid = U.sid
-                                  WHERE user.sid = " . $_SESSION["sid"] . "");
-        }
-
-        $uni_row = $result_uni->fetch_array();
-
-
-
-				//make negative to differentiate from rso ids
-        while($uni_row !== NULL)
-        {
-          $uni_id = 0 - $uni_id - $uni_row["uid"];
-          $rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . $uni_row["uname"] . "</option>";
           $uni_row = $result_uni->fetch_array();
+
+
+
+  				//make negative to differentiate from rso ids
+          while($uni_row !== NULL)
+          {
+            $uni_id = $uni_row["uid"];
+            $rso_olist = $rso_olist . "<option value = " . $uni_id . ">" . $uni_row["uname"] . "</option>";
+            $uni_row = $result_uni->fetch_array();
+          }
+
         }
 
-      }
-
-			echo '<div class = "form-group">
-				<label for="rso">RSO:</label>
-				<select class="form-control" id="rso" name="rso">
-					' . $rso_olist . '
-				</select>
-			</div>';
-		?>
-
-		Event Name: <input type="text" name="eventname"><br>
-		Format:YYYY-MM-DD HH:MM:SS<br>
-		Start Time: <input type="datetime-local" name="starttime"> End Time: <input type="datetime-local" name="endtime"><br>
-		Description: <textarea name="description" rows="10" cols="40"></textarea><br>
-		Phone: <input type="text" name="phone"> Email: <input type="text" name="email"><br>
+  			echo '<div class = "form-group">
+  				<label for="rso">RSO:</label>
+  				<select class="form-control" id="uid" name="uid">
+  					' . $rso_olist . '
+  				</select>
+  			</div>';
+  		?>
 
     <input id="lat" type="hidden" name="lat" value="123">
     <input id="lng" type="hidden" name="lng" value="123">
@@ -169,7 +142,7 @@
 
     			echo '<div class = "form-group">
     				<label for="loc">Location:</label>
-    				<select class="form-control" id="lid" name="lid">
+    				<select class="form-control" id="lid" name="lid" onchange="mapZoom(this.value)">
     					' . $loc_str . '
     				</select>
     			</div>';
@@ -200,6 +173,7 @@
     }
   }
 </script>
+
  <script>
 
         var map;
@@ -210,7 +184,7 @@
 
             var mapProp= {
                 center:new google.maps.LatLng(37.769,-122.446),
-                zoom:5,
+                zoom:15,
             };
             map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
             placeMarker(haightAshbury);

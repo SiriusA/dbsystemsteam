@@ -88,20 +88,55 @@
 
     $eventData = getEventbyTimePlace($time, $place);
 
+    echo "<script>var locId = " . $eventData["lid"] . ";</script>";
+
   ?>
+
+
+  <script>
+    function mapZoom(lid) {
+      if(lid == -1)
+      {
+        return;
+      } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+  //              console.log(this.responseText);
+                eval(this.responseText);
+            }
+        };
+        xmlhttp.open("GET", "../db/zoom_map.php?lid=" + lid, true);
+        xmlhttp.send();
+      }
+    }
+  </script>
+
+
+
 
     <div id="wrapper">
         <div class="hero">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
               <?php
                 echo '<h3 class="title_bar">' . $eventData["ename"] . "</h3>";
               ?>
             </div>
+            <div class="col-md-2">
+              <?php
+              echo '<form class="form-vertical" role="form" action="../db/attend_event.php?time='.$time.'&place='.$place.'&sid='.$_SESSION["sid"].'" method="post">';
+              echo '<input type="submit" value="Attend">';
+              echo '</form>';
+              ?>
+            </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <h3>This is where an image would go, if you had one.</h3>
+            </div>
+            <div class="col-md-6">
+              <div id="googleMap" style="width:100%;height:400px;"></div>
             </div>
           </div>
           <div class="row">
@@ -147,6 +182,8 @@
             <div class="container">
               <I>Add a comment</I><br>
               <textarea name="comment_to_submit" rows="4" cols="60"></textarea><br>
+              <input type="hidden" name="time" value='<?php echo $time ?>'>
+              <input type="hidden" name="place" value='<?php echo $place ?>'>
               <input type="submit" name="Submit">
             </div>
 
@@ -166,7 +203,7 @@
 
       */
 
-      $eventComments = getEventComments();
+      $eventComments = getEventComments($time, $place);
 
       $i = 0;
 
@@ -207,6 +244,45 @@
         </div>
       </div>
     </div>
+
+    <script>
+
+           var map;
+           var marker;
+           function myMap() {
+
+               var haightAshbury = {lat: 37.769, lng: -122.446};
+
+               var mapProp= {
+                   center:new google.maps.LatLng(37.769,-122.446),
+                   zoom:15,
+               };
+               map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+               placeMarker(haightAshbury);
+
+               //get marker position after dragging
+               marker.addListener('dragend', function(event) {
+                   var latlng = marker.getPosition();
+                   console.log("latlng: " + latlng);
+                   console.log("lat(): " + latlng.lat() + ", lng(): " + latlng.lng());
+                   document.getElementById("lat").value = latlng.lat();
+                   document.getElementById("lng").value = latlng.lng();
+               });
+
+               mapZoom(locId);
+
+           }
+
+           function placeMarker(location) {
+
+               marker = new google.maps.Marker({
+                   position: location,
+                   map: map,
+                   draggable:true
+               });
+           }
+       </script>
+         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCttR_s1Fawjgb7lQGP9Yk8T4VAU6vsAbQ&callback=myMap"></script>
 
     <!---- END COMMENTS ---->
 
