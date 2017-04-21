@@ -29,7 +29,7 @@ $result = db_query("INSERT INTO rso_owned (rid, sid, rname, description, approve
 
 	if($result == false)
 	    echo "<script>alert('Error: Something Went Wrong with Insertion!');
-		window.location.replace(\"http://localhost/create_rso\");</script>";
+		window.location.replace(\"../create_rso\");</script>";
 	else
 	{
 		$rid = 'mysqli_insert_id';
@@ -55,7 +55,7 @@ if (!empty($sid[3]))
 		{
 			echo "<script>alert('You cannot enter your own email!');</script>";
 			$result = db_query("DELETE FROM rso_owned WHERE `sid` = '$usersid' AND `rid` = '$rid'");
-			echo "<script>window.location.replace(\"http://localhost/create_rso\");</script>";
+			echo "<script>window.location.replace(\"../create_rso\");</script>";
 		}
 
 	}
@@ -66,7 +66,7 @@ if (!empty($sid[3]))
 	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[2]', '$rid')");
 	$result = db_query("INSERT INTO joins(sid, rid) VALUES('$sid[3]', '$rid')");
 	echo "<script>alert('Your RSO Has Been Created!');
-	window.location.replace(\"http://localhost/rso\");</script>";
+	window.location.replace(\"../rso\");</script>";
 
 
 }
@@ -74,7 +74,7 @@ else
 {
 	echo "<script>alert('You are missing a valid user email!')</script>";
 	$result = db_query("DELETE FROM rso_owned WHERE `sid` = '$usersid' AND `rid` = '$rid'");
-	echo "<script>window.location.replace(\"http://localhost/create_rso\");</script>";
+	echo "<script>window.location.replace(\"../create_rso\");</script>";
 }
 
 ?>
