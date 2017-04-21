@@ -25,7 +25,7 @@ if(!empty($_GET["time"]) && !empty($_GET["place"]) && !empty($_GET["sid"])) {
   }
   else {
     echo "you are not attending, error.";
-    echo $query;
+//    echo $query;
   }
 }
 else{
