@@ -59,9 +59,21 @@
             require_once "../db/events_feed.php";
             include_once "../db/query_events.php";
 
-            fillEventTable("http://events.ucf.edu/feed.rss");
+            //fillEventTable("http://events.ucf.edu/feed.rss");
 
             $event_result = getEventsList();
+
+            if(empty($_GET["page"])){
+                $page = 0;
+                $remaining = sizeof($event_result);
+            }
+            else{
+                $page = $_GET["page"];
+                $remaining = $_GET["remaining"];
+            }
+
+
+            $nextPage = -1;
 
             $i = 0;
 
@@ -71,18 +83,64 @@
               echo '</div>';
             }
 
-            else
-              while($i < 20 && $i < sizeof($event_result)){
-                echo '<div class="list-group-item">';
-                $startTimeHold = date_create_from_format("Y-m-d H:i:s", $event_result[$i]["start_time"]);
-                $startTimeHold = $startTimeHold->format("YmdHis");
-                echo '<h3><a href="../page_event/index.php?time='.$startTimeHold.'&place='.$event_result[$i]["lid"].'" class="list-group-item">' .$event_result[$i]["ename"]. '</a></h3>';
-                echo '<p>' .$event_result[$i]["description"]. '</p>';
-                echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i]["start_time"]. '</font></strong></p>';
-                echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["end_time"]. '</font></strong></p>';
-                echo '</div>';
-                $i++;
+            else {
+              if($remaining > 20){
+                  $index = sizeof($event_result) - $remaining;
+                  for($i = $index; $i < 20 + $index; $i++){
+                    echo '<div class="list-group-item">';
+                    $startTimeHold = date_create_from_format("Y-m-d H:i:s", $event_result[$i]["start_time"]);
+                    $startTimeHold = $startTimeHold->format("YmdHis");
+                    echo '<h3><a href="../page_event/index.php?time='.$startTimeHold.'&place='.$event_result[$i]["lid"].'" class="list-group-item">' .$event_result[$i]["ename"]. '</a></h3>';
+                    echo '<p>' .$event_result[$i]["description"]. '</p>';
+                    echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i]["start_time"]. '</font></strong></p>';
+                    echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["end_time"]. '</font></strong></p>';
+                    echo '</div>';
+                  }
+                  $nextPage = $page + 1;
               }
+              //        display what is left
+              else{
+                $index = sizeof($event_result) - $remaining;
+                for($i = $index; $i < sizeof($event_result); $i++){
+                  echo '<div class="list-group-item">';
+                  $startTimeHold = date_create_from_format("Y-m-d H:i:s", $event_result[$i]["start_time"]);
+                  $startTimeHold = $startTimeHold->format("YmdHis");
+                  echo '<h3><a href="../page_event/index.php?time='.$startTimeHold.'&place='.$event_result[$i]["lid"].'" class="list-group-item">' .$event_result[$i]["ename"]. '</a></h3>';
+                  echo '<p>' .$event_result[$i]["description"]. '</p>';
+                  echo '<p><strong><font size="1%"> Start Time: ' .$event_result[$i]["start_time"]. '</font></strong></p>';
+                  echo '<p><strong><font size="1%"> End Time: ' .$event_result[$i]["end_time"]. '</font></strong></p>';
+                  echo '</div>';
+                }
+
+              }
+            }
+            //start pager
+            echo '<div class="row">';
+            echo '<div class="col-lg-12">';
+            echo    '<ul class="pager">';
+
+            //display previous button?
+            if($page != 0){
+                $prevPage = $page - 1;
+                $prevRemaining = $remaining + 10;
+                //DISPLAY PREV BUTTON
+                echo    '<li><a href="index.php?page='.$prevPage.'&remaining='.$prevRemaining.'">Previous</a></li>';
+
+            }
+            echo    '<li>Page '.$page.'</li>';
+
+            //display next button?
+            if($nextPage != -1){
+                $nextRemaining = $remaining - 10;
+                //display next button here
+                echo '<li><a href="index.php?page='.$nextPage.'&remaining='.$nextRemaining.'">Next</a></li>';
+
+            }
+            echo    '</ul>';
+            echo '</div>';
+            echo '</div>';
+            //end pager
+            echo '<div class="row"><div class="col-lg-12">---</div></div>';
           ?>
 
 
