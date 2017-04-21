@@ -25,7 +25,7 @@
 </head>
 
 	<body class="index">
-		<form action = "http://localhost/create_rso/rso_added.php" method= "post">
+		<form action = "rso_added.php" method= "post">
 
 			<?php
 				if($_SESSION["usertype"] == 1){

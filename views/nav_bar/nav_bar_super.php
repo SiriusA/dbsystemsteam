@@ -22,7 +22,7 @@
         <li><a href="/">Home</a></li>
         <li><a href="/">Login</a>
           <ul>
-            <li><a href="/list_events">List Events</a></li>
+            <li><a href="/list_events_superadmin">List Events</a></li>
             <li><a href="/events_attending">My Events</a></li>
             <li><a href="/create_event">Create an Event</a></li>
           </ul>
